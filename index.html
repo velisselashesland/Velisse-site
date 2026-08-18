@@ -64,7 +64,7 @@
 
             <div class="price-category">Lashes</div>
             <div class="price-row"><span>One by One</span><span class="price-val">25€</span></div>
-            <div class="price-row"><span>Volume / Hybrid Extensions</span><span class="price-val">35€</span></div>
+            <div class="price-row"><span>Volume / Hybrid Extensions / Special effects</span><span class="price-val">35€</span></div>
             <div class="price-row"><span>Lash Lift</span><span class="price-val">30€</span></div>
             <div class="price-row"><span>Lash Lift & Tint</span><span class="price-val">35€</span></div>
 
@@ -74,17 +74,18 @@
             <div class="price-row"><span>Σχηματισμός & Καθαρισμός</span><span class="price-val">10€</span></div>
 
             <div class="price-category">Refill & Combos</div>
-            <div class="price-row"><span>Συντήρηση (Refill)</span><span class="price-val">20€ - 30€</span></div>
-            <div class="price-row"><span>Lash & Brow Combo</span><span class="price-val">από 50€</span></div>
+            <div class="price-row"><span>Συντήρηση 2-3weeks (Refill)</span><span class="price-val">20€ - 30€</span></div>
+            <div class="price-row"><span>Lash lift  & Brow Combo</span><span class="price-val">από 50€</span></div>
+            <div class="price-row"><span>Lash extensions & Brow Combo</span><span class="price-val">από 55€</span></div>
         </section>
 
         <!-- 3. POLICY -->
         <section id="policy" class="section-card">
             <h2 class="section-title">STUDIO POLICY</h2>
             <p class="section-subtitle">PLEASE READ BEFORE BOOKING</p>
-            <div class="policy-item"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση του ραντεβού απαιτείται προκαταβολή 50%.</div>
-            <div class="policy-item"><strong>Ακυρώσεις:</strong> Ενημέρωση τουλάχιστον 24 ώρες πριν το ραντεβού.</div>
-            <div class="policy-item"><strong>Προσέλευση:</strong> Περιθώριο καθυστέρησης έως 10 λεπτά.</div>
+            <div class="policy-item"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση της κράτησης, απαιτείται προκαταβολή ύψους 50% επί της συνολικής αξίας. Παρακαλούμε σημειώστε ότι για εξειδικευμένες τεχνικές (όπως lash strass, colour lashes), υπάρχει επιπλέον χρέωση 5€ στην τελική τιμή.</div>
+            <div class="policy-item"><strong>Ακυρώσεις:</strong> Για οποιαδήποτε αλλαγή ή ακύρωση απαιτείται ενημέρωση τουλάχιστον 24 ώρες νωρίτερα. Σε αντίθετη περίπτωση, η προκαταβολή παρακρατείται ως χρέωση ακύρωσης.</div>
+            <div class="policy-item"><strong>Προσέλευση:</strong> Για καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα τροποποίησης ή μεταφοράς του ραντεβού σε νέα ημερομηνία, βάσει του προγράμματος της ημέρας ανάλογα με τη διαθεσιμότητα, προκειμένου να μην υπάρξει καθυστέρηση στους επόμενους πελάτες.</div>
         </section>
 
         <!-- 4. BOOKING -->
@@ -99,7 +100,7 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Τηλέφωνο Επικοινωνίας</label>
-                        <input type="tel" id="phone" required placeholder="6900000000">
+                        <input type="tel" id="phone" required placeholder="6909392922">
                     </div>
                     <div class="form-group">
                         <label for="service">Υπηρεσία</label>
@@ -110,6 +111,7 @@
                             <option value="Lash Lift">Lash Lift (1 ώρα - 30€)</option>
                             <option value="Brow Lamination">Brow Lamination (1 ώρα - 35€)</option>
                             <option value="Combo Lash & Brow">Combo Lash & Brow (1.5 ώρα - από 50€)</option>
+                            <option value="Brow Wax & Shape">Brow waxs (30 λεπτα  - από 10€)</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -168,9 +170,10 @@
         // Διάρκειες υπηρεσιών σε λεπτά
         const serviceDurations = {
             "One by One": 150,
-            "Volume / Hybrid Extensions": 150,
+            "Volume / Hybrid Extensions/ Special Effect": 150,
             "Lash Lift": 60,
             "Brow Lamination": 60,
+            "Brow Wax and Shape": 30,
             "Combo Lash & Brow": 90
         };
 
