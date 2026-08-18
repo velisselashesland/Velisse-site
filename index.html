@@ -15,6 +15,12 @@
             color: inherit;
         }
     </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("f4-qOKNQ9-9oIr26r");
+       })();
+    </script>
 </head>
 <body>
 
@@ -153,7 +159,7 @@
         </footer>
     </div>
 
-    <!-- FIREBASE INTEGRATION SCRIPT -->
+    <!-- FIREBASE & EMAILJS INTEGRATION SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -268,6 +274,22 @@
                         notes: notes,
                         createdAt: new Date()
                     });
+
+                    // EmailJS Integration
+                    const templateParams = {
+                        client_name: name,
+                        client_phone: phone,
+                        service_name: service,
+                        appointment_date: date,
+                        appointment_time: time
+                    };
+
+                    emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
+                        .then(function(response) {
+                           console.log('Το email εστάλη επιτυχώς!', response.status);
+                        }, function(error) {
+                           console.log('Κάτι πήγε στραβά...', error);
+                        });
 
                     const calendarUrl = createGoogleCalendarLink(name, service, date, time, duration);
 
