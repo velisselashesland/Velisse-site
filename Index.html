@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELISSE | Lash & Brow Beauty Studio</title>
+    <style>
+        :root {
+            --bg-color: #f4f0eb;
+            --card-bg: #ffffff;
+            --primary-color: #2c2a29;
+            --accent-gold: #c5a059;
+            --text-muted: #666666;
+            --border-color: #e5dfd8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--primary-color); line-height: 1.6; padding-bottom: 40px; }
+        
+        header { text-align: center; padding: 40px 20px 20px; background: #eae4dc; border-bottom: 1px solid var(--border-color); }
+        header h1 { font-size: 2.8rem; letter-spacing: 4px; font-weight: 300; margin-bottom: 5px; color: var(--primary-color); }
+        header p { text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; color: var(--accent-gold); font-weight: 600; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+        .section-title { font-size: 1.4rem; text-align: center; margin: 30px 0 15px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary-color); border-bottom: 2px solid var(--accent-gold); display: inline-block; padding-bottom: 5px; }
+        .center-wrapper { text-align: center; }
+
+        .price-card { background: var(--card-bg); border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .price-item { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-color); padding: 10px 0; font-size: 0.95rem; }
+        .price-item:last-child { border-bottom: none; }
+        .price { font-weight: bold; color: var(--accent-gold); }
+
+        .policy-box { background: #fdfbf7; border-left: 4px solid var(--accent-gold); padding: 15px 20px; border-radius: 4px; font-size: 0.9rem; margin-bottom: 20px; }
+        .policy-box ul { padding-left: 20px; }
+        .policy-box li { margin-bottom: 8px; }
+
+        form { background: var(--card-bg); padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem; }
+        
+        .btn-submit { width: 100%; background: var(--accent-gold); color: white; border: none; padding: 14px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-submit:hover { background: #b08d4b; }
+
+        footer { text-align: center; margin-top: 30px; font-size: 0.85rem; color: var(--text-muted); }
+        footer a { color: var(--primary-color); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>VELISSE</h1>
+        <p>Lash & Brow Beauty Studio</p>
+    </header>
+
+    <div class="container">
+
+        <!-- ΤΙΜΟΚΑΤΑΛΟΓΟΣ -->
+        <div class="center-wrapper">
+            <h2 class="section-title">Τιμοκατάλογος</h2>
+        </div>
+
+        <div class="price-card">
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">Lashes</h3>
+            <div class="price-item"><span>One by one</span> <span class="price">25€</span></div>
+            <div class="price-item"><span>Soft volume</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Volume</span> <span class="price">35€</span></div>
+            <div class="price-item"><span>Hybrid</span> <span class="price">35€</span></div>
+            <div class="price-item"><span>Half sets</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Wet sets</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Lash lift</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Lash lift & tint</span> <span class="price">35€</span></div>
+        </div>
+
+        <div class="price-card">
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">Brows</h3>
+            <div class="price-item"><span>Brow lamination</span> <span class="price">35€</span></div>
+            <div class="price-item"><span>Brow lamination & tint</span> <span class="price">40€</span></div>
+            <div class="price-item"><span>Brow wax</span> <span class="price">15€</span></div>
+            <div class="price-item"><span>Brow wax Με κερί</span> <span class="price">20€</span></div>
+            <div class="price-item"><span>Brow shape</span> <span class="price">20€</span></div>
+        </div>
+
+        <div class="price-card">
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">Refill & Removal</h3>
+            <div class="price-item"><span>Refill 2 weeks</span> <span class="price">20€</span></div>
+            <div class="price-item"><span>Refill 3 weeks</span> <span class="price">25€</span></div>
+            <div class="price-item"><span>Refill 4 weeks</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Refill 5 weeks</span> <span class="price">30€</span></div>
+            <div class="price-item"><span>Removal (Δωρεάν με νέο set)</span> <span class="price">10€</span></div>
+        </div>
+
+        <div class="price-card">
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">Combos</h3>
+            <div class="price-item"><span>Lash & Brow lift</span> <span class="price">50€</span></div>
+            <div class="price-item"><span>Lash extension & Brow lift</span> <span class="price">55€</span></div>
+            <div class="price-item"><span>Lash lift Brow lift & Tint</span> <span class="price">55€</span></div>
+            <div class="price-item"><span>Lash extension & Brow wax</span> <span class="price">50€</span></div>
+            <div class="price-item"><span>Lash extension Brow wax & Shape</span> <span class="price">50€</span></div>
+            <div class="price-item"><span>Brow wax & Shape</span> <span class="price">25€</span></div>
+        </div>
+
+        <!-- ΠΟΛΙΤΙΚΗ ΡΑΝΤΕΒΟΥ -->
+        <div class="center-wrapper">
+            <h2 class="section-title">Πολιτική Ραντεβού</h2>
+        </div>
+        
+        <div class="policy-box">
+            <ul>
+                <li><strong>Προκαταβολή:</strong> Απαιτείται προκαταβολή 50% για την επιβεβαίωση της κράτησης.</li>
+                <li><strong>Εξειδικευμένες Τεχνικές:</strong> Επιπλέον χρέωση +5€ για lash strass, colour lashes ή lash art.</li>
+                <li><strong>Προσέλευση & Αργοπορίες:</strong> Παρακαλούμε να βρίσκεστε στον χώρο 10 λεπτά νωρίτερα. Για καθυστερήσεις άνω των 10 λεπτών, το ραντεβού ενδέχεται να τροποποιηθεί ή να μεταφερθεί.</li>
+                <li><strong>Ακυρώσεις:</strong> Αλλαγές ή ακυρώσεις επιτρέπονται έως και 24 ώρες πριν. Σε αντίθετη περίπτωση, η προκαταβολή παρακρατείται.</li>
+            </ul>
+        </div>
+
+        <!-- ΦΟΡΜΑ ΚΡΑΤΗΣΗΣ -->
+        <div class="center-wrapper">
+            <h2 class="section-title">Κλείστε Ραντεβού</h2>
+        </div>
+
+        <form id="bookingForm">
+            <div class="form-group">
+                <label for="name">Ονοματεπώνυμο</label>
+                <input type="text" id="name" required placeholder="π.χ. Μαρία Παπαδοπούλου">
+            </div>
+            <div class="form-group">
+                <label for="phone">Τηλέφωνο Επικοινωνίας</label>
+                <input type="tel" id="phone" required placeholder="69XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label for="service">Επιλογή Υπηρεσίας</label>
+                <select id="service" required>
+                    <option value="">Επιλέξτε Υπηρεσία...</option>
+                    <optgroup label="Lashes">
+                        <option value="One by one (25€)">One by one - 25€</option>
+                        <option value="Soft volume (30€)">Soft volume - 30€</option>
+                        <option value="Volume (35€)">Volume - 35€</option>
+                        <option value="Hybrid (35€)">Hybrid - 35€</option>
+                        <option value="Half sets (30€)">Half sets - 30€</option>
+                        <option value="Wet sets (30€)">Wet sets - 30€</option>
+                        <option value="Lash lift (30€)">Lash lift - 30€</option>
+                        <option value="Lash lift & tint (35€)">Lash lift & tint - 35€</option>
+                    </optgroup>
+                    <optgroup label="Brows">
+                        <option value="Brow lamination (35€)">Brow lamination - 35€</option>
+                        <option value="Brow lamination & tint (40€)">Brow lamination & tint - 40€</option>
+                        <option value="Brow wax (15€)">Brow wax - 15€</option>
+                        <option value="Brow wax Με κερί (20€)">Brow wax Με κερί - 20€</option>
+                        <option value="Brow shape (20€)">Brow shape - 20€</option>
+                    </optgroup>
+                    <optgroup label="Combos">
+                        <option value="Lash & Brow lift (50€)">Lash & Brow lift - 50€</option>
+                        <option value="Lash extension & Brow lift (55€)">Lash extension & Brow lift - 55€</option>
+                        <option value="Lash lift Brow lift & Tint (55€)">Lash lift Brow lift & Tint - 55€</option>
+                        <option value="Lash extension & Brow wax (50€)">Lash extension & Brow wax - 50€</option>
+                        <option value="Lash extension Brow wax & Shape (50€)">Lash extension Brow wax & Shape - 50€</option>
+                        <option value="Brow wax & Shape (25€)">Brow wax & Shape - 25€</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Επιθυμητή Ημερομηνία & Ώρα</label>
+                <input type="text" id="date" required placeholder="π.χ. Παρασκευή 15/09 στις 17:00">
+            </div>
+            <button type="submit" class="btn-submit">Αποστολή Αιτήματος Κράτησης</button>
+        </form>
+
+        <footer>
+            <p><strong>VELISSE Lash & Brow Studio</strong></p>
+            <p>Τηλ: <a href="tel:+306909392922">+30 690 939 29 22</a> | Email: Velisselashesland@gmail.com</p>
+            <p>Instagram: <a href="https://instagram.com/velisselashesland" target="_blank">@velisselashesland</a></p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var service = document.getElementById('service').value;
+            var date = document.getElementById('date').value;
+            
+            // Αριθμός WhatsApp (χωρίς +)
+            var phoneNumber = "306909392922"; 
+            
+            var message = "Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE.%0A%0A" +
+                          "👤 *Όνομα:* " + encodeURIComponent(name) + "%0A" +
+                          "📞 *Τηλέφωνο:* " + encodeURIComponent(phone) + "%0A" +
+                          "✨ *Υπηρεσία:* " + encodeURIComponent(service) + "%0A" +
+                          "📅 *Ημερομηνία/Ώρα:* " + encodeURIComponent(date);
+            
+            // Ανοίγει απευθείας το WhatsApp της πελάτισσας με προσυμπληρωμένο το μήνυμα
+            window.open("https://wa.me/" + phoneNumber + "?text=" + message, '_blank');
+        });
+    </script>
+</body>
+</html>
