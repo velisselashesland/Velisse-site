@@ -91,36 +91,42 @@
         <section id="booking" class="section-card">
             <h2 class="section-title">BOOK APPOINTMENT</h2>
             <p class="section-subtitle">SELECT YOUR PREFERRED TIME</p>
-            <form id="bookingForm">
-                <div class="form-group">
-                    <label for="name">Ονοματεπώνυμο</label>
-                    <input type="text" id="name" required placeholder="π.χ. Μαρία Παπαδοπούλου">
-                </div>
-                <div class="form-group">
-                    <label for="service">Υπηρεσία</label>
-                    <select id="service" required>
-                        <option value="">Επιλέξτε Υπηρεσία...</option>
-                        <option value="One by One (25€)">One by One (25€)</option>
-                        <option value="Volume / Hybrid (35€)">Volume / Hybrid (35€)</option>
-                        <option value="Lash Lift (30€)">Lash Lift (30€)</option>
-                        <option value="Brow Lamination (35€)">Brow Lamination (35€)</option>
-                        <option value="Combo Lash & Brow (από 50€)">Combo Lash & Brow (από 50€)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Ημερομηνία</label>
-                    <input type="date" id="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="time">Ώρα</label>
-                    <input type="time" id="time" required>
-                </div>
-                <div class="form-group">
-                    <label for="notes">Σημειώσεις</label>
-                    <textarea id="notes" rows="2" placeholder="Σχόλια..."></textarea>
-                </div>
-                <button type="button" class="btn-submit" onclick="sendToWhatsApp()">ΑΠΟΣΤΟΛΗ (WHATSAPP)</button>
-            </form>
+            <div id="bookingContainer">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Ονοματεπώνυμο</label>
+                        <input type="text" id="name" required placeholder="π.χ. Μαρία Παπαδοπούλου">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Τηλέφωνο Επικοινωνίας</label>
+                        <input type="tel" id="phone" required placeholder="6900000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Υπηρεσία</label>
+                        <select id="service" required>
+                            <option value="">Επιλέξτε Υπηρεσία...</option>
+                            <option value="One by One">One by One (2.5 ώρες - 25€)</option>
+                            <option value="Volume / Hybrid Extensions">Volume / Hybrid Extensions (2.5 ώρες - 35€)</option>
+                            <option value="Lash Lift">Lash Lift (1 ώρα - 30€)</option>
+                            <option value="Brow Lamination">Brow Lamination (1 ώρα - 35€)</option>
+                            <option value="Combo Lash & Brow">Combo Lash & Brow (1.5 ώρα - από 50€)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Ημερομηνία</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Ώρα</label>
+                        <input type="time" id="time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Σημειώσεις</label>
+                        <textarea id="notes" rows="2" placeholder="Σχόλια..."></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn" class="btn-submit">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</button>
+                </form>
+            </div>
         </section>
 
         <!-- CONNECT -->
@@ -129,9 +135,8 @@
             <p class="section-subtitle">FOLLOW & CONTACT</p>
             <div class="social-grid">
                 <a href="https://www.instagram.com/" target="_blank" class="social-box"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="https://www.tiktok.com/" target="_blank" class="social-box"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-                <a href="https://wa.me/306900000000" target="_blank" class="social-box"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                <a href="tel:+306900000000" class="social-box"><i class="fa-solid fa-phone"></i> Call Us</a>
+                <a href="https://wa.me/306909392922" target="_blank" class="social-box"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:+306909392922" class="social-box"><i class="fa-solid fa-phone"></i> Call Us</a>
             </div>
         </section>
 
@@ -140,28 +145,133 @@
         </footer>
     </div>
 
-    <script>
-        function sendToWhatsApp() {
-            const name = document.getElementById('name').value;
-            const service = document.getElementById('service').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const notes = document.getElementById('notes').value;
+    <!-- FIREBASE INTEGRATION SCRIPT -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-            if(!name || !service || !date || !time) {
-                alert('Παρακαλώ συμπληρώστε όλα τα απαιτούμενα πεδία.');
-                return;
-            }
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHBJ5KO_vofsZ9dnVv4BFaeKbwxSSkkO0",
+            authDomain: "velissebook.firebaseapp.com",
+            projectId: "velissebook",
+            storageBucket: "velissebook.firebasestorage.app",
+            messagingSenderId: "223338416423",
+            appId: "1:223338416423:web:3ffd9c6fdb767ad5100102",
+            measurementId: "G-7GPKKBH9C3"
+        };
 
-            const phoneNumber = "306900000000";
-            const message = `Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE.%0A%0A` +
-                            `👤 *Όνομα:* ${encodeURIComponent(name)}%0A` +
-                            `✨ *Υπηρεσία:* ${encodeURIComponent(service)}%0A` +
-                            `📅 *Ημερομηνία:* ${encodeURIComponent(date)}%0A` +
-                            `⏰ *Ώρα:* ${encodeURIComponent(time)}%0A` +
-                            `📝 *Σημειώσεις:* ${encodeURIComponent(notes)}`;
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        // Διάρκειες υπηρεσιών σε λεπτά
+        const serviceDurations = {
+            "One by One": 150,
+            "Volume / Hybrid Extensions": 150,
+            "Lash Lift": 60,
+            "Brow Lamination": 60,
+            "Combo Lash & Brow": 90
+        };
+
+        function parseTimeToMinutes(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        async function checkAvailability(selectedDate, startTimeStr, durationMinutes) {
+            const startMinutes = parseTimeToMinutes(startTimeStr);
+            const endMinutes = startMinutes + durationMinutes;
+
+            const q = query(collection(db, "appointments"), where("date", "==", selectedDate));
+            const querySnapshot = await getDocs(q);
+
+            let isAvailable = true;
+
+            querySnapshot.forEach((doc) => {
+                const appt = doc.data();
+                const apptStart = parseTimeToMinutes(appt.time);
+                const apptEnd = apptStart + appt.duration;
+
+                if (startMinutes < apptEnd && endMinutes > apptStart) {
+                    isAvailable = false;
+                }
+            });
+
+            return isAvailable;
+        }
+
+        function createGoogleCalendarLink(name, service, date, time, durationMinutes) {
+            const startIso = new Date(`${date}T${time}:00`).toISOString().replace(/-|:|\.\d\d\d/g, "");
+            const endDate = new Date(new Date(`${date}T${time}:00`).getTime() + durationMinutes * 60000);
+            const endIso = endDate.toISOString().replace(/-|:|\.\d\d\d/g, "");
+
+            const title = encodeURIComponent(`VELISSE Studio: ${service}`);
+            const details = encodeURIComponent(`Ραντεβού για ${service} - Πελάτης: ${name}`);
+            const location = encodeURIComponent("VELISSE Lash & Brow Studio");
+
+            return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${endIso}&details=${details}&location=${location}`;
+        }
+
+        const bookingForm = document.getElementById('bookingForm');
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.innerText = "ΕΛΕΓΧΟΣ ΔΙΑΘΕΣΙΜΟΤΗΤΑΣ...";
+
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const service = document.getElementById('service').value;
+                const date = document.getElementById('date').value;
+                const time = document.getElementById('time').value;
+                const notes = document.getElementById('notes').value;
+
+                const duration = serviceDurations[service] || 60;
+
+                try {
+                    const available = await checkAvailability(date, time, duration);
+
+                    if (!available) {
+                        alert("Δυστυχώς η συγκεκριμένη ώρα επικαλύπτεται με άλλο ραντεβού λόγω διάρκειας της υπηρεσίας. Παρακαλώ επιλέξτε άλλη ώρα.");
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ";
+                        return;
+                    }
+
+                    await addDoc(collection(db, "appointments"), {
+                        name: name,
+                        phone: phone,
+                        service: service,
+                        date: date,
+                        time: time,
+                        duration: duration,
+                        notes: notes,
+                        createdAt: new Date()
+                    });
+
+                    const calendarUrl = createGoogleCalendarLink(name, service, date, time, duration);
+
+                    document.getElementById('bookingContainer').innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #b89782; margin-bottom: 15px;"></i>
+                            <h3 style="margin-bottom: 10px;">Το ραντεβού σας καταχωρήθηκε!</h3>
+                            <p style="margin-bottom: 5px;"><strong>Υπηρεσία:</strong> ${service}</p>
+                            <p style="margin-bottom: 15px;"><strong>Ημερομηνία:</strong> ${date} στις ${time}</p>
+                            <a href="${calendarUrl}" target="_blank" class="btn-submit" style="display: inline-block; text-decoration: none; padding: 12px 20px;">
+                                📅 Προσθήκη στο Google Calendar
+                            </a>
+                        </div>
+                    `;
+                } catch (error) {
+                    console.error("Error saving appointment: ", error);
+                    alert("Υπήρξε κάποιο σφάλμα κατά την αποθήκευση. Παρακαλώ δοκιμάστε ξανά.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ";
+                }
+            });
         }
     </script>
 </body>
