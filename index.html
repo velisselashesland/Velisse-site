@@ -297,7 +297,7 @@
         </footer>
     </div>
 
-    <!-- FIREBASE & EMAILJS INTEGRATION SCRIPT -->
+        <!-- FIREBASE & EMAILJS INTEGRATION SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -345,16 +345,14 @@
                         createdAt: new Date()
                     });
 
-                    // ΔΙΟΡΘΩΣΗ: Μεταβλητές που αντιστοιχούν σωστά στο EmailJS Template σου
+                    // ΔΙΟΡΘΩΣΗ: Αντιστοιχία ακριβώς με τα tags του EmailJS Template σου
                     const templateParams = {
                         client_name: name,
                         client_phone: phone,
                         client_email: email,
                         client_birthday: birthday,
-                        service_name: selectedPreferences.length > 0 ? selectedPreferences.join(", ") : "Καμία υπηρεσία/δώρο",
-                        appointment_date: "Εγγραφή / Δώρο Γενεθλίων",
-                        appointment_time: "N/A",
-                        studio_address: "Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122"
+                        desired_service: selectedPreferences.length > 0 ? selectedPreferences.join(", ") : "Καμία υπηρεσία/δώρο",
+                        client_notes: "Εγγραφή / Δώρο Γενεθλίων"
                     };
 
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
@@ -536,10 +534,8 @@
                         client_phone: phone,
                         client_email: email,
                         client_birthday: birthday,
-                        service_name: service,
-                        appointment_date: date,
-                        appointment_time: time,
-                        studio_address: "Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122"
+                        desired_service: service,
+                        client_notes: notes ? `${notes} (Ραντεβού: ${date} στις ${time})` : `Ραντεβού: ${date} στις ${time}`
                     };
 
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
@@ -572,5 +568,3 @@
             });
         }
     </script>
-</body>
-</html>
