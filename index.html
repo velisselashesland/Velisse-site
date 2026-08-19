@@ -336,7 +336,6 @@
                 regSubmitBtn.innerText = "ΑΠΟΣΤΟΛΗ...";
 
                 try {
-                    // Αποθήκευση στη βάση δεδομένων Firebase (συλλογή registrations)
                     await addDoc(collection(db, "registrations"), {
                         name: name,
                         phone: phone,
@@ -346,14 +345,14 @@
                         createdAt: new Date()
                     });
 
-                    // EmailJS ειδοποίηση για τη νέα εγγραφή & γενέθλια
+                    // ΔΙΟΡΘΩΣΗ: Μεταβλητές που αντιστοιχούν σωστά στο EmailJS Template σου
                     const templateParams = {
                         client_name: name,
                         client_phone: phone,
                         client_email: email,
                         client_birthday: birthday,
-                        service_name: "Εγγραφή Πελάτη / Προφίλ & Γενέθλια",
-                        appointment_date: "N/A",
+                        service_name: selectedPreferences.length > 0 ? selectedPreferences.join(", ") : "Καμία υπηρεσία/δώρο",
+                        appointment_date: "Εγγραφή / Δώρο Γενεθλίων",
                         appointment_time: "N/A",
                         studio_address: "Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122"
                     };
