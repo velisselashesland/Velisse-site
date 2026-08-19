@@ -114,7 +114,7 @@
             <p class="about-p">Σκοπός του Velisselashesland είναι να προσφέρει υψηλής ποιότητας εξειδικευμένες υπηρεσίες για βλεφαρίδες και φρύδια, προσαρμοσμένες μοναδικά στα χαρακτηριστικά και το στυλ της κάθε πελάτισσας.</p>
         </section>
 
-        <!-- 2. SERVICES & PRICES (AUTUMN OFFERS & PRICELIST) -->
+        <!-- 2. SERVICES & PRICES -->
         <section id="pricing" class="section-card">
             <h2 class="section-title">VELISSELASHESLAND</h2>
             <p class="section-subtitle">AUTUMN OFFERS, PRICELIST & SOCIAL STRATEGY</p>
@@ -122,7 +122,6 @@
             <div class="offer-title">🔥 ΟΙ ΠΡΟΣΦΟΡΕΣ ΙΣΧΥΟΥΝ ΕΩΣ ΤΕΛΗ ΟΚΤΩΒΡΙΟΥ 🔥</div>
 
             <div class="price-grid">
-                <!-- ΑΤΟΜΙΚΕΣ ΠΡΟΣΦΟΡΕΣ -->
                 <div class="offer-box">
                     <div class="price-category" style="font-weight:bold; margin-bottom:10px; color:#c5a059;">| ΑΤΟΜΙΚΈΣ ΠΡΟΣΦΟΡ’ΕΣ</div>
                     <div class="price-row"><span>One by One <strong style="color:green;">+ΔΩΡΟ Brow Lift</strong></span><span class="price-val"><del>45€</del> <strong>35€</strong></span></div>
@@ -141,7 +140,6 @@
                     <div class="price-row"><span>Brow Wax (Κερί)</span><span class="price-val"><strong>10€</strong></span></div>
                 </div>
 
-                <!-- BRING A FRIEND OFFERS -->
                 <div class="offer-box">
                     <div class="price-category" style="font-weight:bold; margin-bottom:5px; color:#c5a059;">| BRING A FRIEND OFFERS</div>
                     <p style="font-size:0.85rem; font-style:italic; margin-bottom:10px;">Τιμή ανά άτομο όταν έρχεστε μαζί με φίλη/φίλο</p>
@@ -157,35 +155,45 @@
             </div>
         </section>
 
-        <!-- REGISTRATION & BIRTHDAY FORM SECTION (KATA TO PDF) -->
+        <!-- REGISTRATION & BIRTHDAY FORM SECTION (ΔΙΑΔΡΑΣΤΙΚΗ ΦΟΡΜΑ) -->
         <section class="section-card">
             <h2 class="section-title">VELISSELASHESLAND</h2>
             <p class="section-subtitle">ΦΟΡΜΑ ΕΓΓΡΑΦΗΣ & ΠΡΟΦΙΛ ΠΕΛΑΤΗ</p>
-            <div style="background: #fffbf5; border: 1px solid #ebdccb; padding: 20px; border-radius: 8px;">
-                <h3 style="font-size: 1.1rem; color: #c5a059; border-bottom: 1px solid #ebdccb; padding-bottom: 5px; margin-bottom: 15px;">| ΠΡΟΣΩΠΙΚΆ ΣΤΟΙΧΕΊΑ</h3>
-                <p><strong>Ονοματεπώνυμο:</strong> __________________________________________________</p>
-                <p><strong>Τηλέφωνο Επικοινωνίας:</strong> __________________________________________</p>
-                <p><strong>Email:</strong> ________________________________________________________________</p>
-                
-                <div style="background: #fdf5e6; border: 1px dashed #d4af37; padding: 12px; border-radius: 6px; margin: 15px 0;">
-                    ✨ <strong>Ειδική Προσφορά Γενεθλίων:</strong><br>
-                    Μοιραστείτε μαζί μας την ημερομηνία των γενεθλίων σας, για να γιορτάσουμε την ξεχωριστή σας ημέρα με αποκλειστικά δώρα και μοναδικές προσφορές.<br><br>
-                    <strong>Ημερομηνία Γενεθλίων:</strong> [ ΗΗ ] / [ ΜΜ ] / [ ΕΕΕΕ ]
-                </div>
+            <div id="registrationContainer" style="background: #fffbf5; border: 1px solid #ebdccb; padding: 20px; border-radius: 8px;">
+                <form id="registrationForm">
+                    <h3 style="font-size: 1.1rem; color: #c5a059; border-bottom: 1px solid #ebdccb; padding-bottom: 5px; margin-bottom: 15px;">| ΠΡΟΣΩΠΙΚΆ ΣΤΟΙΧΕΊΑ</h3>
+                    
+                    <div class="form-group">
+                        <label for="regName"><strong>Ονοματεπώνυμο:</strong></label>
+                        <input type="text" id="regName" required placeholder="π.χ. Μαρία Παπαδοπούλου" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:4px;">
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="regPhone"><strong>Τηλέφωνο Επικοινωνίας:</strong></label>
+                        <input type="tel" id="regPhone" required placeholder="6900000000" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:4px;">
+                    </div>
+                    <div class="form-group" style="margin-top: 10px;">
+                        <label for="regEmail"><strong>Email:</strong></label>
+                        <input type="email" id="regEmail" required placeholder="email@example.com" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:4px;">
+                    </div>
+                    
+                    <div style="background: #fdf5e6; border: 1px dashed #d4af37; padding: 12px; border-radius: 6px; margin: 15px 0;">
+                        ✨ <strong>Ειδική Προσφορά Γενεθλίων:</strong><br>
+                        Μοιραστείτε μαζί μας την ημερομηνία των γενεθλίων σας, για να γιορτάσουμε την ξεχωριστή σας ημέρα με αποκλειστικά δώρα και μοναδικές προσφορές.<br><br>
+                        <label for="regBirthday"><strong>Ημερομηνία Γενεθλίων (ΗΗ/ΜΜ/ΕΕΕΕ):</strong></label>
+                        <input type="text" id="regBirthday" required placeholder="π.χ. 15/05/1995" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ccc; border-radius:4px;">
+                    </div>
 
-                <h3 style="font-size: 1.1rem; color: #c5a059; border-bottom: 1px solid #ebdccb; padding-bottom: 5px; margin: 20px 0 15px 0;">| ΠΡΟΤΙΜΉΣΕΙΣ ΥΠΗΡΕΣΊΩΝ</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
-                    <div>□ Eyelash Extensions (One by One / Volume)</div>
-                    <div>□ Lash Lift & Tint</div>
-                    <div>□ Brow Lamination & Styling</div>
-                    <div>□ Σχηματισμός / Καθαρισμός Φρυδιών</div>
-                </div>
-                <p style="font-size: 0.8rem; color: #666; font-style: italic;">* Τα στοιχεία σας συλλέγονται αποκλειστικά για τη διαχείριση των ραντεβού σας και την αποστολή προσωποποιημένων προσφορών. Σεβόμαστε την ιδιωτικότητά σας και δεν κοινοποιούμε τα δεδομένα σας σε τρίτους.</p>
-                
-                <div style="display: flex; justify-content: space-between; margin-top: 25px;">
-                    <div><strong>Ημερομηνία:</strong> ______________________</div>
-                    <div><strong>Υπογραφή Πελάτη:</strong> ______________________</div>
-                </div>
+                    <h3 style="font-size: 1.1rem; color: #c5a059; border-bottom: 1px solid #ebdccb; padding-bottom: 5px; margin: 20px 0 15px 0;">| ΠΡΟΤΙΜΉΣΕΙΣ ΥΠΗΡΕΣΊΩΝ</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                        <div><label><input type="checkbox" name="pref" value="Eyelash Extensions"> Eyelash Extensions</label></div>
+                        <div><label><input type="checkbox" name="pref" value="Lash Lift & Tint"> Lash Lift & Tint</label></div>
+                        <div><label><input type="checkbox" name="pref" value="Brow Lamination & Styling"> Brow Lamination & Styling</label></div>
+                        <div><label><input type="checkbox" name="pref" value="Σχηματισμός Φρυδιών"> Σχηματισμός Φρυδιών</label></div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #666; font-style: italic;">* Τα στοιχεία σας συλλέγονται αποκλειστικά για τη διαχείριση των ραντεβού σας και την αποστολή προσωποποιημένων προσφορών.</p>
+                    
+                    <button type="submit" id="regSubmitBtn" class="btn-submit" style="margin-top: 20px; width:100%; background:#c5a059; color:#fff; border:none; padding:12px; font-weight:bold; border-radius:4px; cursor:pointer;">OK / ΥΠΟΒΟΛΗ ΣΤΟΙΧΕΙΩΝ</button>
+                </form>
             </div>
         </section>
 
@@ -205,7 +213,6 @@
             
             <div id="bookingContainer">
                 <form id="bookingForm">
-                    <!-- Βήμα 1: Επιλογή Υπηρεσίας -->
                     <div class="form-group">
                         <label for="service">1. Επιλέξτε Υπηρεσία</label>
                         <select id="service" required>
@@ -227,13 +234,11 @@
                         </select>
                     </div>
 
-                    <!-- Βήμα 2: Επιλογή Ημερομηνίας -->
                     <div class="form-group">
                         <label for="date">2. Επιλέξτε Ημερομηνία</label>
                         <input type="date" id="date" required min="2026-09-15">
                     </div>
 
-                    <!-- Βήμα 3: Επιλογή Ώρας (08:00 - 20:00) -->
                     <div class="form-group">
                         <label>3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)</label>
                         <div id="slotsContainer" style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">
@@ -242,7 +247,6 @@
                         <input type="hidden" id="selectedTime" required>
                     </div>
 
-                    <!-- Βήμα 4: Προσωπικά Στοιχεία -->
                     <div id="personalDetailsSection" style="display:none; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px;">
                         <h3 style="font-size:1rem; margin-bottom:10px; color:#c5a059;">4. Συμπληρώστε τα στοιχεία σας</h3>
                         <div class="form-group">
@@ -298,7 +302,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDHBJ5KO_vofsZ9dnVv4BFaeKbwxSSkkO0",
             authDomain: "velissebook.firebaseapp.com",
@@ -312,7 +315,73 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Διάρκειες υπηρεσιών σε λεπτά
+        // --- 1. ΔΙΑΧΕΙΡΙΣΗ ΦΟΡΜΑΣ ΕΓΓΡΑΦΗΣ & ΓΕΝΕΘΛΙΩΝ ---
+        const registrationForm = document.getElementById('registrationForm');
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('regName').value;
+                const phone = document.getElementById('regPhone').value;
+                const email = document.getElementById('regEmail').value;
+                const birthday = document.getElementById('regBirthday').value;
+
+                const selectedPreferences = [];
+                document.querySelectorAll('input[name="pref"]:checked').forEach((checkbox) => {
+                    selectedPreferences.push(checkbox.value);
+                });
+
+                const regSubmitBtn = document.getElementById('regSubmitBtn');
+                regSubmitBtn.disabled = true;
+                regSubmitBtn.innerText = "ΑΠΟΣΤΟΛΗ...";
+
+                try {
+                    // Αποθήκευση στη βάση δεδομένων Firebase (συλλογή registrations)
+                    await addDoc(collection(db, "registrations"), {
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        birthday: birthday,
+                        preferences: selectedPreferences,
+                        createdAt: new Date()
+                    });
+
+                    // EmailJS ειδοποίηση για τη νέα εγγραφή & γενέθλια
+                    const templateParams = {
+                        client_name: name,
+                        client_phone: phone,
+                        client_email: email,
+                        client_birthday: birthday,
+                        service_name: "Εγγραφή Πελάτη / Προφίλ & Γενέθλια",
+                        appointment_date: "N/A",
+                        appointment_time: "N/A",
+                        studio_address: "Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122"
+                    };
+
+                    emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
+                        .then(function(response) {
+                           console.log('Email εγγραφής εστάλη!', response.status);
+                        }, function(error) {
+                           console.log('Σφάλμα email εγγραφής:', error);
+                        });
+
+                    document.getElementById('registrationContainer').innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #b89782; margin-bottom: 15px;"></i>
+                            <h3 style="margin-bottom: 10px; color:#c5a059;">Τα στοιχεία σας καταχωρήθηκαν επιτυχώς!</h3>
+                            <p>Σας ευχαριστούμε πολύ! Η εγγραφή σας ολοκληρώθηκε και καταχωρήθηκε το προφίλ σας.</p>
+                        </div>
+                    `;
+                } catch (error) {
+                    console.error("Error saving registration: ", error);
+                    alert("Υπήρξε κάποιο σφάλμα. Παρακαλώ δοκιμάστε ξανά.");
+                    regSubmitBtn.disabled = false;
+                    regSubmitBtn.innerText = "OK / ΥΠΟΒΟΛΗ ΣΤΟΙΧΕΙΩΝ";
+                }
+            });
+        }
+
+        // --- 2. ΔΙΑΧΕΙΡΙΣΗ ΡΑΝΤΕΒΟΥ (BOOKING WIZARD) ---
         const serviceDurations = {
             "One by One": 150,
             "Volume": 150,
@@ -352,7 +421,6 @@
 
             slotsContainer.innerHTML = 'Φόρτωση διαθέσιμων ωρών...';
 
-            // Φόρτωση υπαρχόντων ραντεβού από Firestore για τη συγκεκριμένη μέρα
             const q = query(collection(db, "appointments"), where("date", "==", dateInput));
             const querySnapshot = await getDocs(q);
             const bookedIntervals = [];
@@ -367,17 +435,14 @@
             const currentServiceDuration = serviceDurations[serviceSelect] || 60;
             slotsContainer.innerHTML = '';
 
-            // Δημιουργία ωρών από 08:00 μέχρι 20:00 ανά 30 λεπτά
             for (let hour = 8; hour < 20; hour++) {
                 for (let minute = 0; minute < 60; minute += 30) {
                     const timeStr = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
                     const slotStart = parseTimeToMinutes(timeStr);
                     const slotEnd = slotStart + currentServiceDuration;
 
-                    // Έλεγχος αν υπερβαίνει τις 20:00 κλείσιμο
                     if (slotEnd > 20 * 60) continue;
 
-                    // Έλεγχος επικάλυψης
                     let isConflict = false;
                     for (const interval of bookedIntervals) {
                         if (slotStart < interval.end && slotEnd > interval.start) {
@@ -454,7 +519,6 @@
                 const duration = serviceDurations[service] || 60;
 
                 try {
-                    // Αποθήκευση στο Firebase Firestore
                     await addDoc(collection(db, "appointments"), {
                         name: name,
                         phone: phone,
@@ -468,7 +532,6 @@
                         createdAt: new Date()
                     });
 
-                    // EmailJS αποστολή ειδοποίησης (σε εσάς και στην πελάτισσα)
                     const templateParams = {
                         client_name: name,
                         client_phone: phone,
@@ -482,9 +545,9 @@
 
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
                         .then(function(response) {
-                           console.log('Το email εστάλη επιτυχώς!', response.status);
+                           console.log('Email ραντεβού εστάλη!', response.status);
                         }, function(error) {
-                           console.log('Σφάλμα αποστολής email:', error);
+                           console.log('Σφάλμα email ραντεβού:', error);
                         });
 
                     const calendarUrl = createGoogleCalendarLink(name, service, date, time, duration);
