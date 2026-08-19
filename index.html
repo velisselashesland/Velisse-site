@@ -3,313 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELISSE | Lash & Brow Studio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700;800&family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .logo-link {
-            text-decoration: none;
-            color: inherit;
-        }
-    </style>
+    <title>VELISSE | Luxury Beauty & Lash Salon</title>
+    <!-- Google Fonts για Luxury Serif & Clean Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
-       (function(){
-          emailjs.init("f4-qOKNQ9-9oIr26r");
-       })();
+        (function() {
+            emailjs.init("f4-qOKNQ9-9oIr26r");
+        })();
     </script>
+
+    <style>
+        :root {
+            --bg-color: #EFECE9;        /* Soft warm beige background */
+            --card-bg: #F7F5F2;         /* Slightly lighter container bg */
+            --text-color: #2C2A29;      /* Deep charcoal text */
+            --accent-color: #555A53;    /* Muted olive/taupe button tone */
+            --border-color: #D8D2CB;    /* Subtle divider lines */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+        }
+
+        /* Header */
+        .velisse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .velisse-header .logo {
+            font-size: 24px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .menu-icon span {
+            display: block;
+            height: 1.5px;
+            width: 100%;
+            background-color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .velisse-hero {
+            background-color: #333;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: #fff;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.15;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: #fff;
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
+
+        /* Booking Flow Container */
+        .booking-section {
+            padding: 80px 6%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .booking-step {
+            display: none;
+            background: var(--card-bg);
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+
+        .booking-step.active {
+            display: block;
+        }
+
+        .step-header {
+            margin-bottom: 30px;
+        }
+
+        .step-header h2 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .step-header p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .sub-title-highlight {
+            font-weight: 500;
+            color: var(--text-color);
+            margin-top: 5px;
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 24px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .service-card:hover {
+            border-color: var(--text-color);
+        }
+
+        .service-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .book-card-btn, .final-book-btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+        }
+
+        /* Inputs & Slots */
+        .luxury-input, .luxury-select, .luxury-date-input {
+            width: 100%;
+            padding: 12px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border-color);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .time-slot {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .time-slot:hover {
+            background: var(--text-color);
+            color: #fff;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .booking-summary-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .service-select-box {
+            margin-bottom: 25px;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="logo-link"><div class="logo">VELISSE</div></a>
-        <nav class="top-nav">
-            <a href="#about">About</a>
-            <a href="#pricing">Services</a>
-            <a href="#policy">Policy</a>
-            <a href="#booking">Book</a>
-        </nav>
+    <!-- Header -->
+    <header class="velisse-header">
+        <div class="logo">VELISSE</div>
+        <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
-    <section class="hero">
-        <h1>Wake up to <span>FLAWLESS LASHES</span></h1>
-        <a href="#booking" class="btn-black">BOOK NOW</a>
+    <!-- Hero Section -->
+    <section class="velisse-hero">
+        <div class="hero-content">
+            <h1>Aesthetic & <br>Lash Treatments</h1>
+            <p class="hero-subtitle">THE ART OF REFINED BEAUTY</p>
+            <a href="#booking-flow" class="hero-btn">Book an Appointment</a>
+        </div>
     </section>
 
-    <div class="icon-nav">
-        <a href="#about" class="icon-nav-item">
-            <div class="icon-circle"><i class="fa-solid fa-sparkles"></i></div>
-            <span class="icon-label">ABOUT</span>
-        </a>
-        <a href="#pricing" class="icon-nav-item">
-            <div class="icon-circle"><i class="fa-solid fa-eye"></i></div>
-            <span class="icon-label">SERVICES</span>
-        </a>
-        <a href="#policy" class="icon-nav-item">
-            <div class="icon-circle"><i class="fa-solid fa-clipboard-list"></i></div>
-            <span class="icon-label">POLICY</span>
-        </a>
-        <a href="#booking" class="icon-nav-item">
-            <div class="icon-circle"><i class="fa-solid fa-calendar-check"></i></div>
-            <span class="icon-label">BOOKING</span>
-        </a>
-    </div>
+    <!-- Booking Flow Section -->
+    <section class="booking-section" id="booking-flow">
+        <div class="booking-container">
+            
+            <!-- ΒΗΜΑ 1: Επιλογή Υπηρεσίας -->
+            <div id="step-1" class="booking-step active">
+                <div class="step-header">
+                    <h2>Schedule your service</h2>
+                    <p>Select your service, check availability and book the date and time that works for you.</p>
+                </div>
+                
+                <div class="service-select-box">
+                    <label>Select Service Category</label>
+                    <select id="service-category" class="luxury-select">
+                        <option value="Lash Treatments">Lash Treatments</option>
+                        <option value="Brow Treatments">Brow Treatments</option>
+                    </select>
+                </div>
 
-    <div class="container">
+                <div class="services-grid">
+                    <div class="service-card" onclick="selectService('One by One Lashes', '1 hr')">
+                        <div class="service-info">
+                            <h3>One by One Lashes</h3>
+                            <span class="duration">1 hr</span>
+                        </div>
+                        <button class="book-card-btn">BOOK NOW</button>
+                    </div>
+                    <div class="service-card" onclick="selectService('6D Volume Lashes', '1.5 hrs')">
+                        <div class="service-info">
+                            <h3>6D Volume Lashes</h3>
+                            <span class="duration">1.5 hrs</span>
+                        </div>
+                        <button class="book-card-btn">BOOK NOW</button>
+                    </div>
+                </div>
+            </div>
 
-        <!-- 1. ABOUT -->
-        <section id="about" class="section-card">
-            <h2 class="section-title">ABOUT US</h2>
-            <p class="section-subtitle">YOUR PARTNER IN LASH PERFECTION</p>
-            <p class="about-p">Καλώς ήρθατε στο <strong>VELISSE Lash & Brow Studio</strong>!</p>
-            <p class="about-p">Πίσω από το <strong>Velisselashesland</strong> βρίσκεται η απόλυτη αγάπη και το πάθος για την ανάδειξη της φυσικής ομορφιάς κάθε γυναίκας. Αυτό το όμορφο ταξίδι ξεκίνησε το <strong>2025</strong>, με όραμα να δημιουργηθεί ένας ζεστός χώρος όπου η περιποίηση μετατρέπεται σε εμπειρία χαλάρωσης και αυτοπεποίθησης.</p>
-            <p class="about-p">Σκοπός του Velisselashesland είναι να προσφέρει υψηλής ποιότητας εξειδικευμένες υπηρεσίες για βλεφαρίδες και φρύδια, προσαρμοσμένες μοναδικά στα χαρακτηριστικά και το στυλ της κάθε πελάτισσας.</p>
-        </section>
+            <!-- ΒΗΜΑ 2: Επιλογή Ημερομηνίας & Ώρας -->
+            <div id="step-2" class="booking-step">
+                <button class="back-btn" onclick="goToStep(1)">← Back</button>
+                <div class="step-header">
+                    <h2>Select a Date and Time</h2>
+                    <p id="selected-service-title" class="sub-title-highlight"></p>
+                </div>
 
-        <!-- 2. SERVICES & PRICES -->
-        <section id="pricing" class="section-card">
-            <h2 class="section-title">SERVICES</h2>
-            <p class="section-subtitle">MENU & PRICING LIST</p>
+                <div class="date-picker-container">
+                    <input type="date" id="appointment-date" class="luxury-date-input" min="2026-08-19">
+                </div>
 
-            <div class="price-category">Lashes</div>
-            <div class="price-row"><span>One by One</span><span class="price-val">25€</span></div>
-            <div class="price-row"><span>Volume / Hybrid Extensions / Special effects</span><span class="price-val">35€</span></div>
-            <div class="price-row"><span>Lash Lift</span><span class="price-val">30€</span></div>
-            <div class="price-row"><span>Lash Lift & Tint</span><span class="price-val">35€</span></div>
+                <div class="time-slots-grid">
+                    <button class="time-slot" onclick="selectTime('10:00 am')">10:00 am</button>
+                    <button class="time-slot" onclick="selectTime('11:30 am')">11:30 am</button>
+                    <button class="time-slot" onclick="selectTime('01:00 pm')">01:00 pm</button>
+                    <button class="time-slot" onclick="selectTime('04:00 pm')">04:00 pm</button>
+                </div>
+            </div>
 
-            <div class="price-category">Brows</div>
-            <div class="price-row"><span>Brow Lamination</span><span class="price-val">35€</span></div>
-            <div class="price-row"><span>Brow Lamination & Tint</span><span class="price-val">40€</span></div>
-            <div class="price-row"><span>Σχηματισμός & Καθαρισμός</span><span class="price-val">10€</span></div>
+            <!-- ΒΗΜΑ 3: Στοιχεία Πελάτισσας & Ολοκλήρωση -->
+            <div id="step-3" class="booking-step">
+                <button class="back-btn" onclick="goToStep(2)">← Back</button>
+                <div class="step-header">
+                    <h2>Booking Form</h2>
+                    <p>Client Details</p>
+                </div>
 
-            <div class="price-category">Refill & Combos</div>
-            <div class="price-row"><span>Συντήρηση 2-3weeks (Refill)</span><span class="price-val">20€ - 30€</span></div>
-            <div class="price-row"><span>Lash lift  & Brow Combo</span><span class="price-val">από 50€</span></div>
-            <div class="price-row"><span>Lash extensions & Brow Combo</span><span class="price-val">από 55€</span></div>
-        </section>
-
-        <!-- 3. POLICY -->
-        <section id="policy" class="section-card">
-            <h2 class="section-title">STUDIO POLICY</h2>
-            <p class="section-subtitle">PLEASE READ BEFORE BOOKING</p>
-            <div class="policy-item"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση της κράτησης, απαιτείται προκαταβολή ύψους 50% επί της συνολικής αξίας. Παρακαλούμε σημειώστε ότι για εξειδικευμένες τεχνικές (όπως lash strass, colour lashes), υπάρχει επιπλέον χρέωση 5€ στην τελική τιμή.</div>
-            <div class="policy-item"><strong>Ακυρώσεις:</strong> Για οποιαδήποτε αλλαγή ή ακύρωση απαιτείται ενημέρωση τουλάχιστον 24 ώρες νωρίτερα. Σε αντίθετη περίπτωση, η προκαταβολή παρακρατείται ως χρέωση ακύρωσης.</div>
-            <div class="policy-item"><strong>Προσέλευση:</strong> Για καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα τροποποίησης ή μεταφοράς του ραντεβού σε νέα ημερομηνία, βάσει του προγράμματος της ημέρας ανάλογα με τη διαθεσιμότητα, προκειμένου να μην υπάρξει καθυστέρηση στους επόμενους πελάτες.</div>
-        </section>
-
-        <!-- 4. BOOKING -->
-        <section id="booking" class="section-card">
-            <h2 class="section-title">BOOK APPOINTMENT</h2>
-            <p class="section-subtitle">SELECT YOUR PREFERRED TIME</p>
-            <div id="bookingContainer">
-                <form id="bookingForm">
+                <form id="booking-form" onsubmit="submitBooking(event)">
                     <div class="form-group">
-                        <label for="name">Ονοματεπώνυμο</label>
-                        <input type="text" id="name" required placeholder="π.χ. Μαρία Παπαδοπούλου">
+                        <label>First name *</label>
+                        <input type="text" id="client-name" required class="luxury-input">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Τηλέφωνο Επικοινωνίας</label>
-                        <input type="tel" id="phone" required placeholder="6900000000">
+                        <label>Last name *</label>
+                        <input type="text" id="client-lastname" required class="luxury-input">
                     </div>
                     <div class="form-group">
-                        <label for="service">Υπηρεσία</label>
-                        <select id="service" required>
-                            <option value="">Επιλέξτε Υπηρεσία...</option>
-                            <option value="One by One">One by One (2.5 ώρες - 25€)</option>
-                            <option value="Volume / Hybrid Extensions">Volume / Hybrid Extensions (2.5 ώρες - 35€)</option>
-                            <option value="Lash Lift">Lash Lift (1 ώρα - 30€)</option>
-                            <option value="Brow Lamination">Brow Lamination (1 ώρα - 35€)</option>
-                            <option value="Combo Lash & Brow">Combo Lash & Brow (1.5 ώρα - από 50€)</option>
-                            <option value="Brow Wax & Shape">Brow waxs (30 λεπτα  - από 10€)</option>
-                        </select>
+                        <label>Email *</label>
+                        <input type="email" id="client-email" required class="luxury-input">
                     </div>
                     <div class="form-group">
-                        <label for="date">Ημερομηνία</label>
-                        <input type="date" id="date" min="2026-09-15" required>
+                        <label>Phone *</label>
+                        <input type="tel" id="client-phone" required class="luxury-input">
                     </div>
                     <div class="form-group">
-                        <label for="time">Ώρα</label>
-                        <input type="time" id="time" required>
+                        <label>Add your message</label>
+                        <textarea id="client-msg" class="luxury-input" rows="3"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="notes">Σημειώσεις</label>
-                        <textarea id="notes" rows="2" placeholder="Σχόλια..."></textarea>
+
+                    <div class="booking-summary-box">
+                        <h3>Booking Details</h3>
+                        <p id="summary-text">Υπηρεσία & Ημερομηνία</p>
                     </div>
-                    <button type="submit" id="submitBtn" class="btn-submit">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</button>
+
+                    <button type="submit" class="final-book-btn">BOOK NOW</button>
                 </form>
             </div>
-        </section>
 
-        <!-- CONNECT -->
-        <section class="section-card">
-            <h2 class="section-title">CONNECT WITH US</h2>
-            <p class="section-subtitle">FOLLOW & CONTACT</p>
-            <div class="social-grid">
-                <a href="https://www.instagram.com/" target="_blank" class="social-box"><i class="fa-brands fa-instagram"></i> Instagram</a>
-                <a href="https://wa.me/306909392922" target="_blank" class="social-box"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-                <a href="tel:+306909392922" class="social-box"><i class="fa-solid fa-phone"></i> Call Us</a>
-            </div>
-        </section>
+        </div>
+    </section>
 
-        <footer>
-            &copy; 2026 VELISSE LASH & BROW STUDIO
-        </footer>
-    </div>
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
-    <!-- FIREBASE & EMAILJS INTEGRATION SCRIPT -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // Firebase Configuration
+    <!-- Main JavaScript Logic -->
+    <script>
+        // Διαμόρφωση Firebase (Βάλε τα δικά σου στοιχεία project)
         const firebaseConfig = {
-            apiKey: "AIzaSyDHBJ5KO_vofsZ9dnVv4BFaeKbwxSSkkO0",
+            apiKey: "YOUR_API_KEY",
             authDomain: "velissebook.firebaseapp.com",
             projectId: "velissebook",
-            storageBucket: "velissebook.firebasestorage.app",
-            messagingSenderId: "223338416423",
-            appId: "1:223338416423:web:3ffd9c6fdb767ad5100102",
-            measurementId: "G-7GPKKBH9C3"
+            storageBucket: "velissebook.appspot.com",
+            messagingSenderId: "SENDER_ID",
+            appId: "APP_ID"
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
 
-        // Διάρκειες υπηρεσιών σε λεπτά
-        const serviceDurations = {
-            "One by One": 150,
-            "Volume / Hybrid Extensions/ Special Effect": 150,
-            "Lash Lift": 60,
-            "Brow Lamination": 60,
-            "Brow Wax and Shape": 30,
-            "Combo Lash & Brow": 90
+        // Global State Κράτησης
+        let currentBooking = {
+            service: '',
+            duration: '',
+            date: '',
+            time: ''
         };
 
-        function parseTimeToMinutes(timeStr) {
-            const [hours, minutes] = timeStr.split(':').map(Number);
-            return hours * 60 + minutes;
+        // Εναλλαγή βημάτων
+        function goToStep(stepNumber) {
+            document.querySelectorAll('.booking-step').forEach(step => step.classList.remove('active'));
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
         }
 
-        async function checkAvailability(selectedDate, startTimeStr, durationMinutes) {
-            const startMinutes = parseTimeToMinutes(startTimeStr);
-            const endMinutes = startMinutes + durationMinutes;
-
-            const q = query(collection(db, "appointments"), where("date", "==", selectedDate));
-            const querySnapshot = await getDocs(q);
-
-            let isAvailable = true;
-
-            querySnapshot.forEach((doc) => {
-                const appt = doc.data();
-                const apptStart = parseTimeToMinutes(appt.time);
-                const apptEnd = apptStart + appt.duration;
-
-                if (startMinutes < apptEnd && endMinutes > apptStart) {
-                    isAvailable = false;
-                }
-            });
-
-            return isAvailable;
+        // Επιλογή Υπηρεσίας
+        function selectService(serviceName, duration) {
+            currentBooking.service = serviceName;
+            currentBooking.duration = duration;
+            document.getElementById('selected-service-title').innerText = `${serviceName} (${duration})`;
+            goToStep(2);
         }
 
-        function createGoogleCalendarLink(name, service, date, time, durationMinutes) {
-            const startIso = new Date(`${date}T${time}:00`).toISOString().replace(/-|:|\.\d\d\d/g, "");
-            const endDate = new Date(new Date(`${date}T${time}:00`).getTime() + durationMinutes * 60000);
-            const endIso = endDate.toISOString().replace(/-|:|\.\d\d\d/g, "");
+        // Επιλογή Ώρας & Ημερομηνίας
+        function selectTime(timeSlot) {
+            const dateVal = document.getElementById('appointment-date').value;
+            if(!dateVal) {
+                alert('Παρακαλώ επιλέξτε πρώτα ημερομηνία.');
+                return;
+            }
+            currentBooking.date = dateVal;
+            currentBooking.time = timeSlot;
 
-            const title = encodeURIComponent(`VELISSE Studio: ${service}`);
-            const details = encodeURIComponent(`Ραντεβού για ${service} - Πελάτης: ${name}`);
-            const location = encodeURIComponent("VELISSE Lash & Brow Studio");
+            // Ενημέρωση σύνοψης στο 3ο βήμα
+            document.getElementById('summary-text').innerText = 
+                `${currentBooking.service} - ${currentBooking.date} στις ${currentBooking.time} (${currentBooking.duration})`;
 
-            return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startIso}/${endIso}&details=${details}&location=${location}`;
+            goToStep(3);
         }
 
-        const bookingForm = document.getElementById('bookingForm');
-        if (bookingForm) {
-            bookingForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
+        // Υποβολή Κράτησης (Firebase + EmailJS)
+        function submitBooking(e) {
+            e.preventDefault();
 
-                const submitBtn = document.getElementById('submitBtn');
-                submitBtn.disabled = true;
-                submitBtn.innerText = "ΕΛΕΓΧΟΣ ΔΙΑΘΕΣΙΜΟΤΗΤΑΣ...";
+            const name = document.getElementById('client-name').value;
+            const lastname = document.getElementById('client-lastname').value;
+            const email = document.getElementById('client-email').value;
+            const phone = document.getElementById('client-phone').value;
+            const message = document.getElementById('client-msg').value;
 
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                const service = document.getElementById('service').value;
-                const date = document.getElementById('date').value;
-                const time = document.getElementById('time').value;
-                const notes = document.getElementById('notes').value;
+            const fullName = `${name} ${lastname}`;
 
-                // Έλεγχος αν η ημερομηνία είναι πριν τις 15 Σεπτεμβρίου 2026
-                if (date < "2026-09-15") {
-                    alert("Τα ραντεβού ξεκινάνε από τις 15 Σεπτεμβρίου 2026. Παρακαλώ επιλέξτε μεταγενέστερη ημερομηνία.");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ";
-                    return;
-                }
+            // 1. Αποθήκευση στο Firebase Firestore
+            db.collection("appointments").add({
+                name: fullName,
+                email: email,
+                phone: phone,
+                service: currentBooking.service,
+                date: currentBooking.date,
+                time: currentBooking.time,
+                message: message,
+                createdAt: new Date()
+            })
+            .then(() => {
+                // 2. Αποστολή Email μέσω EmailJS
+                const templateParams = {
+                    to_name: fullName,
+                    to_email: email,
+                    service: currentBooking.service,
+                    date: currentBooking.date,
+                    time: currentBooking.time,
+                    phone: phone,
+                    message: message
+                };
 
-                const duration = serviceDurations[service] || 60;
-
-                try {
-                    const available = await checkAvailability(date, time, duration);
-
-                    if (!available) {
-                        alert("Δυστυχώς η συγκεκριμένη ώρα επικαλύπτεται με άλλο ραντεβού λόγω διάρκειας της υπηρεσίας. Παρακαλώ επιλέξτε άλλη ώρα.");
-                        submitBtn.disabled = false;
-                        submitBtn.innerText = "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ";
-                        return;
-                    }
-
-                    await addDoc(collection(db, "appointments"), {
-                        name: name,
-                        phone: phone,
-                        service: service,
-                        date: date,
-                        time: time,
-                        duration: duration,
-                        notes: notes,
-                        createdAt: new Date()
-                    });
-
-                    // EmailJS Integration
-                    const templateParams = {
-                        client_name: name,
-                        client_phone: phone,
-                        service_name: service,
-                        appointment_date: date,
-                        appointment_time: time
-                    };
-
-                    emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams)
-                        .then(function(response) {
-                           console.log('Το email εστάλη επιτυχώς!', response.status);
-                        }, function(error) {
-                           console.log('Κάτι πήγε στραβά...', error);
-                        });
-
-                    const calendarUrl = createGoogleCalendarLink(name, service, date, time, duration);
-
-                    document.getElementById('bookingContainer').innerHTML = `
-                        <div style="text-align: center; padding: 20px;">
-                            <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #b89782; margin-bottom: 15px;"></i>
-                            <h3 style="margin-bottom: 10px;">Το ραντεβού σας καταχωρήθηκε!</h3>
-                            <p style="margin-bottom: 5px;"><strong>Υπηρεσία:</strong> ${service}</p>
-                            <p style="margin-bottom: 15px;"><strong>Ημερομηνία:</strong> ${date} στις ${time}</p>
-                            <a href="${calendarUrl}" target="_blank" class="btn-submit" style="display: inline-block; text-decoration: none; padding: 12px 20px;">
-                                📅 Προσθήκη στο Google Calendar
-                            </a>
-                        </div>
-                    `;
-                } catch (error) {
-                    console.error("Error saving appointment: ", error);
-                    alert("Υπήρξε κάποιο σφάλμα κατά την αποθήκευση. Παρακαλώ δοκιμάστε ξανά.");
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ";
-                }
+                return emailjs.send('service_vbiygcb', 'template_mr9i2ax', templateParams);
+            })
+            .then(() => {
+                alert('Το ραντεβού σας ολοκληρώθηκε με επιτυχία! Σας στάλθηκε email επιβεβαίωσης.');
+                location.reload();
+            })
+            .catch((error) => {
+                console.error("Σφάλμα κράτησης: ", error);
+                alert('Παρουσιάστηκε κάποιο σφάλμα. Παρακαλώ δοκιμάστε ξανά.');
             });
         }
     </script>
