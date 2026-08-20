@@ -124,6 +124,18 @@
             margin: 40px auto;
             padding: 0 20px;
         }
+
+        /* Smooth Scroll Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .section-card {
             background: #ffffff;
             border: 1px solid #e8e1da;
@@ -323,7 +335,7 @@
     <div class="container">
 
         <!-- PROMO SPOTLIGHT -->
-        <section id="offers" class="section-card" style="background: linear-gradient(to bottom, #fffbf5, #f7f0e8);">
+        <section id="offers" class="section-card reveal" style="background: linear-gradient(to bottom, #fffbf5, #f7f0e8);">
             <h2 class="section-title">✨ SPECIAL OFFERS & GIFTS ✨</h2>
             <p class="section-subtitle">ΑΝΑΚΑΛΥΨΤΕ ΤΑ ΠΡΟΝΟΜΙΑ ΤΗΣ ΣΕΖΟΝ</p>
             
@@ -338,7 +350,7 @@
         </section>
 
         <!-- ABOUT -->
-        <section id="about" class="section-card">
+        <section id="about" class="section-card reveal">
             <h2 class="section-title">ABOUT US</h2>
             <p class="section-subtitle">YOUR PARTNER IN LASH PERFECTION</p>
             <p style="font-size: 0.9rem;">Καλώς ήρθατε στο <strong>VELISSE Lash & Brow Studio</strong>!</p>
@@ -346,7 +358,7 @@
         </section>
 
         <!-- SERVICES & PRICES -->
-        <section id="pricing" class="section-card">
+        <section id="pricing" class="section-card reveal">
             <h2 class="section-title">VELISSELASHESLAND</h2>
             <p class="section-subtitle">AUTUMN OFFERS & PRICELIST</p>
             
@@ -378,7 +390,7 @@
         </section>
 
         <!-- REGISTRATION & BIRTHDAY -->
-        <section class="section-card">
+        <section class="section-card reveal">
             <h2 class="section-title">VELISSELASHESLAND</h2>
             <p class="section-subtitle">ΦΟΡΜΑ ΕΓΓΡΑΦΗΣ & ΠΡΟΦΙΛ ΠΕΛΑΤΗ</p>
             <div id="registrationContainer" style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 20px; border-radius: 8px;">
@@ -407,7 +419,7 @@
         </section>
 
         <!-- CLIENT HISTORY / MY ACCOUNT -->
-        <section id="client-history" class="section-card">
+        <section id="client-history" class="section-card reveal">
             <h2 class="section-title">MY ACCOUNT & HISTORY</h2>
             <p class="section-subtitle">ΔΕΙΤΕ ΤΟ ΙΣΤΟΡΙΚΟ ΤΩΝ ΡΑΝΤΕΒΟΥ ΣΑΣ</p>
             <div style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 20px; border-radius: 8px;">
@@ -421,7 +433,7 @@
         </section>
 
         <!-- 3. POLICY -->
-        <section id="policy" class="section-card">
+        <section id="policy" class="section-card reveal">
             <h2 class="section-title">STUDIO POLICY</h2>
             <p class="section-subtitle">PLEASE READ BEFORE BOOKING</p>
             <div class="form-group" style="font-size:0.85rem; margin-bottom: 12px;"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση της κράτησης, απαιτείται προκαταβολή ύψους 50% επί της συνολικής αξίας.</div>
@@ -430,7 +442,7 @@
         </section>
 
         <!-- 4. BOOKING WIZARD -->
-        <section id="booking" class="section-card">
+        <section id="booking" class="section-card reveal">
             <h2 class="section-title">BOOK APPOINTMENT</h2>
             <p class="section-subtitle">ΕΠΙΛΕΞΤΕ ΥΠΗΡΕΣΙΑ, ΗΜΕΡΑ & ΩΡΑ (08:00 - 20:00)</p>
             
@@ -476,7 +488,7 @@
         </section>
 
         <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
-        <section class="section-card">
+        <section class="section-card reveal">
             <h2 class="section-title">FAQ & ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</h2>
             <p class="section-subtitle">ΜΥΘΟΙ ΚΑΙ ΑΛΗΘΕΙΕΣ ΓΙΑ ΠΡΩΤΗ ΦΟΡΑ</p>
             
@@ -497,7 +509,7 @@
         </section>
 
         <!-- CONTACT & CONNECT -->
-        <section id="contact" class="section-card">
+        <section id="contact" class="section-card reveal">
             <h2 class="section-title">CONNECT WITH US</h2>
             <p class="section-subtitle">FOLLOW & CONTACT</p>
             <div style="text-align: center; margin-bottom: 20px; line-height: 1.8; font-size: 0.85rem;">
@@ -536,6 +548,17 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // Scroll Reveal Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
         // Registration
         const registrationForm = document.getElementById('registrationForm');
