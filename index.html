@@ -22,7 +22,7 @@
         }
         header {
             background: #ffffff;
-            padding: 15px 30px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -30,39 +30,41 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            flex-wrap: wrap;
         }
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
         }
         .logo-icon-circle {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: #b89782;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .logo {
             font-family: 'Bodoni Moda', serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: 2px;
             color: #3a3532;
         }
         .top-nav {
             display: flex;
-            gap: 25px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         .top-nav a {
             text-decoration: none;
             color: #3a3532;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
@@ -70,6 +72,18 @@
         }
         .top-nav a:hover {
             color: #b89782;
+        }
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                padding: 10px;
+            }
+            .top-nav {
+                justify-content: center;
+                gap: 12px;
+            }
         }
         .hero {
             background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url('https://images.unsplash.com/photo-1512290900672-17250eb46dcb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
@@ -84,7 +98,7 @@
         }
         .hero h1 {
             font-family: 'Bodoni Moda', serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             letter-spacing: 1px;
         }
@@ -114,36 +128,36 @@
             background: #ffffff;
             border: 1px solid #e8e1da;
             border-radius: 8px;
-            padding: 40px;
+            padding: 30px;
             margin-bottom: 40px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
         .section-title {
             font-family: 'Bodoni Moda', serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-align: center;
             margin-bottom: 5px;
             color: #3a3532;
         }
         .section-subtitle {
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             color: #8c7b70;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .promo-spotlight {
             background: #fdfaf6;
             border: 1px dashed #d4af37;
             border-radius: 8px;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .promo-spotlight h3 {
             font-family: 'Bodoni Moda', serif;
             color: #b89782;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin-bottom: 10px;
         }
         .slot-btn {
@@ -175,14 +189,12 @@
         }
         @media (max-width: 768px) {
             .price-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
-            .top-nav { gap: 10px; }
-            .top-nav a { font-size: 0.7rem; }
+            .hero h1 { font-size: 1.8rem; }
         }
         .offer-box {
             background: #fdfaf6;
             border: 1px solid #e8e1da;
-            padding: 20px;
+            padding: 15px;
             border-radius: 6px;
         }
         .offer-title {
@@ -194,13 +206,14 @@
             border-radius: 4px;
             margin-bottom: 20px;
             letter-spacing: 1px;
+            font-size: 0.85rem;
         }
         .price-row {
             display: flex;
             justify-content: space-between;
             padding: 8px 0;
             border-bottom: 1px solid #f0eae1;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .form-group {
             margin-bottom: 15px;
@@ -209,7 +222,7 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
@@ -217,6 +230,7 @@
             border: 1px solid #dcd3cb;
             border-radius: 4px;
             background: #fdfaf6;
+            box-sizing: border-box;
         }
         .btn-submit {
             background: #b89782;
@@ -236,19 +250,19 @@
             background: #fdfaf6;
             border: 1px solid #e8e1da;
             border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 12px;
         }
         .faq-question {
             font-weight: 700;
             color: #b89782;
-            margin-bottom: 8px;
-            font-size: 1rem;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
         }
         .social-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
         }
         @media (max-width: 768px) {
@@ -257,13 +271,13 @@
         .social-box {
             background: #fdfaf6;
             border: 1px solid #e8e1da;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             text-decoration: none;
             color: #3a3532;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.3s;
         }
         .social-box:hover {
@@ -273,7 +287,7 @@
         footer {
             text-align: center;
             padding: 30px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #8c7b70;
             border-top: 1px solid #e8e1da;
         }
@@ -315,11 +329,11 @@
             
             <div class="promo-spotlight">
                 <h3>🍂 ΦΘΙΝΩΠΩΡΙΝΗ ΠΡΟΣΦΟΡΑ ΓΕΝΕΘΛΙΩΝ & ΥΠΗΡΕΣΙΩΝ</h3>
-                <p>Κλείστε οποιοδήποτε σετ <strong>Eyelash Extensions</strong> και κερδίστε <strong>ΕΝΤΕΛΩΣ ΔΩΡΩ ΤΟ BROW LIFT</strong> αξίας έως 60€!</p>
-                <p style="font-size: 0.85rem; color: #8c7b70; margin-top: 10px;">* Ισχύει για κρατήσεις έως τέλη Οκτωβρίου.</p>
+                <p style="font-size: 0.9rem;">Κλείστε οποιοδήποτε σετ <strong>Eyelash Extensions</strong> και κερδίστε <strong>ΕΝΤΕΛΩΣ ΔΩΡΩ ΤΟ BROW LIFT</strong> αξίας έως 60€!</p>
+                <p style="font-size: 0.75rem; color: #8c7b70; margin-top: 8px;">* Ισχύει για κρατήσεις έως τέλη Οκτωβρίου.</p>
             </div>
             <div style="text-align: center;">
-                <a href="#pricing" class="btn-black" style="font-size: 0.85rem; padding: 10px 20px;">ΔΕΙΤΕ ΤΙΜΟΚΑΤΑΛΟΓΟ</a>
+                <a href="#pricing" class="btn-black" style="font-size: 0.8rem; padding: 10px 20px;">ΔΕΙΤΕ ΤΙΜΟΚΑΤΑΛΟΓΟ</a>
             </div>
         </section>
 
@@ -327,8 +341,8 @@
         <section id="about" class="section-card">
             <h2 class="section-title">ABOUT US</h2>
             <p class="section-subtitle">YOUR PARTNER IN LASH PERFECTION</p>
-            <p>Καλώς ήρθατε στο <strong>VELISSE Lash & Brow Studio</strong>!</p>
-            <p>Πίσω από το <strong>Velisselashesland</strong> βρίσκεται η απόλυτη αγάπη και το πάθος για την ανάδειξη της φυσικής ομορφιάς κάθε γυναίκας. Σκοπός μας είναι να προσφέρουμε υψηλής ποιότητας εξειδικευμένες υπηρεσίες προσαρμοσμένες στα χαρακτηριστικά σας.</p>
+            <p style="font-size: 0.9rem;">Καλώς ήρθατε στο <strong>VELISSE Lash & Brow Studio</strong>!</p>
+            <p style="font-size: 0.9rem;">Πίσω από το <strong>Velisselashesland</strong> βρίσκεται η απόλυτη αγάπη και το πάθος για την ανάδειξη της φυσικής ομορφιάς κάθε γυναίκας. Σκοπός μας είναι να προσφέρουμε υψηλής ποιότητας εξειδικευμένες υπηρεσίες προσαρμοσμένες στα χαρακτηριστικά σας.</p>
         </section>
 
         <!-- SERVICES & PRICES -->
@@ -340,7 +354,7 @@
 
             <div class="price-grid">
                 <div class="offer-box">
-                    <div style="font-weight:bold; margin-bottom:12px; color:#b89782;">| ΑΤΟΜΙΚΈΣ ΠΡΟΣΦΟΡΈΣ</div>
+                    <div style="font-weight:bold; margin-bottom:12px; color:#b89782; font-size:0.9rem;">| ΑΤΟΜΙΚΈΣ ΠΡΟΣΦΟΡΈΣ</div>
                     <div class="price-row"><span>One by One <strong style="color:#6b8e23;">+ΔΩΡΟ Brow Lift</strong></span><span><del>45€</del> <strong>35€</strong></span></div>
                     <div class="price-row"><span>Volume <strong style="color:#6b8e23;">+ΔΩΡΟ Brow Lift</strong></span><span><del>55€</del> <strong>45€</strong></span></div>
                     <div class="price-row"><span>Half Set <strong style="color:#6b8e23;">+ΔΩΡΟ Brow Lift</strong></span><span><del>40€</del> <strong>30€</strong></span></div>
@@ -352,8 +366,8 @@
                 </div>
 
                 <div class="offer-box">
-                    <div style="font-weight:bold; margin-bottom:5px; color:#b89782;">| BRING A FRIEND OFFERS</div>
-                    <p style="font-size:0.8rem; font-style:italic; margin-bottom:12px;">Τιμή ανά άτομο όταν έρχεστε μαζί</p>
+                    <div style="font-weight:bold; margin-bottom:5px; color:#b89782; font-size:0.9rem;">| BRING A FRIEND OFFERS</div>
+                    <p style="font-size:0.75rem; font-style:italic; margin-bottom:12px;">Τιμή ανά άτομο όταν έρχεστε μαζί</p>
                     <div class="price-row"><span>One by One + ΔΩΡΟ Brow Lift</span><span><del>45€</del> <strong>25€ / άτομο</strong></span></div>
                     <div class="price-row"><span>Volume / Half Set + ΔΩΡΟ</span><span><del>55€</del> <strong>30€ / άτομο</strong></span></div>
                     <div class="price-row"><span>Lash Lift</span><span><del>60€</del> <strong>30€ / άτομο</strong></span></div>
@@ -367,9 +381,9 @@
         <section class="section-card">
             <h2 class="section-title">VELISSELASHESLAND</h2>
             <p class="section-subtitle">ΦΟΡΜΑ ΕΓΓΡΑΦΗΣ & ΠΡΟΦΙΛ ΠΕΛΑΤΗ</p>
-            <div id="registrationContainer" style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 25px; border-radius: 8px;">
+            <div id="registrationContainer" style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 20px; border-radius: 8px;">
                 <form id="registrationForm">
-                    <h3 style="font-size: 1rem; color: #b89782; border-bottom: 1px solid #e8e1da; padding-bottom: 5px; margin-bottom: 15px;">| ΠΡΟΣΩΠΙΚΆ ΣΤΟΙΧΕΊΑ</h3>
+                    <h3 style="font-size: 0.9rem; color: #b89782; border-bottom: 1px solid #e8e1da; padding-bottom: 5px; margin-bottom: 15px;">| ΠΡΟΣΩΠΙΚΆ ΣΤΟΙΧΕΊΑ</h3>
                     <div class="form-group">
                         <label for="regName">Ονοματεπώνυμο:</label>
                         <input type="text" id="regName" required placeholder="π.χ. Μαρία Παπαδοπούλου">
@@ -382,7 +396,7 @@
                         <label for="regEmail">Email:</label>
                         <input type="email" id="regEmail" required placeholder="email@example.com">
                     </div>
-                    <div style="background: #f7eee3; border: 1px dashed #b89782; padding: 15px; border-radius: 6px; margin: 15px 0;">
+                    <div style="background: #f7eee3; border: 1px dashed #b89782; padding: 12px; border-radius: 6px; margin: 15px 0; font-size: 0.85rem;">
                         ✨ <strong>Δώρο Γενεθλίων:</strong><br><br>
                         <label for="regBirthday"><strong>Ημερομηνία Γενεθλίων (ΗΗ/ΜΜ/ΕΕΕΕ):</strong></label>
                         <input type="text" id="regBirthday" required placeholder="π.χ. 15/05/1995">
@@ -396,7 +410,7 @@
         <section id="client-history" class="section-card">
             <h2 class="section-title">MY ACCOUNT & HISTORY</h2>
             <p class="section-subtitle">ΔΕΙΤΕ ΤΟ ΙΣΤΟΡΙΚΟ ΤΩΝ ΡΑΝΤΕΒΟΥ ΣΑΣ</p>
-            <div style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 25px; border-radius: 8px;">
+            <div style="background: #fdfaf6; border: 1px solid #e8e1da; padding: 20px; border-radius: 8px;">
                 <div class="form-group">
                     <label for="searchPhone">Κινητό Τηλέφωνο:</label>
                     <input type="tel" id="searchPhone" placeholder="π.χ. 6900000000">
@@ -410,9 +424,9 @@
         <section id="policy" class="section-card">
             <h2 class="section-title">STUDIO POLICY</h2>
             <p class="section-subtitle">PLEASE READ BEFORE BOOKING</p>
-            <div class="form-group" style="margin-bottom: 15px;"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση της κράτησης, απαιτείται προκαταβολή ύψους 50% επί της συνολικής αξίας.</div>
-            <div class="form-group" style="margin-bottom: 15px;"><strong>Ακυρώσεις:</strong> Απαιτείται ενημέρωση τουλάχιστον 24 ώρες νωρίτερα για οποιαδήποτε αλλαγή ή ακύρωση.</div>
-            <div class="form-group"><strong>Προσέλευση:</strong> Σε καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα τροποποίησης του ραντεβού.</div>
+            <div class="form-group" style="font-size:0.85rem; margin-bottom: 12px;"><strong>Προκαταβολή:</strong> Για την επιβεβαίωση της κράτησης, απαιτείται προκαταβολή ύψους 50% επί της συνολικής αξίας.</div>
+            <div class="form-group" style="font-size:0.85rem; margin-bottom: 12px;"><strong>Ακυρώσεις:</strong> Απαιτείται ενημέρωση τουλάχιστον 24 ώρες νωρίτερα για οποιαδήποτε αλλαγή ή ακύρωση.</div>
+            <div class="form-group" style="font-size:0.85rem;"><strong>Προσέλευση:</strong> Σε καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα τροποποίησης του ραντεβού.</div>
         </section>
 
         <!-- 4. BOOKING WIZARD -->
@@ -444,13 +458,13 @@
                     <div class="form-group">
                         <label>3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)</label>
                         <div id="slotsContainer" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
-                            <p style="color: #8c7b70; font-style: italic;">Παρακαλώ επιλέξτε υπηρεσία και ημερομηνία.</p>
+                            <p style="color: #8c7b70; font-style: italic; font-size: 0.85rem;">Παρακαλώ επιλέξτε υπηρεσία και ημερομηνία.</p>
                         </div>
                         <input type="hidden" id="selectedTime" required>
                     </div>
 
                     <div id="personalDetailsSection" style="display:none; margin-top: 20px; border-top: 1px solid #e8e1da; padding-top: 15px;">
-                        <h3 style="font-size:1rem; margin-bottom:15px; color:#b89782;">4. Συμπληρώστε τα στοιχεία σας</h3>
+                        <h3 style="font-size:0.9rem; margin-bottom:15px; color:#b89782;">4. Συμπληρώστε τα στοιχεία σας</h3>
                         <div class="form-group"><label>Ονοματεπώνυμο</label><input type="text" id="name" required></div>
                         <div class="form-group"><label>Τηλέφωνο Επικοινωνίας</label><input type="tel" id="phone" required></div>
                         <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
@@ -461,24 +475,24 @@
             </div>
         </section>
 
-        <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ (ΝΕΟ) -->
+        <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
         <section class="section-card">
             <h2 class="section-title">FAQ & ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</h2>
             <p class="section-subtitle">ΜΥΘΟΙ ΚΑΙ ΑΛΗΘΕΙΕΣ ΓΙΑ ΠΡΩΤΗ ΦΟΡΑ</p>
             
             <div class="faq-item">
                 <div class="faq-question">❌ Μύθος: «Τα extensions καταστρέφουν τις φυσικές βλεφαρίδες.»</div>
-                <div style="font-size:0.9rem;">✔️ <strong>Αλήθεια:</strong> Όταν η εφαρμογή γίνεται σωστά από επαγγελματία με ποιοτικά υλικά και σωστή απομόνωση, οι φυσικές βλεφαρίδες παραμένουν υγιείς. Πέφτουν μόνο όταν ολοκληρώνεται ο φυσικός τους κύκλος ζωής.</div>
+                <div style="font-size:0.85rem;">✔️ <strong>Αλήθεια:</strong> Όταν η εφαρμογή γίνεται σωστά από επαγγελματία με ποιοτικά υλικά και σωστή απομόνωση, οι φυσικές βλεφαρίδες παραμένουν υγιείς. Πέφτουν μόνο όταν ολοκληρώνεται ο φυσικός τους κύκλος ζωής.</div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">❌ Μύθος: «Δεν θα μπορώ να πλένω το πρόσωπό μου.»</div>
-                <div style="font-size:0.9rem;">✔️ <strong>Αλήθεια:</strong> Μετά τις πρώτες 24-48 ώρες, μπορείτε κανονικά να πλένετε το πρόσωπό σας και να χαρείτε τη θάλασσα ή το μπάνιο σας, αποφεύγοντας απλώς τα προϊόντα με βάση το λάδι.</div>
+                <div style="font-size:0.85rem;">✔️ <strong>Αλήθεια:</strong> Μετά τις πρώτες 24-48 ώρες, μπορείτε κανονικά να πλένετε το πρόσωπό σας και να χαρείτε τη θάλασσα ή το μπάνιο σας, αποφεύγοντας απλώς τα προϊόντα με βάση το λάδι.</div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">✨ Τι είναι το Lash & Brow Lift;</div>
-                <div style="font-size:0.9rem;">Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων. Η διαδικασία είναι απόλυτα χαλαρωτική και ανώδυνη.</div>
+                <div style="font-size:0.85rem;">Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων. Η διαδικασία είναι απόλυτα χαλαρωτική και ανώδυνη.</div>
             </div>
         </section>
 
@@ -486,7 +500,7 @@
         <section id="contact" class="section-card">
             <h2 class="section-title">CONNECT WITH US</h2>
             <p class="section-subtitle">FOLLOW & CONTACT</p>
-            <div style="text-align: center; margin-bottom: 20px; line-height: 1.8; font-size: 0.95rem;">
+            <div style="text-align: center; margin-bottom: 20px; line-height: 1.8; font-size: 0.85rem;">
                 <p><i class="fa-solid fa-location-dot" style="color:#b89782;"></i> <strong>Διεύθυνση:</strong> Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122</p>
                 <p><i class="fa-solid fa-phone" style="color:#b89782;"></i> <strong>Τηλέφωνο:</strong> +30 6909392922</p>
                 <p><i class="fa-brands fa-whatsapp" style="color:#b89782;"></i> <strong>WhatsApp & Viber:</strong> +30 6909392922</p>
@@ -539,7 +553,7 @@
                 try {
                     await addDoc(collection(db, "registrations"), { name, phone, email, birthday, createdAt: new Date() });
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', { client_name: name, client_phone: phone, client_email: email, client_birthday: birthday, desired_service: "Εγγραφή / Δώρο" });
-                    document.getElementById('registrationContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">Επιτυχής Εγγραφή!</h3></div>`;
+                    document.getElementById('registrationContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">Επιτυχής Εγγραφή!</h3></div>`;
                 } catch (error) {
                     alert("Σφάλμα. Δοκιμάστε ξανά.");
                 }
@@ -558,17 +572,17 @@
                     const q = query(collection(db, "appointments"), where("phone", "==", phoneInput));
                     const querySnapshot = await getDocs(q);
                     if(querySnapshot.empty) {
-                        container.innerHTML = `<p style="color: #8c7b70; font-style: italic;">Δεν βρέθηκαν ραντεβού.</p>`;
+                        container.innerHTML = `<p style="color: #8c7b70; font-style: italic; font-size: 0.85rem;">Δεν βρέθηκαν ραντεβού.</p>`;
                         return;
                     }
-                    let html = `<h4 style="color:#b89782;">Τα ραντεβού σας:</h4><ul style="list-style:none; padding:0;">`;
+                    let html = `<h4 style="color:#b89782; font-size:0.9rem;">Τα ραντεβού σας:</h4><ul style="list-style:none; padding:0;">`;
                     querySnapshot.forEach((doc) => {
                         const data = doc.data();
-                        html += `<li style="background:#fff; border:1px solid #e8e1da; padding:10px; margin-bottom:8px; border-radius:4px; font-size:0.9rem;"><strong>${data.service}</strong> - ${data.date} (${data.time})</li>`;
+                        html += `<li style="background:#fff; border:1px solid #e8e1da; padding:10px; margin-bottom:8px; border-radius:4px; font-size:0.85rem;"><strong>${data.service}</strong> - ${data.date} (${data.time})</li>`;
                     });
                     html += `</ul>`;
                     container.innerHTML = html;
-                } catch(e) { container.innerHTML = `<p style="color:red;">Σφάλμα ανάκτησης.</p>`; }
+                } catch(e) { container.innerHTML = `<p style="color:red; font-size:0.85rem;">Σφάλμα ανάκτησης.</p>`; }
             });
         }
 
@@ -641,7 +655,7 @@
                 try {
                     await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, notes, createdAt: new Date() });
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', { client_name: name, client_phone: phone, client_email: email, desired_service: service, client_notes: `Ραντεβού: ${date} στις ${time}` });
-                    document.getElementById('bookingContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 3rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">Το ραντεβού σας καταχωρήθηκε!</h3></div>`;
+                    document.getElementById('bookingContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">Το ραντεβού σας καταχωρήθηκε!</h3></div>`;
                 } catch (error) { alert("Σφάλμα. Δοκιμάστε ξανά."); }
             });
         }
