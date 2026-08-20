@@ -630,7 +630,7 @@
                 faq1_a: "✔️ <strong>Αλήθεια:</strong> Όταν η εφαρμογή γίνεται σωστά από επαγγελματία με ποιοτικά υλικά και σωστή απομόνωση, οι φυσικές βλεφαρίδες παραμένουν υγιείς. Πέφτουν μόνο όταν ολοκληρώνεται ο φυσικός τους κύκλος ζωής.",
                 faq2_q: "❌ Μύθος: «Δεν θα μπορώ να πλένω το πρόσωπό μου.»",
                 faq2_a: "✔️ <strong>Αλήθεια:</strong> Μετά τις πρώτες 24-48 ώρες, μπορείτε κανονικά να πλένετε το πρόσωπό σας και να χαρείτε τη θάλασσα ή το μπάνιο σας, αποφεύγοντας απλώς τα προϊόντα με βάση το λάδι.",
-                faq3_q: "✨ Τι είναι το Lash & Brow Lift;",
+                faq3_q: "✨ Τι είναι το Lash & Brow Lift?",
                 faq3_a: "Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων. Η διαδικασία είναι απόλυτα χαλαρωτική και ανώδυνη.",
                 contact_title: "CONNECT WITH US",
                 contact_subtitle: "FOLLOW & CONTACT",
@@ -872,6 +872,10 @@
                                 <a href="${gCalUrl}" target="_blank" class="btn-black" style="font-size: 0.8rem; padding: 12px; text-decoration: none; display: block; background: #4285f4; border:none; color:white;"><i class="fa-solid fa-calendar-plus"></i> Προσθήκη στο Calendar</a>
                             </div>
                         </div>`;
+                    
+                    // Διόρθωση: Σταθεροποίηση της οθόνης ακριβώς στην ενότητα του booking
+                    window.scrollTo({ top: document.getElementById('booking').offsetTop - 100, behavior: 'smooth' });
+
                 } catch (error) { alert(currentLang === 'el' ? "Σφάλμα. Δοκιμάστε ξανά." : "Error. Try again."); }
             });
         }
