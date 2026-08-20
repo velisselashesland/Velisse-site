@@ -838,7 +838,7 @@
         document.getElementById('date').addEventListener('change', generateTimeSlots);
         document.getElementById('service').addEventListener('change', generateTimeSlots);
 
-        // Booking submission
+        // Booking submission with instant messaging links & Calendar export
         const bookingForm = document.getElementById('bookingForm');
         if (bookingForm) {
             bookingForm.addEventListener('submit', async (e) => {
@@ -857,7 +857,36 @@
                 try {
                     await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, notes, createdAt: new Date() });
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', { client_name: name, client_phone: phone, client_email: email, desired_service: service, client_notes: `Ραντεβού: ${date} στις ${time}` });
-                    document.getElementById('bookingContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">${currentLang === 'el' ? 'Το ραντεβού σας καταχωρήθηκε!' : 'Your appointment has been booked!'}</h3></div>`;
+                    
+                    // Δημιουργία κειμένου για τα μηνύματα
+                    const msgText = encodeURIComponent(`Γεια σας ${name}, το ραντεβού σας για ${service} στις ${date} και ώρα ${time} στο VELISSE Studio επιβεβαιώθηκε! Σας περιμένουμε.`);
+                    
+                    // Google Calendar Link generation
+                    const [year, month, day] = date.split('-');
+                    const [thour, tmin] = time.split(':');
+                    const startDateObj = new Date(year, month - 1, day, thour, tmin);
+                    const durationMins = serviceDurations[service] || 60;
+                    const endDateObj = new Date(startDateObj.getTime() + durationMins * 60000);
+                    
+                    const formatCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g,"");
+                    const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('VELISSE: ' + service)}&dates=${formatCalDate(startDateObj)}/${formatCalDate(endDateObj)}&details=${encodeURIComponent('Ραντεβού για ' + service + ' στο VELISSE Lash & Brow Studio')}&location=${encodeURIComponent('Αριστείδου Κουρτίδου 122, Άγιος Ελευθέριος')}`;
+
+                    // Εμφάνιση επιβεβαίωσης με κουμπιά για SMS/Viber/WhatsApp και Calendar
+                    document.getElementById('bookingContainer').innerHTML = `
+                        <div style="text-align: center; padding: 20px;">
+                            <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i>
+                            <h3 style="color:#b89782; margin-bottom: 10px;">${currentLang === 'el' ? 'Το ραντεβού σας καταχωρήθηκε!' : 'Your appointment has been booked!'}</h3>
+                            <p style="font-size: 0.85rem; margin-bottom: 20px;">
+                                <strong>Υπηρεσία:</strong> ${service}<br>
+                                <strong>Ημερομηνία & Ώρα:</strong> ${date} στις ${time}
+                            </p>
+                            <div style="display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 0 auto;">
+                                <a href="sms:${phone}?body=${msgText}" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block;"><i class="fa-solid fa-comment-sms"></i> Αποστολή SMS Ειδοποίησης</a>
+                                <a href="viber://forward?text=${msgText}" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #7360f2;"><i class="fa-brands fa-viber"></i> Αποστολή στο Viber</a>
+                                <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${msgText}" target="_blank" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #25d366;"><i class="fa-brands fa-whatsapp"></i> Αποστολή στο WhatsApp</a>
+                                <a href="${gCalUrl}" target="_blank" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #4285f4;"><i class="fa-solid fa-calendar-plus"></i> Προσθήκη στο Calendar</a>
+                            </div>
+                        </div>`;
                 } catch (error) { alert(currentLang === 'el' ? "Σφάλμα. Δοκιμάστε ξανά." : "Error. Try again."); }
             });
         }
