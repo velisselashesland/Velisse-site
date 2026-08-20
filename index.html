@@ -514,14 +514,24 @@
                 </form>
             </div>
         </section>
-            <!-- Οθόνη Επιτυχίας με το Κουμπί Viber -->
-    <div class="container" id="successSection" style="display: none; text-align: center; margin-top: 20px;">
-        <h2 style="color: #28a745;">Το ραντεβού κλείστηκε επιτυχώς!</h2>
-        <p>Πατήστε παρακάτω για να στείλετε το μήνυμα επιβεβαίωσης στο Viber:</p>
-        <a id="viberActionBtn" href="#" target="_blank" style="background-color: #7360f2; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 16px;">💬 Στέλνοντας Viber Επιβεβαίωσης</a>
-        <br><br>
-        <button onclick="location.reload()" style="background: #6c757d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 15px;">Νέα Κράτηση</button>
-    </div>
+            <div class="container" id="successSection" style="display:none; text-align: center; padding: 20px;">
+    <h2 style="color: #28a745;">Το ραντεβού σας καταχωρήθηκε επιτυχώς!</h2>
+    <p>Πατήστε παρακάτω για να στείλετε την επιβεβαίωση εύκολα:</p>
+    
+    <!-- Κουμπί WhatsApp -->
+    <a id="whatsappBtn" href="#" target="_blank" class="btn" style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">
+        💬 Επιβεβαίωση μέσω WhatsApp
+    </a>
+    
+    <!-- Κουμπί SMS -->
+    <a id="smsBtn" href="#" class="btn" style="background-color: #007BFF; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">
+        ✉️ Επιβεβαίωση μέσω SMS
+    </a>
+    
+    <br><br>
+    <button onclick="location.reload()" class="btn" style="background-color: #6c757d; color: white; padding: 8px 15px; border: none; border-radius: 5px;">Νέα Κράτηση</button>
+</div>
+
 
 
         <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
@@ -739,22 +749,45 @@
             try {
                 await addDoc(collection(db, "appointments"), apptData);
                 
-                // Κρύβουμε τη φόρμα του booking (id="booking") και δείχνουμε την επιτυχία
-                document.getElementById('booking').style.display = 'none';
-                document.getElementById('successSection').style.display = 'block';
+                document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const service = document.getElementById('service').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('selectedTime').value;
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value;
+    const notes = document.getElementById('notes').value;
+    const duration = serviceDurations[service] || 60;
 
-                // Φτιάχνουμε αυτόματα το link του Viber με τα στοιχεία του πελάτη
-                let formattedPhone = phone.startsWith('+') ? phone : '+30' + phone;
-                let message = `Γεια σας ${name}, το ραντεβού σας στο Velisselashesland για ${service} στις ${date} και ώρα ${time} επιβεβαιώθηκε! Σας περιμένουμε.`;
-                let viberUrl = `viber://chat?number=${encodeURIComponent(formattedPhone)}&text=${encodeURIComponent(message)}`;
-                
-                // Το συνδέουμε στο κουμπί
-                document.getElementById('viberActionBtn').href = viberUrl;
+    const apptData = { service, date, time, name, phone, email, notes, duration };
 
-            } catch (err) {
-                alert("Σφάλμα: " + err.message);
-            }
-        });
+    try {
+        await addDoc(collection(db, "appointments"), apptData);
+        
+        // Κρύβουμε τη φόρμα και δείχνουμε την επιτυχία
+        document.getElementById('booking').style.display = 'none';
+        document.getElementById('successSection').style.display = 'block';
+
+        // Μήνυμα επιβεβαίωσης
+        let message = `Γεια σας ${name}, το ραντεβού σας στο Velisselashesland για ${service} στις ${date} και ώρα ${time} επιβεβαιώθηκε! Σας περιμένουμε.`;
+        
+        // Ο δικός σου αριθμός υποδοχής (βάλε εδώ το κινητό σου με το 30 μπροστά)
+        let myBusinessPhone = "+30XXXXXXXXXX"; // <-- ΑΛΛΑΞΕ ΤΟ ΜΕ ΤΟ ΔΙΚΟ ΣΟΥ ΝΟΥΜΕΡΟ
+
+        // 1. Δημιουργία link για WhatsApp (στον δικό σου αριθμό)
+        let whatsappUrl = `https://wa.me/${myBusinessPhone.replace('+', '')}?text=${encodeURIComponent(message)}`;
+        document.getElementById('whatsappBtn').href = whatsappUrl;
+
+        // 2. Δημιουργία link για SMS (στον δικό σου αριθμό)
+        let smsUrl = `sms:${myBusinessPhone}?body=${encodeURIComponent(message)}`;
+        document.getElementById('smsBtn').href = smsUrl;
+
+    } catch (err) {
+        alert("Σφάλμα: " + err.message);
+    }
+});
 
 
         let currentLang = 'el';
