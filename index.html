@@ -140,6 +140,8 @@
             letter-spacing: 1px;
             border-radius: 4px;
             transition: background 0.3s;
+            display: inline-block;
+            text-align: center;
         }
         .btn-black:hover {
             background: #b89782;
@@ -149,8 +151,6 @@
             margin: 40px auto;
             padding: 0 20px;
         }
-
-        /* Smooth Scroll Reveal Animations */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -160,7 +160,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
         .section-card {
             background: #ffffff;
             border: 1px solid #e8e1da;
@@ -190,12 +189,6 @@
             padding: 20px;
             text-align: center;
             margin-bottom: 25px;
-        }
-        .promo-spotlight h3 {
-            font-family: 'Bodoni Moda', serif;
-            color: #b89782;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
         }
         .slot-btn {
             padding: 8px 12px;
@@ -514,25 +507,6 @@
                 </form>
             </div>
         </section>
-            <div class="container" id="successSection" style="display:none; text-align: center; padding: 20px;">
-    <h2 style="color: #28a745;">Το ραντεβού σας καταχωρήθηκε επιτυχώς!</h2>
-    <p>Πατήστε παρακάτω για να στείλετε την επιβεβαίωση εύκολα:</p>
-    
-    <!-- Κουμπί WhatsApp -->
-    <a id="whatsappBtn" href="#" target="_blank" class="btn" style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">
-        💬 Επιβεβαίωση μέσω WhatsApp
-    </a>
-    
-    <!-- Κουμπί SMS -->
-    <a id="smsBtn" href="#" class="btn" style="background-color: #007BFF; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 5px;">
-        ✉️ Επιβεβαίωση μέσω SMS
-    </a>
-    
-    <br><br>
-    <button onclick="location.reload()" class="btn" style="background-color: #6c757d; color: white; padding: 8px 15px; border: none; border-radius: 5px;">Νέα Κράτηση</button>
-</div>
-
-
 
         <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
         <section class="section-card reveal">
@@ -550,7 +524,7 @@
             </div>
 
             <div class="faq-item">
-                <div class="faq-question" data-key="faq3_q">✨ Τι είναι το Lash & Brow Lift;</div>
+                <div class="faq-question" data-key="faq3_q">✨ Τι είναι το Lash & Brow Lift?</div>
                 <div style="font-size:0.85rem;" data-key="faq3_a">Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων. Η διαδικασία είναι απόλυτα χαλαρωτική και ανώδυνη.</div>
             </div>
         </section>
@@ -731,64 +705,6 @@
                 soc_call: "Call Us"
             }
         };
-                // Submit Booking & εμφάνιση κουμπιού Viber
-        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const service = document.getElementById('service').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('selectedTime').value;
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const notes = document.getElementById('notes').value;
-            const duration = serviceDurations[service] || 60;
-
-            const apptData = { service, date, time, name, phone, email, notes, duration };
-
-            try {
-                await addDoc(collection(db, "appointments"), apptData);
-                
-                document.getElementById('bookingForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const service = document.getElementById('service').value;
-    const date = document.getElementById('date').value;
-    const time = document.getElementById('selectedTime').value;
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const email = document.getElementById('email').value;
-    const notes = document.getElementById('notes').value;
-    const duration = serviceDurations[service] || 60;
-
-    const apptData = { service, date, time, name, phone, email, notes, duration };
-
-    try {
-        await addDoc(collection(db, "appointments"), apptData);
-        
-        // Κρύβουμε τη φόρμα και δείχνουμε την επιτυχία
-        document.getElementById('booking').style.display = 'none';
-        document.getElementById('successSection').style.display = 'block';
-
-        // Μήνυμα επιβεβαίωσης
-        let message = `Γεια σας ${name}, το ραντεβού σας στο Velisselashesland για ${service} στις ${date} και ώρα ${time} επιβεβαιώθηκε! Σας περιμένουμε.`;
-        
-        // Ο δικός σου αριθμός υποδοχής (βάλε εδώ το κινητό σου με το 30 μπροστά)
-        let myBusinessPhone = "+30XXXXXXXXXX"; // <-- ΑΛΛΑΞΕ ΤΟ ΜΕ ΤΟ ΔΙΚΟ ΣΟΥ ΝΟΥΜΕΡΟ
-
-        // 1. Δημιουργία link για WhatsApp (στον δικό σου αριθμό)
-        let whatsappUrl = `https://wa.me/${myBusinessPhone.replace('+', '')}?text=${encodeURIComponent(message)}`;
-        document.getElementById('whatsappBtn').href = whatsappUrl;
-
-        // 2. Δημιουργία link για SMS (στον δικό σου αριθμό)
-        let smsUrl = `sms:${myBusinessPhone}?body=${encodeURIComponent(message)}`;
-        document.getElementById('smsBtn').href = smsUrl;
-
-    } catch (err) {
-        alert("Σφάλμα: " + err.message);
-    }
-});
-
 
         let currentLang = 'el';
         const langToggleBtn = document.getElementById('langToggle');
@@ -935,10 +851,8 @@
                     await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, notes, createdAt: new Date() });
                     emailjs.send('service_vbiygcb', 'template_mr9i2ax', { client_name: name, client_phone: phone, client_email: email, desired_service: service, client_notes: `Ραντεβού: ${date} στις ${time}` });
                     
-                    // Δημιουργία κειμένου για τα μηνύματα
                     const msgText = encodeURIComponent(`Γεια σας ${name}, το ραντεβού σας για ${service} στις ${date} και ώρα ${time} στο VELISSE Studio επιβεβαιώθηκε! Σας περιμένουμε.`);
                     
-                    // Google Calendar Link generation
                     const [year, month, day] = date.split('-');
                     const [thour, tmin] = time.split(':');
                     const startDateObj = new Date(year, month - 1, day, thour, tmin);
@@ -948,7 +862,6 @@
                     const formatCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g,"");
                     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('VELISSE: ' + service)}&dates=${formatCalDate(startDateObj)}/${formatCalDate(endDateObj)}&details=${encodeURIComponent('Ραντεβού για ' + service + ' στο VELISSE Lash & Brow Studio')}&location=${encodeURIComponent('Αριστείδου Κουρτίδου 122, Άγιος Ελευθέριος')}`;
 
-                    // Εμφάνιση επιβεβαίωσης με κουμπιά για SMS/Viber/WhatsApp και Calendar
                     document.getElementById('bookingContainer').innerHTML = `
                         <div style="text-align: center; padding: 20px;">
                             <i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i>
@@ -959,7 +872,6 @@
                             </p>
                             <div style="display: flex; flex-direction: column; gap: 10px; max-width: 320px; margin: 0 auto;">
                                 <a href="sms:${phone}?body=${msgText}" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block;"><i class="fa-solid fa-comment-sms"></i> Αποστολή SMS Ειδοποίησης</a>
-                                <a href="viber://forward?text=${msgText}" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #7360f2;"><i class="fa-brands fa-viber"></i> Αποστολή στο Viber</a>
                                 <a href="https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${msgText}" target="_blank" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #25d366;"><i class="fa-brands fa-whatsapp"></i> Αποστολή στο WhatsApp</a>
                                 <a href="${gCalUrl}" target="_blank" class="btn-black" style="font-size: 0.8rem; padding: 10px; text-decoration: none; display: block; background: #4285f4;"><i class="fa-solid fa-calendar-plus"></i> Προσθήκη στο Calendar</a>
                             </div>
