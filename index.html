@@ -514,6 +514,15 @@
                 </form>
             </div>
         </section>
+            <!-- Οθόνη Επιτυχίας με το Κουμπί Viber -->
+    <div class="container" id="successSection" style="display: none; text-align: center; margin-top: 20px;">
+        <h2 style="color: #28a745;">Το ραντεβού κλείστηκε επιτυχώς!</h2>
+        <p>Πατήστε παρακάτω για να στείλετε το μήνυμα επιβεβαίωσης στο Viber:</p>
+        <a id="viberActionBtn" href="#" target="_blank" style="background-color: #7360f2; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; font-size: 16px;">💬 Στέλνοντας Viber Επιβεβαίωσης</a>
+        <br><br>
+        <button onclick="location.reload()" style="background: #6c757d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 15px;">Νέα Κράτηση</button>
+    </div>
+
 
         <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
         <section class="section-card reveal">
@@ -712,6 +721,41 @@
                 soc_call: "Call Us"
             }
         };
+                // Submit Booking & εμφάνιση κουμπιού Viber
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('selectedTime').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const notes = document.getElementById('notes').value;
+            const duration = serviceDurations[service] || 60;
+
+            const apptData = { service, date, time, name, phone, email, notes, duration };
+
+            try {
+                await addDoc(collection(db, "appointments"), apptData);
+                
+                // Κρύβουμε τη φόρμα του booking (id="booking") και δείχνουμε την επιτυχία
+                document.getElementById('booking').style.display = 'none';
+                document.getElementById('successSection').style.display = 'block';
+
+                // Φτιάχνουμε αυτόματα το link του Viber με τα στοιχεία του πελάτη
+                let formattedPhone = phone.startsWith('+') ? phone : '+30' + phone;
+                let message = `Γεια σας ${name}, το ραντεβού σας στο Velisselashesland για ${service} στις ${date} και ώρα ${time} επιβεβαιώθηκε! Σας περιμένουμε.`;
+                let viberUrl = `viber://chat?number=${encodeURIComponent(formattedPhone)}&text=${encodeURIComponent(message)}`;
+                
+                // Το συνδέουμε στο κουμπί
+                document.getElementById('viberActionBtn').href = viberUrl;
+
+            } catch (err) {
+                alert("Σφάλμα: " + err.message);
+            }
+        });
+
 
         let currentLang = 'el';
         const langToggleBtn = document.getElementById('langToggle');
