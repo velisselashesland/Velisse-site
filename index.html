@@ -1,6 +1,75 @@
-<!-- [Το υπόλοιπο HTML παραμένει το ίδιο μέχρι το τέλος του script] -->
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velisselashesland - Online Booking</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; color: #333; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .slot-btn { padding: 8px 12px; margin: 5px; border: 1px solid #ccc; background: #fff; cursor: pointer; border-radius: 4px; }
+        .slot-btn.selected { background: #7360f2; color: white; border-color: #7360f2; }
+        .slot-btn.booked { background: #eee; color: #aaa; cursor: not-allowed; border-color: #ddd; }
+        #personalDetailsSection { display: none; margin-top: 15px; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button[type="submit"] { background: #28a745; color: white; border: none; padding: 10px; width: 100%; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        #successSection { display: none; text-align: center; margin-top: 20px; }
+        .viber-btn { background-color: #7360f2; color: white; padding: 12px 20px; border-radius: 6px; text-decoration: none; display: inline-block; font-weight: bold; margin-top: 15px; font-size: 16px; }
+    </style>
+</head>
+<body>
 
-    <!-- SCRIPT -->
+    <!-- Η ΦΟΡΜΑ ΚΡΑΤΗΣΗΣ -->
+    <div class="container" id="formContainer">
+        <h2>Velisselashesland - Κλείστε ραντεβού</h2>
+        <form id="bookingForm">
+            <label for="service">Υπηρεσία:</label>
+            <select id="service" required>
+                <option value="">-- Επιλέξτε Υπηρεσία --</option>
+                <option value="One by One">One by One</option>
+                <option value="Volume">Volume</option>
+                <option value="Half Set">Half Set</option>
+                <option value="Special Effects">Special Effects</option>
+                <option value="Lash Lift & Tint">Lash Lift & Tint</option>
+                <option value="Brow Lift & Tint">Brow Lift & Tint</option>
+                <option value="Lash & Brow Lift Combo">Lash & Brow Lift Combo</option>
+            </select>
+
+            <label for="date">Ημερομηνία:</label>
+            <input type="date" id="date" required>
+
+            <label>Διαθέσιμες Ώρες:</label>
+            <div id="slotsContainer"></div>
+            <input type="hidden" id="selectedTime" required>
+
+            <div id="personalDetailsSection">
+                <label for="name">Ονοματεπώνυμο:</label>
+                <input type="text" id="name" required>
+
+                <label for="phone">Κινητό Τηλέφωνο:</label>
+                <input type="tel" id="phone" placeholder="π.χ. 6912345678" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+
+                <label for="notes">Σημειώσεις (προαιρετικά):</label>
+                <textarea id="notes"></textarea>
+
+                <button type="submit">Ολοκλήρωση Κράτησης</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Η ΟΘΟΝΗ ΕΠΙΤΥΧΙΑΣ ΜΕ ΤΟ ΚΟΥΜΠΙ VIBER -->
+    <div class="container" id="successSection">
+        <h2 style="color: #28a745;">Το ραντεβού κλείστηκε επιτυχώς!</h2>
+        <p>Πατήστε παρακάτω για να στείλετε το μήνυμα επιβεβαίωσης στον πελάτη:</p>
+        <a id="viberActionBtn" href="#" target="_blank" class="viber-btn">💬 Στέλνοντας Viber Επιβεβαίωσης</a>
+        <br><br>
+        <button onclick="location.reload()" style="background: #6c757d; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; margin-top: 15px;">Νέα Κράτηση</button>
+    </div>
+
+    <!-- Ο ΚΩΔΙΚΑΣ (SCRIPT) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -18,11 +87,20 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- (Οι μεταφράσεις παραμένουν εδώ όπως τις είχατε) ---
+        const serviceDurations = { 
+            "One by One": 150, 
+            "Volume": 150, 
+            "Half Set": 120, 
+            "Special Effects": 150, 
+            "Lash Lift & Tint": 60, 
+            "Brow Lift & Tint": 60, 
+            "Lash & Brow Lift Combo": 90 
+        };
 
-        // LOGIC FOR BOOKING SLOTS
-        const serviceDurations = { "One by One": 150, "Volume": 150, "Half Set": 120, "Special Effects": 150, "Lash Lift & Tint": 60, "Brow Lift & Tint": 60, "Lash & Brow Lift Combo": 90 };
-        function parseTimeToMinutes(t) { const [h, m] = t.split(':').map(Number); return h * 60 + m; }
+        function parseTimeToMinutes(t) { 
+            const [h, m] = t.split(':').map(Number); 
+            return h * 60 + m; 
+        }
 
         async function generateTimeSlots() {
             const dateInput = document.getElementById('date').value;
@@ -30,7 +108,7 @@
             const slotsContainer = document.getElementById('slotsContainer');
             if (!dateInput || !serviceSelect) return;
 
-            slotsContainer.innerHTML = currentLang === 'el' ? 'Φόρτωση...' : 'Loading...';
+            slotsContainer.innerHTML = 'Φόρτωση...';
             const q = query(collection(db, "appointments"), where("date", "==", dateInput));
             const querySnapshot = await getDocs(q);
             const bookedIntervals = [];
@@ -76,26 +154,38 @@
         document.getElementById('date').addEventListener('change', generateTimeSlots);
         document.getElementById('service').addEventListener('change', generateTimeSlots);
 
-        // Submit Booking
+        // ΟΛΟΚΛΗΡΩΣΗ ΚΡΑΤΗΣΗΣ & ΕΜΦΑΝΙΣΗ ΚΟΥΜΠΙΟΥ VIBER
         document.getElementById('bookingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const apptData = {
-                service: document.getElementById('service').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('selectedTime').value,
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                notes: document.getElementById('notes').value,
-                duration: serviceDurations[document.getElementById('service').value]
-            };
+            
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('selectedTime').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const notes = document.getElementById('notes').value;
+            const duration = serviceDurations[service] || 60;
+
+            const apptData = { service, date, time, name, phone, email, notes, duration };
 
             try {
                 await addDoc(collection(db, "appointments"), apptData);
-                alert(currentLang === 'el' ? "Το ραντεβού κλείστηκε επιτυχώς!" : "Appointment booked successfully!");
-                location.reload();
+                
+                // Κρύβουμε τη φόρμα και δείχνουμε την επιτυχία με το Viber
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('successSection').style.display = 'block';
+
+                // Φτιάχνουμε αυτόματα το link του Viber με τα στοιχεία του πελάτη
+                let formattedPhone = phone.startsWith('+') ? phone : '+30' + phone;
+                let message = `Γεια σας ${name}, το ραντεβού σας στο Velisselashesland για ${service} στις ${date} και ώρα ${time} επιβεβαιώθηκε! Σας περιμένουμε.`;
+                let viberUrl = `viber://chat?number=${encodeURIComponent(formattedPhone)}&text=${encodeURIComponent(message)}`;
+                
+                // Το συνδέουμε στο κουμπί
+                document.getElementById('viberActionBtn').href = viberUrl;
+
             } catch (err) {
-                alert("Error: " + err.message);
+                alert("Σφάλμα: " + err.message);
             }
         });
     </script>
