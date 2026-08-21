@@ -321,6 +321,16 @@
             color: #8c7b70;
             border-top: 1px solid #e8e1da;
         }
+
+
+        .aftercare-container { max-width: 600px; margin: 20px auto; font-family: sans-serif; }
+.aftercare-item { border: 1px solid #e8e1da; margin-bottom: 10px; border-radius: 5px; background: #fdfaf6; }
+.aftercare-item summary { padding: 15px; cursor: pointer; font-weight: bold; color: #3a3532; list-style: none; }
+.aftercare-item summary::after { content: '+'; float: right; color: #b89782; }
+.aftercare-item[open] summary::after { content: '-'; }
+.aftercare-item .content { padding: 0 15px 15px 15px; color: #555; font-size: 0.9rem; line-height: 1.5; }
+
+
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -508,6 +518,52 @@
                 </form>
             </div>
         </section>
+
+        <div class="aftercare-container">
+    <h3 style="text-align:center; color:#3a3532;">Οδηγίες Aftercare</h3>
+    
+    <!-- Ενότητα: Lash Extensions -->
+    <details class="aftercare-item">
+        <summary>Aftercare για Lash Extensions</summary>
+        <div class="content">
+            <p><strong>Πρώτες 24 ώρες:</strong> Αποφύγετε το νερό, τον ατμό, τη σάουνα και το κολύμπι.</p>
+            <ul>
+                <li>Μην τρίβετε και μην τραβάτε τα extensions σας.</li>
+                <li>Αποφύγετε το ψαλιδάκι βλεφαρίδων και τη μάσκαρα.</li>
+                <li>Χρησιμοποιείτε καθαριστικό χωρίς έλαια (oil-free).</li>
+                <li>Καθαρίζετε τακτικά με ειδικό σαμπουάν βλεφαρίδων και χτενίζετε καθημερινά.</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- Ενότητα: Lash Lift -->
+    <details class="aftercare-item">
+        <summary>Aftercare για Lash Lift</summary>
+        <div class="content">
+            <p><strong>Πρώτες 24 ώρες:</strong> Αποφύγετε το νερό στα μάτια, τον ατμό και τη σάουνα.</p>
+            <ul>
+                <li>Αποφύγετε να τρίβετε τα μάτια σας ή να κοιμάστε μπρούμυτα.</li>
+                <li>Χτενίζετε καθημερινά με καθαρό βουρτσάκι.</li>
+                <li>Εφαρμόστε καθημερινά serum βλεφαρίδων για ενυδάτωση.</li>
+            </ul>
+        </div>
+    </details>
+
+    <!-- Ενότητα: Brow Lamination -->
+    <details class="aftercare-item">
+        <summary>Aftercare για Brow Lamination</summary>
+        <div class="content">
+            <ul>
+                <li><strong>Πρώτες 24-48 ώρες:</strong> Αποφύγετε το νερό στα φρύδια.</li>
+                <li>Μετά τις 24 ώρες, καθαρίζετε απαλά με χλιαρό νερό.</li>
+                <li>Εφαρμόζετε κάθε βράδυ θρεπτικό serum ή λάδι για ενυδάτωση.</li>
+                <li>Χτενίζετε τα φρύδια καθημερινά προς τα πάνω για να διατηρήσουν το σχήμα τους.</li>
+                <li>Αποφύγετε σκληρά χημικά προϊόντα στην περιοχή.</li>
+            </ul>
+        </div>
+    </details>
+</div>
+
 
         <!-- FAQ / ΜΥΘΟΙ & ΑΛΗΘΕΙΕΣ -->
         <section class="section-card reveal">
