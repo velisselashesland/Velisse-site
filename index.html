@@ -3,368 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELISSE | Lash & Brow Studio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700;800&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Velisse Style Template</title>
+    <!-- Εισαγωγή Google Fonts για το serif look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --bg-color: #F4F1EA; /* Απαλό κρεμ/μπεζ φόντο */
+            --text-color: #1A1A1A;
+            --dark-card: #22201F;
+            --accent-color: #C5A059;
+            --border-color: #D9D2C9;
         }
-        body {
-            background-color: #f7f4ef;
-            color: #3a3532;
-            font-family: 'Montserrat', sans-serif;
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
         }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Header */
         header {
-            background: #ffffff;
-            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e8e1da;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            flex-wrap: wrap;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
         }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .logo-icon-circle {
-            width: 35px;
-            height: 35px;
-            background: #b89782;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1rem;
-        }
+
         .logo {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #3a3532;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            letter-spacing: 3px;
+            font-weight: 600;
         }
+
         .header-right {
             display: flex;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .top-nav {
-            display: flex;
             gap: 15px;
-            flex-wrap: wrap;
-        }
-        .top-nav a {
-            text-decoration: none;
-            color: #3a3532;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        .top-nav a:hover {
-            color: #b89782;
-        }
-        .lang-switcher {
-            background: #fdfaf6;
-            border: 1px solid #b89782;
-            color: #3a3532;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .lang-switcher:hover {
-            background: #b89782;
-            color: #fff;
-        }
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-                padding: 10px;
-            }
-            .header-right {
-                flex-direction: column;
-                gap: 8px;
-            }
-            .top-nav {
-                justify-content: center;
-                gap: 12px;
-            }
-        }
-        .hero {
-            background: linear-gradient(135deg, #4a423d 0%, #b89782 100%);
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #fff;
-            padding: 0 20px;
-        }
-        .hero h1 {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-        .hero h1 span {
-            color: #f3e5d8;
-            font-style: italic;
-        }
-        .btn-black {
-            background: #3a3532;
-            color: #fff;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-radius: 4px;
-            transition: background 0.3s;
-            display: inline-block;
-            text-align: center;
-        }
-        .btn-black:hover {
-            background: #b89782;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section-card {
-            background: #ffffff;
-            border: 1px solid #e8e1da;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-        .section-title {
-            font-family: 'Bodoni Moda', serif;
-            font-size: 1.6rem;
-            text-align: center;
-            margin-bottom: 5px;
-            color: #3a3532;
-        }
-        .section-subtitle {
-            text-align: center;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: #8c7b70;
-            margin-bottom: 25px;
-        }
-        .promo-spotlight {
-            background: #fdfaf6;
-            border: 1px dashed #d4af37;
-            border-radius: 8px;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .slot-btn {
-            padding: 8px 12px;
-            margin: 5px;
-            border: 1px solid #d4af37;
-            background: #fff;
-            color: #3a3532;
-            cursor: pointer;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-        .slot-btn.selected {
-            background: #b89782;
-            color: #fff;
-            border-color: #b89782;
-        }
-        .slot-btn.booked {
-            background: #f0eae1;
-            color: #b5aaa2;
-            text-decoration: line-through;
-            border-color: #e2d9cd;
-            cursor: not-allowed;
-        }
-        .price-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        @media (max-width: 768px) {
-            .price-grid { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 1.8rem; }
-        }
-        .offer-box {
-            background: #fdfaf6;
-            border: 1px solid #e8e1da;
-            padding: 15px;
-            border-radius: 6px;
-        }
-        .offer-title {
-            background: #b89782;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            font-weight: bold;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-        }
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0eae1;
-            font-size: 0.85rem;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #dcd3cb;
-            border-radius: 4px;
-            background: #fdfaf6;
-            box-sizing: border-box;
-        }
-        .btn-submit {
-            background: #b89782;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .btn-submit:hover {
-            background: #a3826e;
-        }
-        .faq-item {
-            background: #fdfaf6;
-            border: 1px solid #e8e1da;
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 12px;
-        }
-        .faq-question {
-            font-weight: 700;
-            color: #b89782;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
-        }
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-        @media (max-width: 768px) {
-            .social-grid { grid-template-columns: 1fr 1fr; }
-        }
-        .social-box {
-            background: #fdfaf6;
-            border: 1px solid #e8e1da;
-            padding: 12px;
-            text-align: center;
-            text-decoration: none;
-            color: #3a3532;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.3s;
-        }
-        .social-box:hover {
-            background: #b89782;
-            color: #fff;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 0.8rem;
-            color: #8c7b70;
-            border-top: 1px solid #e8e1da;
         }
 
-        /* Aftercare styles */
-        .aftercare-container { 
-            max-width: 100%; 
-            margin: 0 auto; 
+        .lang-btn {
+            border: 1px solid var(--text-color);
+            background: transparent;
+            padding: 6px 12px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            cursor: pointer;
         }
-        .aftercare-item { 
-            border: 1px solid #e8e1da; 
-            margin-bottom: 10px; 
-            border-radius: 6px; 
-            background: #fdfaf6; 
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
-        .aftercare-item summary { 
-            padding: 15px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            color: #3a3532; 
-            list-style: none; 
-            font-size: 0.95rem;
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background-color: var(--text-color);
         }
-        .aftercare-item summary::after { 
-            content: '+'; 
-            float: right; 
-            color: #b89782; 
-            font-weight: bold;
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 500px;
+            background-image: url('https://images.unsplash.com/photo-1512290900672-132d73f40f2f?auto=format&fit=crop&q=80&w=1000') /* Παράδειγμα εικόνας */;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+            color: white;
+            text-align: center;
         }
-        .aftercare-item[open] summary::after { 
-            content: '-'; 
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.35); /* Σκοτεινό φίλτρο για να ξεχωρίζουν τα γράμματα */
+            z-index: 1;
         }
-        .aftercare-item .content { 
-            padding: 0 15px 15px 15px; 
-            color: #555; 
-            font-size: 0.85rem; 
-            line-height: 1.5; 
+
+        .hero > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-top {
+            align-self: flex-end;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 6px 12px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .hero-center h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-center p {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary {
+            background-color: #1A1A1A;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #333;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 400;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .service-time {
+            font-size: 11px;
+            background: #F4F1EA;
+            padding: 4px 8px;
+            border-radius: 12px;
+            color: #555;
+        }
+
+        .service-desc {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+
+        .service-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+        }
+
+        .service-book {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #1A1A1A;
+            text-decoration: none;
+            border-bottom: 1px solid #1A1A1A;
+            padding-bottom: 2px;
         }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-       (function(){
-          emailjs.init("f4-qOKNQ9-9oIr26r");
-       })();
-    </script>
 </head>
 <body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">VELISSE</div>
+        <div class="header-right">
+            <button class="lang-btn">EN / ΕΛ</button>
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-top">
+            <span class="badge">Athens Only</span>
+        </div>
+        <div class="hero-center">
+            <p>Lash Extensions • Lash Lift • Brow Lamination</p>
+            <h1>Wake up to<br>FLAWLESS<br>LASHES</h1>
+            <button class="btn-primary">Book Now</button>
+        </div>
+        <div class="hero-bottom">
+            <!-- Pagination dots simulation -->
+            <div style="display: flex; justify-content: center; gap: 6px;">
+                <span style="width: 20px; height: 3px; background: white; border-radius: 2px;"></span>
+                <span style="width: 6px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px;"></span>
+                <span style="width: 6px; height: 3px; background: rgba(255,255,255,0.5); border-radius: 2px;"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <h2 class="section-title">Signature Services</h2>
+        <p class="section-subtitle">Refill within 2-3 weeks 20% off. All services include consultation and aftercare kit.</p>
+
+        <!-- Service Item 1 -->
+        <div class="service-card">
+            <div class="service-header">
+                <h3 class="service-name">Classic Lashes</h3>
+                <span class="service-time">120 min</span>
+            </div>
+            <p class="service-desc">Natural, elegant, one-by-one for everyday flawlessness.</p>
+            <div class="service-footer">
+                <span class="service-price">€70</span>
+                <a href="#" class="service-book">Book</a>
+            </div>
+        </div>
+
+        <!-- Service Item 2 -->
+        <div class="service-card">
+            <div class="service-header">
+                <h3 class="service-name">Hybrid Lashes</h3>
+                <span class="service-time">135 min</span>
+            </div>
+            <p class="service-desc">Perfect mix of volume and natural definition.</p>
+            <div class="service-footer">
+                <span class="service-price">€85</span>
+                <a href="#" class="service-book">Book</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
 
     <header>
         <a href="#home" class="logo-container">
