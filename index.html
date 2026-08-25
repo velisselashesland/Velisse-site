@@ -510,8 +510,8 @@
                     <div class="price-row"><span data-key="srv_4">Special Effects <strong style="color:#6b8e23;">+ΔΩΡΟ Brow Lift</strong></span><span><del>60€</del> <strong>50€</strong></span></div>
                     <div class="price-row"><span>Lash Lift & Tint</span><span><del>65€</del> <strong>55€</strong></span></div>
                     <div class="price-row"><span>Brow Lift & Tint</span><span><del>65€</del> <strong>55€</strong></span></div>
-                    <div class="price-row"><span>Lash & Brow Lift + Tint</span><span><del>75€</del> <strong>65€</strong></span></div>
-                    <div class="price-row"><span>Brow Wax (Κερί)</span><span><strong>10€</strong></span></div>
+                    <div class="price-row"><span>Lash & Brow Lift Combo</span><span><del>75€</del> <strong>65€</strong></span></div>
+                    <div class="price-row"><span>Brow Wax</span><span><strong>10€</strong></span></div>
                 </div>
 
                 <div class="offer-box">
@@ -591,12 +591,12 @@
                             <option value="" data-key="sel_service">-- Επιλέξτε Υπηρεσία --</option>
                             <option value="One by One">One by One (35€)</option>
                             <option value="Volume">Volume (45€)</option>
-                            <option value="Brow Wax">Brow Wax (10€)</option>
                             <option value="Half Set">Half Set (30€)</option>
                             <option value="Special Effects">Special Effects (50€)</option>
                             <option value="Lash Lift & Tint">Lash Lift & Tint (55€)</option>
                             <option value="Brow Lift & Tint">Brow Lift & Tint (55€)</option>
-                            <option value="Lash & Brow Lift Combo">Lash & Brow Lift Combo (60€)</option>
+                            <option value="Lash & Brow Lift Combo">Lash & Brow Lift Combo (65€)</option>
+                            <option value="Brow Wax">Brow Wax (10€)</option>
                         </select>
                     </div>
 
@@ -941,7 +941,16 @@
         }
 
         // Booking slots logic
-        const serviceDurations = { "One by One": 150, "Volume": 150, "Half Set": 120, "Special Effects": 150, "Lash Lift & Tint": 60, "Brow Lift & Tint": 60, "Lash & Brow Lift Combo": 90 };
+        const serviceDurations = { 
+            "One by One": 150, 
+            "Volume": 150, 
+            "Half Set": 120, 
+            "Special Effects": 150, 
+            "Lash Lift & Tint": 60, 
+            "Brow Lift & Tint": 60, 
+            "Lash & Brow Lift Combo": 90, 
+            "Brow Wax": 20 
+        };
         function parseTimeToMinutes(t) { const [h, m] = t.split(':').map(Number); return h * 60 + m; }
 
         async function generateTimeSlots() {
@@ -1015,7 +1024,15 @@
                     const durationMins = serviceDurations[service] || 60;
                     const endDateObj = new Date(startDateObj.getTime() + durationMins * 60000);
                     
-                    const formatCalDate = (d) => d.toISOString().replace(/-|:|\.\d\d\d/g,"");
+                    const formatCalDate = (d) => {
+                        const pad = (n) => String(n).padStart(2, '0');
+                        return d.getUTCFullYear() +
+                            pad(d.getUTCMonth() + 1) +
+                            pad(d.getUTCDate()) + 'T' +
+                            pad(d.getUTCHours()) +
+                            pad(d.getUTCMinutes()) +
+                            pad(d.getUTCSeconds()) + 'Z';
+                    };
                     const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('VELISSE: ' + service)}&dates=${formatCalDate(startDateObj)}/${formatCalDate(endDateObj)}&details=${encodeURIComponent('Ραντεβού για ' + service + ' στο VELISSE Lash & Brow Studio')}&location=${encodeURIComponent('Αριστείδου Κουρτίδου 122, Άγιος Ελευθέριος')}`;
 
                     document.getElementById('bookingContainer').innerHTML = `
