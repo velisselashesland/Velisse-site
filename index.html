@@ -621,6 +621,13 @@
                         <div class="form-group"><label data-key="lbl_name">Ονοματεπώνυμο</label><input type="text" id="name" required></div>
                         <div class="form-group"><label data-key="lbl_phone">Τηλέφωνο Επικοινωνίας</label><input type="tel" id="phone" required></div>
                         <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
+                        
+                        <!-- ΞΕΧΩΡΙΣΤΟ ΠΕΔΙΟ ΓΙΑ ΤΑ ΓΕΝΕΘΛΙΑ ΣΤΟ ΡΑΝΤΕΒΟΥ -->
+                        <div class="form-group">
+                            <label>Ημερομηνία Γενεθλίων (ΗΗ/ΜΜ/ΕΕΕΕ) <span style="font-weight:normal; color:#888;">(Για το δώρο σου!)</span></label>
+                            <input type="text" id="bookingBirthday" placeholder="π.χ. 15/05/1995">
+                        </div>
+
                         <div class="form-group"><label data-key="lbl_notes">Σημειώσεις</label><textarea id="notes" rows="2"></textarea></div>
                         <button type="submit" id="submitBtn" class="btn-submit" data-key="btn_submit_appt">ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ</button>
                     </div>
@@ -653,7 +660,7 @@
                         <ul>
                             <li>Αποφύγετε να τρίβετε τα μάτια σας ή να κοιμάστε μπρούμυτα.</li>
                             <li>Χτενίζετε καθημερινά με καθαρό βουρτσάκι.</li>
-                            <li>Εφαρμόστε καθημερινά serum βλεφαρίδων για ενυδάτωση.</li>
+                            <li>Εφαρμόζετε καθημερινά serum βλεφαρίδων για ενυδάτωση.</li>
                         </ul>
                     </div>
                 </details>
@@ -1013,28 +1020,26 @@
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
                 const email = document.getElementById('email').value;
+                const birthday = document.getElementById('bookingBirthday').value || 'Δεν δηλώθηκε';
                 const notes = document.getElementById('notes').value;
 
                 if (!time) return alert(currentLang === 'el' ? "Επιλέξτε ώρα." : "Please select a time.");
                 document.getElementById('submitBtn').disabled = true;
 
                 try {
-                    // 1. Αποθήκευση στη Firebase
-                    await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, notes, createdAt: new Date() });
+                    await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, birthday, notes, createdAt: new Date() });
                     
-                    // 2. ΑΠΟΣΤΟΛΗ ΜΕΣΩ EMAILJS (Με τα δικά σου κλειδιά)
                     emailjs.init("zmP_Ns5hG1yl5leMR"); 
                     
                     const templateParams = {
                         client_name: name,
                         client_phone: phone,
                         client_email: email,
-                        client_birthday: "Δεν δηλώθηκε (Ραντεβού)",
+                        client_birthday: birthday,
                         desired_service: service + " στις " + date + " - " + time,
                         client_notes: notes ? notes : "Χωρίς σημειώσεις",
-                        // Συμβατότητα με τα πεδία που έχεις στο EmailJS template σου ("Contact Us")
                         from_name: name,
-                        message: "Νέο ραντεβού για " + service + " στις " + date + " και ώρα " + time + ".\nΤηλέφωνο: " + phone + "\nEmail: " + email + "\nΣημειώσεις: " + (notes || "Καμία")
+                        message: "Νέο ραντεβού για " + service + " στις " + date + " και ώρα " + time + ".\nΤηλέφωνο: " + phone + "\nEmail: " + email + "\nΓενέθλια: " + birthday + "\nΣημειώσεις: " + (notes || "Καμία")
                     };
 
                     await emailjs.send('default_service', 'template_mr9i2ax', templateParams);
