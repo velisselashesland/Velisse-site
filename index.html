@@ -117,34 +117,45 @@
             font-weight: 500;
         }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            height: 450px;
-            background-image: url('https://images.unsplash.com/photo-1512290900672-132d73f40f2f?auto=format&fit=crop&q=80&w=1000');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 24px;
-            color: white;
-            text-align: center;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 1;
-        }
-
-        .hero > * {
-            position: relative;
-            z-index: 2;
-        }
+       /* Hero Section - SLIDESHOW */
+.hero {
+    position: relative;
+    height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    color: white;
+    text-align: center;
+}
+.hero-slides {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero::after {
+    content: '';
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+}
+.hero > * {
+    position: relative;
+    z-index: 2;
+}
 
         .hero h1 {
             font-family: 'Cormorant Garamond', serif;
@@ -536,9 +547,28 @@ header {
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <h1 data-key="hero_title">Wake up to <span>FLAWLESS LASHES</span></h1>
-        <a href="#booking" class="btn-black" data-key="hero_btn">BOOK NOW</a>
-    </section>
+  <div class="hero-slides">
+    <img src="./images/slide1.jpg" class="hero-slide active">
+    <img src="./images/slide2.jpg" class="hero-slide">
+    <img src="./images/slide3.jpg" class="hero-slide">
+    <img src="./images/slide4.jpg" class="hero-slide">
+    <img src="./images/slide5.jpg" class="hero-slide">
+    <img src="./images/slide6.jpg" class="hero-slide">
+    <img src="./images/slide7.jpg" class="hero-slide">
+    <img src="./images/slide8.jpg" class="hero-slide">
+    <img src="./images/slide9.jpg" class="hero-slide">
+  </div>
+  <h1 data-key="hero_title" style="position:relative; z-index:2; text-align:center; color:white; font-size:2.5rem;">Wake up to<br>FLAWLESS LASHES</h1>
+  <a href="#booking" class="btn-black" style="position:relative; z-index:2; background:#fdfaf6; color:#1a1a1a; padding:14px 36px; text-decoration:none; margin-top:20px; display:inline-block;">BOOK NOW</a>
+  <div id="heroDots" style="position:relative; z-index:2; display:flex; gap:8px; justify-content:center; margin-top:30px;">
+    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  </div>
+        <script>
+const slides=document.querySelectorAll('.hero-slide');
+let c=0;
+setInterval(()=>{slides[c].classList.remove('active'); c=(c+1)%slides.length; slides[c].classList.add('active');},3500);
+</script>
+</section>
 
     <div class="container">
 
