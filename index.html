@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <style>
         :root {
             --bg-color: #F4F1EA;
@@ -999,7 +1002,7 @@
         document.getElementById('date').addEventListener('change', generateTimeSlots);
         document.getElementById('service').addEventListener('change', generateTimeSlots);
 
-        // Booking submission
+        // Booking submission & EmailJS
         const bookingForm = document.getElementById('bookingForm');
         if (bookingForm) {
             bookingForm.addEventListener('submit', async (e) => {
@@ -1016,8 +1019,26 @@
                 document.getElementById('submitBtn').disabled = true;
 
                 try {
+                    // 1. Αποθήκευση στη Firebase
                     await addDoc(collection(db, "appointments"), { name, phone, email, service, date, time, duration: serviceDurations[service] || 60, notes, createdAt: new Date() });
                     
+                    // 2. ΑΠΟΣΤΟΛΗ ΜΕΣΩ EMAILJS (Με τα δικά σου κλειδιά)
+                    emailjs.init("zmP_Ns5hG1yl5leMR"); 
+                    
+                    const templateParams = {
+                        client_name: name,
+                        client_phone: phone,
+                        client_email: email,
+                        client_birthday: "Δεν δηλώθηκε (Ραντεβού)",
+                        desired_service: service + " στις " + date + " - " + time,
+                        client_notes: notes ? notes : "Χωρίς σημειώσεις",
+                        // Συμβατότητα με τα πεδία που έχεις στο EmailJS template σου ("Contact Us")
+                        from_name: name,
+                        message: "Νέο ραντεβού για " + service + " στις " + date + " και ώρα " + time + ".\nΤηλέφωνο: " + phone + "\nEmail: " + email + "\nΣημειώσεις: " + (notes || "Καμία")
+                    };
+
+                    await emailjs.send('default_service', 'template_mr9i2ax', templateParams);
+
                     const [year, month, day] = date.split('-');
                     const [thour, tmin] = time.split(':');
                     const startDateObj = new Date(year, month - 1, day, thour, tmin);
