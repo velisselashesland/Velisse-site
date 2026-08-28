@@ -440,6 +440,63 @@
             font-size: 1.2rem;
             color: #b89782;
         }
+/* Header & Navigation Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.dropdown-menu a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
 
         footer {
             text-align: center;
@@ -455,23 +512,25 @@
 
     <!-- Header -->
    <header>
-    <a href="#home" class="logo-container">
+    <a href="#home" class="logo-container" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color);">
         <div class="logo-icon-circle"><i>👁️</i></div>
         <div class="logo">VELISSE</div>
     </a>
 
-    <nav class="top-nav">
-        <a href="#home">Αρχική</a>
-        <a href="#about">Για εμάς</a>
-        <a href="#services">Υπηρεσίες</a>
-        <a href="#pricing">Τιμοκατάλογος</a>
-        <a href="#booking">Booking</a>
-        <a href="#contact">Επικοινωνία</a>
-    </nav>
-
-    <div class="header-right">
+    <div class="header-right-group">
         <button id="langToggle" class="lang-switcher">EN</button>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
     </div>
+
+    <!-- Αναπτυσσόμενο Μενού -->
+    <nav id="dropdownMenu" class="dropdown-menu">
+        <a href="#home" onclick="toggleMenu()">Αρχική</a>
+        <a href="#about" onclick="toggleMenu()">Για εμάς</a>
+        <a href="#services" onclick="toggleMenu()">Υπηρεσίες</a>
+        <a href="#pricing" onclick="toggleMenu()">Τιμοκατάλογος</a>
+        <a href="#booking" onclick="toggleMenu()">Booking</a>
+        <a href="#contact" onclick="toggleMenu()">Επικοινωνία</a>
+    </nav>
 </header>
 
 
@@ -1092,5 +1151,12 @@
             });
         }
     </script>
+    <script>
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('active');
+}
+</script>
+
 </body>
 </html>
