@@ -533,11 +533,12 @@ header {
   <div id="heroDots" style="position:relative; z-index:2; display:flex; gap:8px; justify-content:center; margin-top:30px;">
     <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
   </div>
-        <script>
-const slides=document.querySelectorAll('.hero-slide');
-let c=0;
-setInterval(()=>{slides[c].classList.remove('active'); c=(c+1)%slides.length; slides[c].classList.add('active');},3500);
-</script>
+            <script>
+    const slides=document.querySelectorAll('.hero-slide');
+    const dots=document.querySelectorAll('.dot');
+    let c=0;
+    setInterval(()=>{slides[c].classList.remove('active');dots[c].classList.remove('active');c=(c+1)%slides.length;slides[c].classList.add('active');dots[c].classList.add('active');},3500);
+    </script>
 </section>
 
     <div class="container">
