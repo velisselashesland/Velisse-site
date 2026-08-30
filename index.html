@@ -514,46 +514,91 @@ header {
 </header>
 
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-  <div class="hero-slides">
-    <img src="slide1.jpg" class="hero-slide active">
-    <img src="slide2.jpg" class="hero-slide">
-    <img src="slide3.jpg" class="hero-slide">
-    <img src="slide4.jpg" class="hero-slide">
-    <img src="slide5.jpg" class="hero-slide">
-    <img src="slide6.jpg" class="hero-slide">
-    <img src="slide7.jpg" class="hero-slide">
-    <img src="slide8.jpg" class="hero-slide">
-    <img src="slide9.jpg" class="hero-slide">
+    <section id="home" class="hero" style="position:relative; height:85svh; min-height:600px; max-height:800px; overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:#fff; padding:0 20px; transform:translateZ(0);">
+  <div id="heroSlides" style="position:absolute; inset:0; z-index:0; transform:translateZ(0);">
+    <!-- Οι 9 φωτό σου - άλλαξε τα src αν χρειάζεται -->
+    <div class="hero-slide active" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide1.jpg') center center / cover no-repeat; opacity:1; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide2.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide3.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide4.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide5.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide6.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide7.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide8.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
+    <div class="hero-slide" style="position:absolute; inset:0; background:url('https://velisselashesland.github.io/slides_for_github/slide9.jpg') center center / cover no-repeat; opacity:0; transition:opacity 1.2s ease-in-out; will-change:opacity;"></div>
   </div>
-  <h1 data-key="hero_title" style="position:relative; z-index:2; text-align:center; color:white; font-size:2.5rem;">Wake up to<br>FLAWLESS LASHES</h1>
-  <a href="#booking" class="btn-black" style="position:relative; z-index:2; background:#fdfaf6; color:#1a1a1a; padding:14px 36px; text-decoration:none; margin-top:20px; display:inline-block;">BOOK NOW</a>
-  <div id="heroDots" style="position:relative; z-index:2; display:flex; gap:8px; justify-content:center; margin-top:30px;">
-    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+  <div style="position:absolute; inset:0; background:rgba(58,53,50,0.42); z-index:1; pointer-events:none;"></div>
+  <div style="position:relative; z-index:2; transform:translateZ(0);">
+    <h1 style="font-family:'Bodoni Moda', serif; font-size:clamp(2.2rem, 6vw, 3rem); line-height:1.1; letter-spacing:2px; font-weight:300; margin-bottom:25px; color:#fff; text-shadow:0 2px 20px rgba(0,0,0,0.3);">
+      Wake up to<br><span style="font-weight:700; letter-spacing:3px;">FLAWLESS<br>LASHES</span>
+    </h1>
+    <a href="#booking" style="background:#fdfaf6; color:#3a3532; padding:14px 36px; text-decoration:none; font-size:0.8rem; letter-spacing:2px; font-weight:600; display:inline-block; border-radius:999px; box-shadow:0 4px 20px rgba(0,0,0,0.15);">BOOK NOW</a>
+    <div id="heroDots" style="display:flex; gap:8px; justify-content:center; margin-top:35px; align-items:center;">
+      <span class="dot active" style="width:24px; height:3px; background:#fff; display:block; border-radius:999px; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+      <span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%; transition:all 0.3s;"></span>
+    </div>
   </div>
-       <script>
-    const slides=document.querySelectorAll('.hero-slide');
-    const dots=document.querySelectorAll('.dot');
-    let c=0;
-    setInterval(()=>{
-      slides[c].classList.remove('active');
-      dots[c].classList.remove('active');
-      c=(c+1)%slides.length;
-      slides[c].classList.add('active');
-      dots[c].classList.add('active');
-    },3500);
-    dots.forEach((d,i)=>{
-      d.addEventListener('click',()=>{
-        slides[c].classList.remove('active');
-        dots[c].classList.remove('active');
-        c=i;
-        slides[c].classList.add('active');
-        dots[c].classList.add('active');
-      });
-    });
-    </script>
 </section>
+<style>
+/* FIX για το τίναγμα στο iPhone */
+.hero{
+  height:85svh !important; /* svh = stable viewport, δεν αλλάζει όταν κρύβεται η μπάρα */
+  min-height:600px;
+  max-height:850px;
+}
+@media (max-width: 768px){
+  .hero{ height:78svh !important; min-height:550px; }
+}
+.hero-slide{
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:translateZ(0);
+}
+</style>
+<script>
+(function(){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('#heroDots .dot');
+  let cur = 0;
+  let interval;
+  function show(n){
+    slides.forEach((s,i)=> {
+      s.style.opacity = i===n ? '1' : '0';
+      s.classList.toggle('active', i===n);
+    });
+    dots.forEach((d,i)=> {
+      if(i===n){
+        d.style.background='#fff';
+        d.style.width='24px';
+        d.style.height='3px';
+        d.style.borderRadius='999px';
+      }else{
+        d.style.background='rgba(255,255,255,0.5)';
+        d.style.width='8px';
+        d.style.height='8px';
+        d.style.borderRadius='50%';
+      }
+    });
+    cur = n;
+  }
+  function next(){ show((cur+1)%slides.length); }
+  // ξεκινά μετά από 4 δευτερόλεπτα, αλλάζει κάθε 4.5 δευτ - πιο αργά για να μην ζαλίζει
+  interval = setInterval(next, 4500);
+  // click στα dots για manual αλλαγή
+  dots.forEach((d,i)=> d.addEventListener('click', ()=>{ clearInterval(interval); show(i); interval=setInterval(next,4500); }));
+  // preload images
+  const urls = ["slide1.jpg","slide2.jpg","slide3.jpg","slide4.jpg","slide5.jpg","slide6.jpg","slide7.jpg","slide8.jpg","slide9.jpg"];
+  urls.forEach(u=>{ const img=new Image(); img.src='https://velisselashesland.github.io/slides_for_github/'+u; });
+})();
+</script>
+
 
     <div class="container">
 
@@ -963,6 +1008,7 @@ window.lbLogout=function(){localStorage.removeItem('velisse_profile');localStora
 })();
 </script>
 <!-- ===== END FULL BOOKING ===== -->
+
         <!-- AFTERCARE SECTION -->
         <section class="section-card reveal">
             <h2 class="section-title">Οδηγίες Aftercare</h2>
