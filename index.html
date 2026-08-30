@@ -16,7 +16,7 @@
     .header-right{display:flex;align-items:center;gap:10px}
     .lang-switcher{border:1px solid var(--text);padding:6px 10px;border-radius:20px;background:transparent;cursor:pointer}
     .menu-toggle{background:none;border:none;font-size:22px;cursor:pointer}
-    .dropdown-menu{display:none;position:absolute;top:64px;left:0;width:100%;background:var(--bg);padding:12px 20px;border-bottom:1px solid var(--border)}
+    .dropdown-menu{display:none;position:absolute;top:64px;left:0;width:100%;background:var(--bg);padding:12px 20px;border-bottom:1px solid var(--border);z-index:999}
     .dropdown-menu.active{display:block}
     .dropdown-menu a{display:block;padding:8px 0;text-decoration:none;color:var(--text)}
 
@@ -34,29 +34,31 @@
     .section-title{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;text-align:center}
     .section-subtitle{text-transform:uppercase;font-size:11px;color:#7a6b5f;text-align:center;margin-bottom:12px}
 
-    /* pricing tabs */
     .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
     .tabs button{padding:8px 16px;border-radius:999px;border:none;background:transparent;cursor:pointer;transition:all .3s}
     .tabs button.active{background:#1a1a1a;color:#fff}
     .price-list{display:block}
     .price-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}
 
-    /* booking customer type */
     .customer-type-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
     .customer-type-tabs button{padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:transparent;cursor:pointer;transition:all .3s;font-weight:500}
     .customer-type-tabs button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 
-    /* booking simple */
     .form-row{display:flex;gap:8px;flex-wrap:wrap}
-    .form-row input,.form-row select{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px}
-    .btn-submit{background:#1a1a1a;color:#fff;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:all .3s}
+    .form-row input,.form-row select{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;min-width:150px}
+    .form-row label{display:flex;align-items:center;gap:6px;flex:0}
+    .form-row label input{margin:0}
+    .btn-submit{background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:8px;border:none;cursor:pointer;transition:all .3s}
     .btn-submit:hover{background:#C5A059;cursor:pointer}
 
     .price-display{background:#f9f7f4;padding:12px;border-radius:8px;margin:12px 0;text-align:center;font-weight:600;color:#C5A059}
+    .reminder-options{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0;justify-content:center}
+    .reminder-options label{display:flex;align-items:center;gap:6px;border:1px solid var(--border);padding:8px 12px;border-radius:6px;cursor:pointer}
+    .reminder-options input[type="checkbox"]{cursor:pointer}
 
     footer{text-align:center;padding:18px 0;color:#777;font-size:.85rem}
 
-    @media(min-width:700px){.form-row input{flex:unset;min-width:220px}}
+    @media(min-width:700px){.form-row input{flex:unset;min-width:200px}}
   </style>
 </head>
 <body>
@@ -121,11 +123,14 @@
       <form id="bookingForm">
         <div class="form-row">
           <input id="name" placeholder="Ονοματεπώνυμο *" required>
-          <input id="phone" placeholder="Κινητό *" type="tel" required>
+          <input id="phone" placeholder="Κινητό (με +30) *" type="tel" pattern="^\+30[0-9]{10}$" required>
         </div>
+        
         <div class="form-row" style="margin-top:8px">
-          <input id="email" placeholder="Email (για υπενθύμηση) *" type="email" required>
+          <input id="email" placeholder="Email *" type="email" required>
+          <input id="birthday" placeholder="Γενέθλια (MM/DD)" type="text" pattern="^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
         </div>
+
         <div class="form-row" style="margin-top:8px">
           <select id="service" required>
             <option value="">-- Επιλέξτε υπηρεσία --</option>
@@ -133,11 +138,32 @@
             <option value="One by One">One by One</option>
             <option value="Volume 2D-3D">Volume 2D-3D</option>
           </select>
+          <input id="duration" type="hidden" value="60">
           <input id="date" type="date" required>
           <input id="time" type="time" required>
         </div>
 
+        <div class="form-row" style="margin-top:8px">
+          <label><input id="is_first_time" type="checkbox"> Πρώτη φορά</label>
+          <label><input id="is_student" type="checkbox"> Είμαι φοιτήτρια</label>
+          <label><input id="is_bring_friend" type="checkbox"> Φέρνω φίλη</label>
+        </div>
+
+        <div class="form-row" style="margin-top:8px" id="friendSection" style="display:none">
+          <input id="friend_name" placeholder="Όνομα φίλης">
+          <input id="friend_phone" placeholder="Τηλέφωνο φίλης (με +30)">
+        </div>
+
         <div class="price-display" id="priceDisplay">Τιμή: Επιλέξτε υπηρεσία</div>
+
+        <div style="margin:12px 0">
+          <div style="font-weight:600;margin-bottom:8px">Πώς θέλετε να λάβετε υπενθύμιση;</div>
+          <div class="reminder-options">
+            <label><input id="remind_whatsapp" type="checkbox" checked> 💬 WhatsApp</label>
+            <label><input id="remind_viber" type="checkbox"> 📞 Viber</label>
+            <label><input id="remind_sms" type="checkbox"> 📧 Email</label>
+          </div>
+        </div>
 
         <div style="margin-top:12px">
           <button type="submit" class="btn-submit">✓ Κλείσιμο Ραντεβού</button>
@@ -145,8 +171,8 @@
         <p id="bookingMsg" style="margin-top:10px;color:#6b5d4d;text-align:center"></p>
 
         <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-          <button type="button" onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4;flex:0">📅 Google Calendar</button>
-          <button type="button" onclick="downloadICS()" class="btn-submit" style="background:#17a2b8;flex:0">📥 Κατέβασμα Calendar</button>
+          <button type="button" onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4">📅 Google Calendar</button>
+          <button type="button" onclick="downloadICS()" class="btn-submit" style="background:#17a2b8">📥 ICS File</button>
         </div>
       </form>
     </section>
@@ -154,15 +180,17 @@
     <section id="contact" class="section-card">
       <div class="section-title">Aftercare & FAQ</div>
       <div class="section-subtitle">Οδηγίες και Συχνές Ερωτήσεις</div>
-      <p style="margin-top:8px"><strong>Φροντίδα μετά την εφαρμογή:</strong> Διατηρήστε τα φυσικά σας βλέφαρα καθαρά και ξηρά για τις πρώτες 24 ώρες. Αποφύγετε το νερό, την ατμό και τα καλλυντικά. Χρησιμοποιήστε τη βούρτσα που σας δώσαμε καθημερινά για αποφυγή μάτσων.</p>
+      <p style="margin-top:8px"><strong>Φροντίδα μετά την εφαρμογή:</strong> Διατηρήστε τα φυσικά σας βλέφαρα καθαρά και ξηρά για τις πρώτες 24 ώρες. Αποφύγετε το νερό, την ατμό και τα καλλυντικά. Χρησιμοποιήστε τη βούρτσα που σας δώσαμε καθημερινά.</p>
     </section>
 
   </div>
 
   <footer>© VELISSE - All rights reserved</footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    // GOOGLE SHEET CONFIGURATION
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfaeSxTTgSQzjw5dWzfuIU8q73wluNOTKbiv9bblVEkEJGTLoRZMS_7IK98GdCqh26Zw/exec';
+
     let currentCustomerType = 'regular';
     let currentService = '';
     let currentPrice = 0;
@@ -182,7 +210,7 @@
       }catch(e){console.warn(e)}
     }
 
-    // Simple slideshow
+    // Slideshow
     (function(){
       const slides = Array.from(document.querySelectorAll('.hero-slide'));
       if(!slides.length) return;
@@ -194,7 +222,7 @@
       });
     })();
 
-    // Pricing data
+    // Pricing
     const pricelist = serviceprices;
     function showPrice(key){
       document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
@@ -212,7 +240,7 @@
     }
     showPrice('regular');
 
-    // Customer Type Selection
+    // Customer Type
     function selectCustomerType(type){
       currentCustomerType = type;
       document.querySelectorAll('.customer-type-tabs button').forEach(b=>b.classList.remove('active'));
@@ -220,7 +248,6 @@
       updatePrice();
     }
 
-    // Update price display
     function updatePrice(){
       const service = document.getElementById('service').value;
       if(service){
@@ -236,50 +263,129 @@
 
     document.getElementById('service').addEventListener('change', updatePrice);
 
-    // Booking Form Submission
+    // Show/hide friend fields
+    document.getElementById('is_bring_friend').addEventListener('change', function(){
+      document.getElementById('friendSection').style.display = this.checked ? 'flex' : 'none';
+    });
+
+    // Form Submission
     document.getElementById('bookingForm').addEventListener('submit', function(e){
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.trim();
       const email = document.getElementById('email').value.trim();
+      const birthday = document.getElementById('birthday').value.trim();
       const service = document.getElementById('service').value;
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
+      const is_first_time = document.getElementById('is_first_time').checked;
+      const is_student = document.getElementById('is_student').checked;
+      const is_bring_friend = document.getElementById('is_bring_friend').checked;
+      const friend_name = document.getElementById('friend_name').value.trim() || '';
+      const friend_phone = document.getElementById('friend_phone').value.trim() || '';
 
       if(!name||!phone||!email||!service||!date||!time){
-        document.getElementById('bookingMsg').textContent='❌ Συμπλήρωσε όλα τα πεδία.';
+        document.getElementById('bookingMsg').textContent='❌ Συμπλήρωσε όλα τα υποχρεωτικά πεδία.';
         return;
       }
 
-      // Store booking
+      // Prepare booking data
       const booking = {
-        name, phone, email, service, date, time, 
-        type: currentCustomerType, 
+        id: Date.now(),
+        name, 
+        phone, 
+        email, 
+        birthday,
+        service, 
+        date, 
+        time,
+        duration: 60,
+        start_time: time,
+        end_time: calculateEndTime(time),
         price: currentPrice,
-        created: new Date().toISOString()
+        final_price: currentPrice,
+        client_type: currentCustomerType,
+        is_first_time,
+        is_student,
+        is_bring_friend,
+        friend_name,
+        friend_phone,
+        discount: 0,
+        gift: false,
+        created_at: new Date().toISOString(),
+        birthday_type: 'none'
       };
 
+      // Save locally
       const bookings = JSON.parse(localStorage.getItem('velisse_bookings') || '[]');
       bookings.push(booking);
       localStorage.setItem('velisse_bookings', JSON.stringify(bookings));
 
-      // Send reminders
+      // Send to Google Sheet
+      sendToGoogleSheet(booking);
+
+      // Schedule reminders
       scheduleReminders(booking);
 
       // Show success
       document.getElementById('bookingMsg').innerHTML = `
         ✅ <strong>Ραντεβού κλειστό!</strong><br>
-        Θα λάβετε υπενθύμηση σε 1 ημέρα και 2 ώρες πριν.
+        Θα λάβετε υπενθύμιση σε 1 ημέρα και 2 ώρες πριν.
       `;
 
-      setTimeout(() => this.reset(), 2000);
+      setTimeout(() => {
+        this.reset();
+        document.getElementById('friendSection').style.display = 'none';
+      }, 2000);
     });
 
-    // Schedule automatic reminders
+    function calculateEndTime(startTime){
+      const [hours, minutes] = startTime.split(':');
+      const endHours = (parseInt(hours) + 1) % 24;
+      return `${String(endHours).padStart(2, '0')}:${minutes}`;
+    }
+
+    // Google Sheet Integration
+    function sendToGoogleSheet(booking){
+      const payload = {
+        action: 'addBooking',
+        id: booking.id,
+        name: booking.name,
+        phone: booking.phone,
+        birthday: booking.birthday,
+        service: booking.service,
+        duration: booking.duration,
+        data: booking.date,
+        start_time: booking.start_time,
+        end_time: booking.end_time,
+        price: booking.price,
+        final_price: booking.final_price,
+        client_type: booking.client_type,
+        discount: booking.discount,
+        friend_name: booking.friend_name,
+        friend_phone: booking.friend_phone,
+        is_first_time: booking.is_first_time,
+        is_student: booking.is_student,
+        is_bring_friend: booking.is_bring_friend,
+        gift: booking.gift,
+        created_at: booking.created_at,
+        birthday_type: booking.birthday_type
+      };
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        mode: 'no-cors'
+      })
+      .then(() => console.log('✅ Ραντεβού αποθηκεύτηκε στο Google Sheet'))
+      .catch(err => console.log('Google Sheet sync error:', err));
+    }
+
+    // Reminders
     function scheduleReminders(booking){
       const bookingDateTime = new Date(booking.date + 'T' + booking.time);
       
-      // 1 day before reminder
+      // 1 day before
       const oneDayBefore = new Date(bookingDateTime.getTime() - 24*60*60*1000);
       const hoursUntilOneDayReminder = (oneDayBefore.getTime() - new Date().getTime()) / (1000 * 60 * 60);
       
@@ -289,7 +395,7 @@
         }, hoursUntilOneDayReminder * 60 * 60 * 1000);
       }
 
-      // 2 hours before reminder
+      // 2 hours before
       const twoHoursBefore = new Date(bookingDateTime.getTime() - 2*60*60*1000);
       const minutesUntilTwoHourReminder = (twoHoursBefore.getTime() - new Date().getTime()) / (1000 * 60);
       
@@ -300,22 +406,30 @@
       }
     }
 
-    // Send reminder (email simulation)
     function sendReminder(booking, reminderType){
-      const message = `
-        Υπενθύμηση: Το ραντεβού σας με VELISSE είναι ${reminderType}
-        Ημερομηνία: ${booking.date} Ώρα: ${booking.time}
-        Υπηρεσία: ${booking.service}
-        Τιμή: ${booking.price}€
-      `;
+      const message = `Υπενθύμιση: Το ραντεβού σας με VELISSE είναι ${reminderType}\n📅 Ημερομηνία: ${booking.date}\n⏰ Ώρα: ${booking.time}\n💇 Υπηρεσία: ${booking.service}\n💰 Τιμή: ${booking.price}€`;
       
-      console.log('📧 Reminder:', message);
-      
-      // In production, send email via EmailJS or backend
-      // Example: sendEmailViaBackend(booking.email, message);
+      // WhatsApp
+      if(document.getElementById('remind_whatsapp').checked){
+        const whatsappUrl = `https://wa.me/${booking.phone.replace('+','').replace(/\s/g,'')}?text=${encodeURIComponent(message)}`;
+        console.log('📱 WhatsApp reminder:', whatsappUrl);
+        // In production: open URL or use WhatsApp API
+      }
+
+      // Viber
+      if(document.getElementById('remind_viber').checked){
+        const viberUrl = `viber://chat?number=${booking.phone}`;
+        console.log('📞 Viber reminder:', viberUrl);
+      }
+
+      // Email (simple)
+      if(document.getElementById('remind_sms').checked){
+        console.log('📧 Email reminder to:', booking.email, message);
+        // In production: send via backend
+      }
     }
 
-    // Add to Google Calendar
+    // Google Calendar
     function addToGoogleCalendar(){
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
@@ -328,14 +442,17 @@
       }
 
       const startDateTime = new Date(date + 'T' + time);
-      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000); // 1 hour duration
+      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000);
 
-      const googleCalendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=VELISSE%20-%20${encodeURIComponent(service)}&dates=${startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z/${endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z&details=Πελάτης:%20${encodeURIComponent(name)}&location=VELISSE%20Studio`;
+      const startISO = startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0] + 'Z';
+      const endISO = endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0] + 'Z';
+
+      const googleCalendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=VELISSE%20-%20${encodeURIComponent(service)}&dates=${startISO}/${endISO}&details=Πελάτης:%20${encodeURIComponent(name)}`;
 
       window.open(googleCalendarUrl, '_blank');
     }
 
-    // Download as ICS file
+    // Download ICS
     function downloadICS(){
       const date = document.getElementById('date').value;
       const time = document.getElementById('time').value;
