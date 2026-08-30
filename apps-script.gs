@@ -5,7 +5,7 @@
 // CONFIGURATION - ΑΛΛΑΞΤΕ ΤΑ ΠΑΡΑΚΑΤΩ
 // ============================================
 
-const SPREADSHEET_ID = 'YOUR_SHEET_ID_HERE'; // Βρείτε στο URL του Sheet
+const SPREADSHEET_ID = '17SX0-ejdWEYVfR597izA_N1tA0zwMmHD4nvS2D6hI-k'; // ✅ Ενημερωμένο
 const SHEET_NAME = 'Bookings'; // Όνομα του worksheet
 const TWILIO_ACCOUNT_SID = 'YOUR_TWILIO_SID'; // Από Twilio
 const TWILIO_AUTH_TOKEN = 'YOUR_TWILIO_TOKEN'; // Από Twilio
@@ -213,7 +213,7 @@ function sendWhatsAppReminder(name, phone, reminderType) {
     return;
   }
   
-  const message = `Γεια σας ${name}! 👋\n\n⏰ Υπενθύμιση: Το ραντεβού σας με VELISSE είναι ${reminderType}.\n\n💇 Περιμένουμε να σας δούμε!\n🌟 VELISSE`;
+  const message = `Γεια σας ${name}! 👋\n\n⏰ Υπενθύμηση: Το ραντεβού σας με VELISSE είναι ${reminderType}.\n\n💇 Περιμένουμε να σας δούμε!\n🌟 VELISSE`;
   
   const payload = {
     From: TWILIO_PHONE,
@@ -248,7 +248,7 @@ function sendViberReminder(name, phone, reminderType) {
     return;
   }
   
-  const message = `Γεια σας ${name}! 👋\n⏰ Υπενθύμιση: Το ραντεβού σας με VELISSE είναι ${reminderType}.\n💇 Περιμένουμε να σας δούμε!`;
+  const message = `Γεια σας ${name}! 👋\n⏰ Υπενθύμηση: Το ραντεβού σας με VELISSE είναι ${reminderType}.\n💇 Περιμένουμε να σας δούμε!`;
   
   const payload = {
     receiver: phone,
@@ -285,7 +285,7 @@ function sendEmailReminder(email, name, reminderType) {
   const emailBody = `
     Γεια σας ${name}! 👋
     
-    ⏰ Υπενθύμιση: Το ραντεβού σας με VELISSE είναι ${reminderType}.
+    ⏰ Υπενθύμηση: Το ραντεβού σας με VELISSE είναι ${reminderType}.
     
     💇 Περιμένουμε να σας δούμε!
     
