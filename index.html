@@ -1,1 +1,1274 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELISSE Lash & Brow Studio</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-color: #F4F1EA;
+            --text-color: #1A1A1A;
+            --dark-card: #22201F;
+            --accent-color: #C5A059;
+            --border-color: #D9D2C9;
+        }
+        .reveal{opacity:1 !important; transform:none !important;}
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo-icon-circle {
+            width: 35px;
+            height: 35px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-nav {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+        }
+ 
+
+
+        @media(min-width: 900px) {
+            .top-nav {
+                display: flex;
+                gap: 20px;
+            }
+            .top-nav a {
+                text-decoration: none;
+                color: var(--text-color);
+                font-size: 0.85rem;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                transition: color 0.3s;
+            }
+            .top-nav a:hover {
+                color: var(--accent-color);
+            }
+        }
+
+        .lang-switcher {
+            border: 1px solid var(--text-color);
+            background: transparent;
+            padding: 6px 14px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.hero{position:relative;height:85svh;min-height:600px;max-height:850px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.8s ease}
+.hero-slide.active{opacity:1}
+.hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35);z-index:1}
+.hero h1,.hero a,#heroDots{position:relative;z-index:2}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.5);display:inline-block;transition:all 0.3s}
+.dot.active{background:white;width:24px;border-radius:10px}
+
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            font-style: italic;
+            display: block;
+        }
+
+        .btn-black {
+            background-color: #1A1A1A;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .btn-black:hover {
+            background-color: #333;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 16px;
+        }
+
+        .section-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 11px;
+            color: #777;
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Promo Spotlight */
+        .promo-spotlight {
+            background: #fff;
+            border: 1px solid #e8e1da;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .promo-spotlight h3 {
+            font-size: 0.95rem;
+            color: #b89782;
+            margin-bottom: 10px;
+        }
+
+        /* Pricing Grid */
+        .offer-title {
+            background: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media(min-width: 600px) {
+            .price-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .offer-box {
+            background: #fdfaf6;
+            border: 1px solid #e8e1da;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .price-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: #fff;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .btn-submit {
+            background-color: #1A1A1A;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #333;
+        }
+
+        /* Booking slots */
+        .slot-btn {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .slot-btn:hover:not(:disabled) {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .slot-btn.selected {
+            background: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        .slot-btn.booked {
+            background: #eee;
+            color: #aaa;
+            border-color: #ddd;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* Aftercare Details */
+        .aftercare-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .aftercare-item {
+            background: #fdfaf6;
+            border: 1px solid #e8e1da;
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .aftercare-item summary {
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #222;
+        }
+
+        .aftercare-item .content {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .aftercare-item ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: #fdfaf6;
+            border: 1px solid #e8e1da;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        /* Social Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        @media(min-width: 600px) {
+            .social-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .social-box {
+            background: #fdfaf6;
+            border: 1px solid #e8e1da;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .social-box:hover {
+            background: #f4ece1;
+        }
+
+        .social-box i {
+            font-size: 1.2rem;
+            color: #b89782;
+        }
+/* Header & Navigation Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    padding: 15px 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.dropdown-menu.active {
+    display: flex;
+}
+
+.dropdown-menu a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #777;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+   <header>
+    <a href="#home" class="logo-container" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-color);">
+        <div class="logo-icon-circle"><i>👁️</i></div>
+        <div class="logo">VELISSE</div>
+    </a>
+
+    <div class="header-right-group">
+        <button id="langToggle" class="lang-switcher">EN</button>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <!-- Αναπτυσσόμενο Μενού -->
+    <nav id="dropdownMenu" class="dropdown-menu">
+        <a href="#home" onclick="toggleMenu()">Αρχική</a>
+        <a href="#about" onclick="toggleMenu()">Για εμάς</a>
+        <a href="#pricing" onclick="toggleMenu()">Τιμοκατάλογος</a>
+        <a href="#booking" onclick="toggleMenu()">Booking</a>
+        <a href="#contact" onclick="toggleMenu()">Επικοινωνία</a>
+    </nav>
+</header>
+
+<!-- HERO FIXED FINAL - 9 ΦΩΤΟ + ΔΕΝ ΤΙΝΑΖΕΤΑΙ + ΠΟΤΕ ΜΑΥΡΟ -->
+<section id="home" class="hero" style="position:relative; height:85svh; min-height:600px; max-height:850px; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#1a1a1a;">
+<div class="hero-slides" style="position:absolute; inset:0; z-index:0;">
+<img src="slide1.jpg" alt="" class="hero-slide active">
+<img src="slide2.jpg" alt="" class="hero-slide">
+<img src="slide3.jpg" alt="" class="hero-slide">
+<img src="slide4.jpg" alt="" class="hero-slide">
+<img src="slide5.jpg" alt="" class="hero-slide">
+<img src="slide6.jpg" alt="" class="hero-slide">
+<img src="slide7.jpg" alt="" class="hero-slide">
+<img src="slide8.jpg" alt="" class="hero-slide">
+<img src="slide9.jpg" alt="" class="hero-slide">
+</div>
+<div style="position:absolute; inset:0; background:rgba(0,0,0,0.35); z-index:1;"></div>
+<div style="position:relative; z-index:2; text-align:center; padding:0 20px;">
+<h1 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,6vw,3rem); line-height:1.1; color:#fff; text-shadow:0 2px 20px rgba(0,0,0,0.5);">
+Wake up to<br><span style="font-weight:700; font-style:italic; letter-spacing:2px;">FLAWLESS<br>LASHES</span>
+</h1>
+<a href="#booking" style="background:#fdfaf6; color:#1a1a1a; padding:14px 36px; text-decoration:none; font-size:0.8rem; letter-spacing:2px; font-weight:700; display:inline-block; margin-top:25px; border-radius:999px;">BOOK NOW</a>
+<div id="heroDots" style="display:flex; gap:8px; justify-content:center; margin-top:35px;">
+<span class="dot active" style="width:24px; height:3px; background:#fff; display:block; border-radius:999px;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+<span class="dot" style="width:8px; height:8px; background:rgba(255,255,255,0.5); display:block; border-radius:50%;"></span>
+</div>
+</div>
+</section>
+<style>
+.hero{ height:85svh !important; min-height:600px; max-height:850px; }
+@media(max-width:768px){ .hero{ height:78svh !important; min-height:550px; } }
+.hero-slide{ backface-visibility:hidden; } 
+</style>
+<script>
+(function(){
+const slides=document.querySelectorAll('.hero-slide');
+const dots=document.querySelectorAll('#heroDots .dot');
+let cur=0;
+function show(n){
+slides.forEach((s,i)=>{ s.style.opacity=i===n?'1':'0'; });
+dots.forEach((d,i)=>{
+if(i===n){d.style.background='#fff'; d.style.width='24px'; d.style.height='3px'; d.style.borderRadius='999px'; d.classList.add('active');}
+else{d.style.background='rgba(255,255,255,0.5)'; d.style.width='8px'; d.style.height='8px'; d.style.borderRadius='50%'; d.classList.remove('active');}
+});
+cur=n;
+}
+setInterval(()=>{ show((cur+1)%slides.length); },4500);
+dots.forEach((d,i)=>d.addEventListener('click',()=>show(i)));
+})();
+</script>
+
+        <!-- SERVICES & PRICES 2026 - FIXED - START ΓΡΑΜΜΗ 592 -->
+<section id="pricing" class="section-card reveal" style="background:#faf7f2; padding:50px 16px;">
+  <div style="max-width:900px; margin:0 auto; text-align:center;">
+    
+    <div style="border:1px solid #e8ddd0; border-radius:30px; padding:8px 20px; font-size:11px; letter-spacing:3px; color:#8a7a65; background:white; display:inline-block; margin-bottom:20px;">- 2026 COLLECTION •</div>
+    
+    <h2 class="section-title" style="letter-spacing:2px; font-size:clamp(18px,5.5vw,26px); word-break:break-word; white-space:normal; line-height:1.2; max-width:100%; overflow:hidden; text-align:center;">VELISSE</h2>
+    <p style="letter-spacing:5px; font-size:14px; color:#6b5d4d; margin:10px 0;">2026 PRICELIST & OFFERS</p>
+    <p style="font-size:13px; color:#8a7a65; max-width:520px; margin:0 auto 30px; line-height:1.5;">Όλες οι υπηρεσίες <b style="color:#1a1a1a;">Eyelash Extensions</b> περιλαμβάνουν <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:20px; padding:4px 12px; font-size:12px; font-weight:700;">ΔΩΡΟ brow lift αξίας 30€</span></p>
+
+    <!-- Tabs -->
+    <div style="background:#fdf1e7; border-radius:40px; padding:6px; display:flex; flex-wrap:wrap; justify-content:center; gap:6px; margin-bottom:25px;">
+      <button onclick="showPrice2('regular')" id="b-regular" style="background:#1a1a1a; color:white; border:none; border-radius:30px; padding:12px 22px; font-size:13px; cursor:pointer;">Κανονικός</button>
+      <button onclick="showPrice2('student')" id="b-student" style="background:transparent; border:none; border-radius:30px; padding:12px 22px; font-size:13px; cursor:pointer; color:#6b5d4d;">Student -10€</button>
+      <button onclick="showPrice2('first')" id="b-first" style="background:transparent; border:none; border-radius:30px; padding:12px 22px; font-size:13px; cursor:pointer; color:#6b5d4d;">First Visit -5€</button>
+      <button onclick="showPrice2('friend')" id="b-friend" style="background:transparent; border:none; border-radius:30px; padding:12px 22px; font-size:13px; cursor:pointer; color:#6b5d4d;">Bring a Friend -10€</button>
+    </div>
+
+    <!-- REGULAR - FIXED -->
+    <div id="p-regular" style="background:white; border:1px solid #f0e6d8; border-radius:20px; padding:16px 20px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #faf7f2; font-size:11px; letter-spacing:3px; opacity:0.4;"><span>SERVICE</span><span>PRICE</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span style="font-family:'Playfair Display';">Half Set <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>35€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span style="font-family:'Playfair Display';">One by One <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span style="font-family:'Playfair Display';">Volume 2D-3D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>50€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span style="font-family:'Playfair Display';">Volume 4D-6D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>55€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span style="font-family:'Playfair Display';">Special Effects <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>55€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Tint</span><b>35€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift</span><b>30€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift + Tint</span><b>30€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift</span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow wax(ΤΣΙΜΠΙΔΑΚΙ)</span><b>5€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Wax(ΚΕΡΙ)</span><b>10€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set + Brow Lift</span><b>55€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One + Brow Lift</span><b>65€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume + Brow Lift</span><b>70€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0;"><span>Special Effects + Brow Lift</span><b>75€</b></div>
+    </div>
+
+    <!-- STUDENT - FIXED STYLE -->
+    <div id="p-student" style="display:none; background:white; border:1px solid #f0e6d8; border-radius:20px; padding:16px 20px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #faf7f2; font-size:11px; letter-spacing:3px; opacity:0.4;"><span>SERVICE - STUDENT -10€</span><span>PRICE</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>35€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 2D-3D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>40€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 4D-6D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Special Effects <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Tint</span><b>20€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift</span><b>15€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift + Tint</span><b>20€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift</span><b>15€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow wax(ΤΣΙΜΠΙΔΑΚΙ)</span><b>5€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Wax(ΚΕΡΙ)</span><b>10€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set + Brow Lift</span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One + Brow Lift</span><b>55€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume + Brow Lift</span><b>60€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0;"><span>Special Effects + Brow Lift</span><b>65€</b></div>
+    </div>
+
+    <!-- FIRST VISIT - FIXED STYLE -->
+    <div id="p-first" style="display:none; background:white; border:1px solid #f0e6d8; border-radius:20px; padding:16px 20px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #faf7f2; font-size:11px; letter-spacing:3px; opacity:0.4;"><span>SERVICE - FIRST VISIT -5€</span><span>PRICE</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>30€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>40€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 2D-3D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 4D-6D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>50€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Special Effects <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>50€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Tint</span><b>30€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift + Tint</span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Brow Lift</span><b>50€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift</span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift</span><b>20€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Wax(ΤΣΙΜΠΙΔΑΚΙ)</span><b>5€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Wax(ΚΕΡΙ)</span><b>10€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set + Brow Lift</span><b>50€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One + Brow Lift</span><b>60€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume + Brow Lift</span><b>65€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0;"><span>Special Effects + Brow Lift</span><b>70€</b></div>
+    </div>
+
+    <!-- BRING A FRIEND - FIXED STYLE -->
+    <div id="p-friend" style="display:none; background:white; border:1px solid #f0e6d8; border-radius:20px; padding:16px 20px; text-align:left;">
+      <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid #faf7f2; font-size:11px; letter-spacing:3px; opacity:0.4;"><span>SERVICE - BRING A FRIEND -10€ / άτομο</span><span>PRICE</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>35€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 2D-3D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>40€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume 4D-6D <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Special Effects <span style="background:#fdf6e9; border:1px solid #e8d5b5; border-radius:12px; padding:3px 8px; font-size:9px; color:#8a7a65; margin-left:6px;">ΔΩΡΟ brow lift</span></span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Tint</span><b>25€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift + Tint</span><b>20€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift + Brow Lift</span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Lash Lift</span><b>20€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Lift</span><b>15€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow wax(ΤΣΙΜΠΙΔΑΚΙ)</span><b>5€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Brow Wax(ΚΕΡΙ)</span><b>10€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Half Set + Brow Lift</span><b>45€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>One by One + Brow Lift</span><b>55€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0; border-bottom:1px solid #faf7f2;"><span>Volume + Brow Lift</span><b>60€</b></div>
+      <div style="display:flex; justify-content:space-between; padding:14px 0;"><span>Special Effects + Brow Lift</span><b>65€</b></div>
+    </div>
+
+    <div style="background:#fdfaf3; border:1px solid #f0e6d8; border-radius:20px; padding:20px; margin-top:20px; text-align:left;">
+      <p style="letter-spacing:3px; font-size:12px; margin:0 0 10px;">ΟΡΟΙ ΠΡΟΣΦΟΡΩΝ</p>
+      <p style="font-size:12px; color:#6b5d4d; line-height:1.7; margin:0;">— Οι προσφορές δεν συνδυάζονται.<br>— ΔΩΡΟ brow lift αξίας 30€ ισχύει για Half Set, One by One, Volume, Special Effects.<br>— Student: επίδειξη πάσου. First Visit: πρώτη φορά. Bring a Friend: νέα πελάτισσα, ίδια μέρα.</p>
+    </div>
+
+  </div>
+</section>
+<script>
+function showPrice2(t){
+  document.querySelectorAll('[id^=p-]').forEach(e=>e.style.display='none');
+  document.querySelectorAll('[id^=b-]').forEach(e=>{e.style.background='transparent'; e.style.color='#6b5d4d';});
+  document.getElementById('p-'+t).style.display='block';
+  document.getElementById('b-'+t).style.background='#1a1a1a';
+  document.getElementById('b-'+t).style.color='white';
+}
+</script>
+<!-- END SERVICES & PRICES 2026 -->
+
+<!-- ===== VELISSE FIXED BOOKING - FULL PRICELIST WITH ALL SERVICES ===== -->
+<section id="booking" class="luxury-booking" style="max-width:800px;margin:0 auto;padding:30px 16px;">
+<style>
+.luxury-booking{--lb-card:#fff;--lb-beige:#FDFBF5;--lb-border:#F0E9DE;--lb-taupe:#A08B7D;--lb-gold:#C2A990;--lb-black:#1A1A1A}
+.lb-header{padding:24px 0 10px;text-align:left}
+.lb-header h1{font-family:'Playfair Display',serif;font-size:32px;letter-spacing:0.18em;font-weight:600;line-height:1;color:var(--lb-black)}
+.lb-header p{margin-top:8px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--lb-taupe);font-weight:500}
+.lb-tabs{background:#F5F0E8;border-radius:999px;padding:6px;display:flex;gap:4px;margin:20px 0 12px}
+.lb-tab{flex:1;padding:14px 6px;text-align:center;border-radius:999px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;cursor:pointer;color:var(--lb-taupe);border:none;background:transparent}
+.lb-tab.active{background:var(--lb-black);color:white;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.lb-info{font-size:11px;color:var(--lb-taupe);line-height:1.5;margin-bottom:18px;padding:0 4px}
+.lb-card{background:var(--lb-card);border-radius:24px;border:1px solid var(--lb-border);padding:26px 22px;box-shadow:0 8px 32px rgba(0,0,0,0.04);margin-bottom:16px;position:relative;z-index:1}
+.lb-label{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--lb-gold);font-weight:700;margin-bottom:12px;display:block}
+.lb-card h2{font-family:'Playfair Display',serif;font-size:32px;line-height:0.95;font-weight:600;font-style:italic;margin-bottom:8px;color:var(--lb-black)}
+.lb-subtitle{font-size:13px;color:var(--lb-taupe);line-height:1.5;margin-bottom:18px}
+.lb-field label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#5C4F47;font-weight:700;display:block;margin:16px 0 7px}
+.lb-field input{width:100%;padding:14px 18px;border-radius:16px;border:1.5px solid var(--lb-border);background:var(--lb-beige);font-size:14px;outline:none;font-family:'Plus Jakarta Sans',sans-serif}
+.lb-field input:focus{border-color:var(--lb-black);background:white}
+.lb-btn{width:100%;background:var(--lb-black);color:white;border:none;padding:16px;border-radius:999px;font-weight:700;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin-top:20px;cursor:pointer;touch-action:manipulation}
+.lb-btn:disabled{opacity:0.4}
+.lb-btn.sec{background:var(--lb-beige);color:var(--lb-black);border:1.5px solid var(--lb-border)}
+.lb-offer{border:1.5px solid var(--lb-border);border-radius:16px;padding:16px 16px;cursor:pointer;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;background:var(--lb-card);touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:transparent;position:relative;z-index:2}
+.lb-offer:active{transform:scale(0.98)}
+.lb-offer.selected{border-color:var(--lb-black)!important;background:#F5F0E8!important;border-width:2px}
+.lb-service{border:1.5px solid var(--lb-border);border-radius:16px;padding:13px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;cursor:pointer;background:var(--lb-card);position:relative;touch-action:manipulation;user-select:none}
+.lb-service.active{border-color:var(--lb-black);background:var(--lb-beige);border-width:2px}
+.lb-service .gift{position:absolute;top:-8px;right:10px;background:var(--lb-black);color:white;font-size:7px;font-weight:800;padding:4px 9px;border-radius:999px}
+.lb-service .bday{position:absolute;top:-8px;left:10px;background:#8C6A5D;color:white;font-size:7px;font-weight:800;padding:4px 9px;border-radius:999px}
+.lb-times{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:10px}
+.lb-time{padding:11px;border-radius:12px;border:1.5px solid var(--lb-border);text-align:center;font-weight:600;cursor:pointer;background:var(--lb-card);font-size:12px;touch-action:manipulation}
+.lb-time.sel{background:var(--lb-black);color:white}
+.lb-time.block{background:var(--lb-beige);color:var(--lb-taupe);text-decoration:line-through;pointer-events:none;opacity:0.5}
+.lb-final{background:var(--lb-black);color:white;border-radius:16px;padding:14px;text-align:center;margin-top:14px}
+.lb-bday-box{background:#FFFEF9;border:1.5px dashed var(--lb-gold);border-radius:16px;padding:14px;margin-top:12px}
+.lb-hidden{display:none!important}
+.lb-cat{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;background:#1A1A1A;color:white;padding:5px 10px;border-radius:999px;display:inline-block;margin:14px 0 8px}
+</style>
+
+<div class="lb-header"><h1>VELISSE LASHES</h1><p>BEAUTY ATELIER • SINCE 2022</p></div>
+<div class="lb-tabs">
+<button class="lb-tab active" id="lbTabProfile" onclick="lbSwitch('profile')">ΕΓΓΡΑΦΗ & ΠΡΟΦΙΛ</button>
+<button class="lb-tab" id="lbTabBook" onclick="lbSwitch('book')">BOOK APPOINTMENT</button>
+<button class="lb-tab" id="lbTabHist" onclick="lbSwitch('history')">ΙΣΤΟΡΙΚΟ</button>
+</div>
+<p class="lb-info">Επίλεξε προσφορά και υπηρεσία. Το ραντεβού αποθηκεύεται και στο Google Sheet.</p>
+
+<div id="lb-profile" class="lb-card">
+<span class="lb-label">ΦΟΡΜΑ ΕΓΓΡΑΦΗΣ</span>
+<h2>Δημιούργησε το προφίλ σου</h2>
+<p class="lb-subtitle">Πάτα την προσφορά για να την επιλέξεις.</p>
+<div class="lb-field"><label>ΟΝΟΜΑΤΕΠΩΝΥΜΟ *</label><input id="lbName" placeholder="π.χ. Μαρία Παπαδοπούλου"></div>
+<div class="lb-field"><label>ΚΙΝΗΤΟ ΤΗΛΕΦΩΝΟ *</label><input id="lbPhone" placeholder="69xxxxxxxx"></div>
+<button class="lb-btn sec" type="button" onclick="lbCheck()" style="padding:10px;font-size:11px;margin-top:10px;width:auto">🔍 Έχω ξανακλείσει; Έλεγχος</button>
+<div id="lbCheckBox" class="lb-hidden" style="margin-top:10px;padding:12px;border-radius:12px;background:#F5F0E8;font-size:12px"></div>
+<div class="lb-field"><label>EMAIL</label><input id="lbEmail" type="email" placeholder="email@example.com"></div>
+<div class="lb-bday-box">
+<div class="lb-field" style="margin-top:0"><label style="margin-top:0">🎂 ΗΜ. ΓΕΝΝΗΣΗΣ * (για δώρο)</label><input id="lbBirthday" type="date"></div>
+<p style="font-size:11px;color:#8C6A5D;margin-top:8px;line-height:1.4">🎁 <b>Δώρο:</b> Την ημέρα γενεθλίων → ΔΩΡΕΑΝ υπηρεσία, μετά μέχρι τέλος μήνα → -15€</p>
+</div>
+<div class="lb-field"><label>ΠΡΟΣΦΟΡΑ * ΠΑΤΑ ΓΙΑ ΕΠΙΛΟΓΗ (1 ΜΟΝΟ)</label>
+<div id="lbOffers">
+<div class="lb-offer selected" data-offer="normal" onclick="lbSelectOffer('normal')"><div><b style="font-size:14px">Κανονική</b><div style="font-size:11px;color:#A08B7D">35€-75€</div></div><span>✓</span></div>
+<div class="lb-offer" data-offer="student" onclick="lbSelectOffer('student')"><div><b style="font-size:14px">🎓 Φοιτήτρια -10€</b></div><span style="background:#1A1A1A;color:white;font-size:9px;padding:4px 8px;border-radius:999px">-10€</span></div>
+<div class="lb-offer" data-offer="first" onclick="lbSelectOffer('first')"><div><b style="font-size:14px">✨ First Visit -5€</b></div><span style="background:#1A1A1A;color:white;font-size:9px;padding:4px 8px;border-radius:999px">-5€</span></div>
+<div class="lb-offer" data-offer="friend" onclick="lbSelectOffer('friend')"><div><b style="font-size:14px">👯 Bring a Friend -10€</b></div><span style="background:#1A1A1A;color:white;font-size:9px;padding:4px 8px;border-radius:999px">-10€</span></div>
+</div></div>
+<button class="lb-btn" type="button" onclick="lbSave()">ΑΠΟΘΗΚΕΥΣΗ ΠΡΟΦΙΛ → BOOKING</button>
+<p id="lbProfileMsg" style="font-size:11px;color:#8C6A5D;margin-top:10px;text-align:center"></p>
+</div>
+
+<div id="lb-book" class="lb-hidden">
+<div class="lb-card">
+<span class="lb-label">ΒΗΜΑ 1 - ΥΠΗΡΕΣΙΑ (ΠΑΤΑ ΓΙΑ ΕΠΙΛΟΓΗ)</span>
+<h2>Διάλεξε υπηρεσία</h2>
+<p style="font-size:11px;color:#A08B7D">Όλα τα extensions περιλαμβάνουν ΔΩΡΟ Brow Lamination 20€</p>
+<div id="lbServices"></div>
+<div id="lbBdayExact" class="lb-hidden" style="margin-top:10px;padding:10px;background:#8C6A5D;color:white;border-radius:12px;font-size:11px;text-align:center">🎂 Γενέθλια σήμερα! Η υπηρεσία θα είναι <b>ΔΩΡΕΑΝ!</b></div>
+<div id="lbBdayAfter" class="lb-hidden" style="margin-top:10px;padding:10px;background:#F5F0E8;border-radius:12px;font-size:11px;text-align:center">🎂 Μήνας γενεθλίων! <b>-15€</b> έκπτωση!</div>
+</div>
+<div class="lb-card">
+<span class="lb-label">ΒΗΜΑ 2 - ΗΜΕΡΟΜΗΝΙΑ & ΩΡΑ</span>
+<div class="lb-field"><label>ΗΜΕΡΟΜΗΝΙΑ *</label><input id="lbDate" type="date"></div>
+<div id="lbLoading" class="lb-hidden" style="font-size:11px;color:#A08B7D;margin-top:8px">Φόρτωση διαθεσιμότητας...</div>
+<div id="lbTimes" class="lb-times"></div>
+<div id="lbFinal" class="lb-final lb-hidden"></div>
+<button class="lb-btn" type="button" id="lbBtnBook" disabled onclick="lbBook()">ΔΙΑΛΕΞΕ ΥΠΗΡΕΣΙΑ & ΩΡΑ</button>
+</div>
+</div>
+
+<div id="lb-history" class="lb-card lb-hidden">
+<span class="lb-label">ΤΑ ΡΑΝΤΕΒΟΥ ΣΟΥ</span>
+<h2>Ιστορικό</h2>
+<div id="lbHistoryList"></div>
+<button class="lb-btn sec" type="button" onclick="lbLogout()" style="margin-top:12px">Αποσύνδεση προφίλ</button>
+</div>
+
+<div id="lb-success" class="lb-card lb-hidden" style="text-align:center">
+<span class="lb-label">ΕΠΙΤΥΧΙΑ</span>
+<h2 style="font-style:normal">Επιβεβαιώθηκε! 🎉</h2>
+<p id="lbSuccessText" style="font-size:13px;color:#5C4F47;margin-top:10px;line-height:1.5"></p>
+<div style="display:flex;gap:8px;margin-top:16px"><a id="lbGoogle" target="_blank" class="lb-btn sec" style="text-decoration:none;text-align:center">Google Calendar</a><a id="lbApple" download="velisse.ics" class="lb-btn sec" style="text-decoration:none;text-align:center">Apple .ics</a></div>
+<button class="lb-btn" type="button" onclick="location.reload()">ΝΕΟ ΡΑΝΤΕΒΟΥ</button>
+</div>
+
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbxo914BHQ0dJcUX5B3qzA9QJ5d_5vXq9j2Z3Q9xXxXxXxXxXxXxXx/exec";
+
+// ===== ΠΛΗΡΗΣ ΤΙΜΟΚΑΤΑΛΟΓΟΣ ΜΕ ΟΛΕΣ ΤΙΣ ΥΠΗΡΕΣΙΕΣ ΠΟΥ ΖΗΤΗΣΕΣ =====
+const pricelist={
+ normal:{
+  "Half Set":35,
+  "One by One":45,
+  "Volume 2D-3D":50,
+  "Volume 4D-6D":55,
+  "Special Effects":55,
+  "Lash Lift":35,
+  "Lash Lift + Tint":35,
+  "Brow Lift":30,
+  "Brow Lift + Tint":30,
+  "Lash Lift + Brow Lift":55,
+  "Brow Wax - Τσιμπιδάκι":15,
+  "Brow Wax - Κερί":15,
+  "Brow Shaping":15,
+  "Half Set + Brow Lift":55,
+  "One by One + Brow Lift":65,
+  "Volume + Brow Lift":70,
+  "Special Effects + Brow Lift":75
+ },
+ student:{
+  "Half Set":25, "One by One":35, "Volume 2D-3D":40, "Volume 4D-6D":45, "Special Effects":45,
+  "Lash Lift":25, "Lash Lift + Tint":25, "Brow Lift":20, "Brow Lift + Tint":20, "Lash Lift + Brow Lift":45,
+  "Brow Wax - Τσιμπιδάκι":10, "Brow Wax - Κερί":10, "Brow Shaping":10,
+  "Half Set + Brow Lift":45, "One by One + Brow Lift":55, "Volume + Brow Lift":60, "Special Effects + Brow Lift":65
+ },
+ first:{
+  "Half Set":30, "One by One":40, "Volume 2D-3D":45, "Volume 4D-6D":50, "Special Effects":50,
+  "Lash Lift":30, "Lash Lift + Tint":30, "Brow Lift":25, "Brow Lift + Tint":25, "Lash Lift + Brow Lift":50,
+  "Brow Wax - Τσιμπιδάκι":12, "Brow Wax - Κερί":12, "Brow Shaping":12,
+  "Half Set + Brow Lift":50, "One by One + Brow Lift":60, "Volume + Brow Lift":65, "Special Effects + Brow Lift":70
+ },
+ friend:{
+  "Half Set":25, "One by One":35, "Volume 2D-3D":40, "Volume 4D-6D":45, "Special Effects":45,
+  "Lash Lift":25, "Lash Lift + Tint":25, "Brow Lift":20, "Brow Lift + Tint":20, "Lash Lift + Brow Lift":45,
+  "Brow Wax - Τσιμπιδάκι":10, "Brow Wax - Κερί":10, "Brow Shaping":10,
+  "Half Set + Brow Lift":45, "One by One + Brow Lift":55, "Volume + Brow Lift":60, "Special Effects + Brow Lift":65
+ }
+};
+
+const durations={
+ "Half Set":90, "One by One":150, "Volume 2D-3D":150, "Volume 4D-6D":150, "Special Effects":150,
+ "Lash Lift":50, "Lash Lift + Tint":50, "Brow Lift":40, "Brow Lift + Tint":40, "Lash Lift + Brow Lift":80,
+ "Brow Wax - Τσιμπιδάκι":20, "Brow Wax - Κερί":20, "Brow Shaping":20,
+ "Half Set + Brow Lift":150, "One by One + Brow Lift":210, "Volume + Brow Lift":210, "Special Effects + Brow Lift":210
+};
+
+let currentOffer='normal',currentUser=null,sel=null,selTime=null,blocked=[];
+
+window.lbSelectOffer=function(o){
+  currentOffer=o;
+  document.querySelectorAll('.lb-offer').forEach(c=>{c.classList.remove('selected');});
+  const el=document.querySelector(`[data-offer="${o}"]`);
+  if(el) el.classList.add('selected');
+  localStorage.setItem('velisse_offer',o);
+  document.getElementById('lbProfileMsg').textContent='✓ Επιλέχθηκε: '+o;
+  lbRenderServices();
+}
+
+window.lbSwitch=function(tab){
+  document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('lb-profile').classList.add('lb-hidden');
+  document.getElementById('lb-book').classList.add('lb-hidden');
+  document.getElementById('lb-history').classList.add('lb-hidden');
+  document.getElementById('lb-success').classList.add('lb-hidden');
+  if(tab==='profile'){document.getElementById('lbTabProfile').classList.add('active');document.getElementById('lb-profile').classList.remove('lb-hidden');}
+  if(tab==='book'){if(!currentUser){alert('Πρώτα αποθήκευσε προφίλ!');lbSwitch('profile');return;}document.getElementById('lbTabBook').classList.add('active');document.getElementById('lb-book').classList.remove('lb-hidden');lbRenderServices();}
+  if(tab==='history'){document.getElementById('lbTabHist').classList.add('active');document.getElementById('lb-history').classList.remove('lb-hidden');lbLoadHistory();}
+}
+
+function calcBday(bdayStr, bookingStr, price){
+  if(!bdayStr||!bookingStr) return {final:price,type:"normal",gift:""};
+  const b=new Date(bdayStr); const bk=new Date(bookingStr);
+  if(b.getMonth()===bk.getMonth() && b.getDate()===bk.getDate()) return {final:0,type:"BDAY_FREE",gift:"🎂 ΔΩΡΕΑΝ Γενέθλια"};
+  if(b.getMonth()===bk.getMonth() && bk.getDate()>b.getDate()) return {final:Math.max(0,price-15),type:"BDAY_15",gift:"🎂 -15€ μήνας γενεθλίων"};
+  return {final:price,type:"normal",gift:""};
+}
+
+window.lbSave=function(){
+  const name=document.getElementById('lbName').value.trim();
+  const phone=document.getElementById('lbPhone').value.trim();
+  const bday=document.getElementById('lbBirthday').value;
+  const email=document.getElementById('lbEmail').value.trim();
+  if(!name||!phone||!bday){alert('Συμπλήρωσε Όνομα, Κινητό και Ημ. Γέννησης');return;}
+  currentUser={name,phone,birthday:bday,email};
+  localStorage.setItem('velisse_profile',JSON.stringify(currentUser));
+  localStorage.setItem('velisse_offer',currentOffer);
+  document.getElementById('lbProfileMsg').textContent='✓ Αποθηκεύτηκε! Πάμε στο booking...';
+  setTimeout(()=>lbSwitch('book'),600);
+}
+
+window.lbCheck=async function(){
+  const phone=document.getElementById('lbPhone').value.trim();
+  if(!phone){alert('Βάλε κινητό');return;}
+  const box=document.getElementById('lbCheckBox');box.classList.remove('lb-hidden');box.textContent='Έλεγχος...';
+  try{
+    const r=await fetch(`${SCRIPT_URL}?action=getBookings&phone=${encodeURIComponent(phone)}`);
+    const b=await r.json();
+    if(b.length>0){box.innerHTML=`Βρέθηκες! ${b.length} ραντεβού. <button type="button" onclick="lbFillFromHistory()" style="text-decoration:underline;background:none;border:none;cursor:pointer;color:#1A1A1A;font-weight:700">Φόρτωση στοιχείων</button>`; window._lastBookings=b;}
+    else box.textContent='Δεν βρέθηκε προηγούμενο προφίλ.';
+  }catch{box.textContent='Συμπλήρωσε χειροκίνητα';}
+}
+window.lbFillFromHistory=function(){ if(!window._lastBookings||!window._lastBookings[0]) return; const last=window._lastBookings[0]; document.getElementById('lbName').value=last.name||''; if(last.birthday) document.getElementById('lbBirthday').value=last.birthday; document.getElementById('lbCheckBox').classList.add('lb-hidden'); }
+
+function lbRenderServices(){
+  const div=document.getElementById('lbServices');div.innerHTML='';
+  const bday=document.getElementById('lbDate').value;
+  const list=pricelist[currentOffer]||pricelist.normal;
+  
+  const cats={"LASH EXTENSIONS":["Half Set","One by One","Volume 2D-3D","Volume 4D-6D","Special Effects"], "LASH & BROW LIFT":["Lash Lift","Lash Lift + Tint","Brow Lift","Brow Lift + Tint","Lash Lift + Brow Lift"], "BROW WAX":["Brow Wax - Τσιμπιδάκι","Brow Wax - Κερί","Brow Shaping"], "COMBO + ΔΩΡΟ":["Half Set + Brow Lift","One by One + Brow Lift","Volume + Brow Lift","Special Effects + Brow Lift"]};
+  
+  Object.keys(cats).forEach(catName=>{
+    const catDiv=document.createElement('div');catDiv.innerHTML=`<div class="lb-cat">${catName}</div>`;div.appendChild(catDiv);
+    cats[catName].forEach(name=>{
+      if(!list[name]) return;
+      const price=list[name];
+      const normalPrice=pricelist.normal[name];
+      const isDiscount=price<normalPrice;
+      const calc=calcBday(currentUser?.birthday,bday,price);
+      const isBdayFree=calc.type==="BDAY_FREE";
+      const isBday15=calc.type==="BDAY_15";
+      const isExtension=name.includes('+ Brow Lift');
+      const el=document.createElement('div');el.className='lb-service'+(sel&&sel.name===name?' active':'');
+      el.onclick=()=>{sel={name,price,dur:durations[name]||60,isExtension};document.querySelectorAll('.lb-service').forEach(s=>s.classList.remove('active'));el.classList.add('active');lbUpdateFinal();lbUpdateTimes();lbCheckBook();};
+      el.innerHTML=`<div><b style="font-size:13px">${name}</b><div style="font-size:11px;color:#A08B7D">${isBdayFree?'ΔΩΡΕΑΝ 🎂':(isBday15?calc.final+'€ (από '+price+'€)':price+'€'+(isDiscount?' <s style="color:#ccc">'+normalPrice+'€</s>':''))} • ${durations[name]}′</div></div>${isBdayFree?'<span class="bday">🎂 ΔΩΡΕΑΝ</span>':''}${isBday15?'<span class="gift">-15€</span>':''}${isExtension?'<span class="gift">ΔΩΡΟ Brow</span>':''}<span style="font-size:12px">→</span>`;
+      div.appendChild(el);
+    });
+  });
+}
+
+function lbUpdateFinal(){if(!sel)return;const bd=document.getElementById('lbDate').value;const calc=bd?calcBday(currentUser.birthday,bd,sel.price):{final:sel.price,type:"normal",gift:""};const box=document.getElementById('lbFinal');box.classList.remove('lb-hidden');if(calc.type==="BDAY_FREE")box.innerHTML=`<div style="font-size:18px;font-weight:900">🎂 ΔΩΡΕΑΝ! 🎉</div><div style="font-size:11px;margin-top:4px">Δώρο γενεθλίων!<br>${sel.name} • ${durations[sel.name]}′</div>`;else if(calc.type==="BDAY_15")box.innerHTML=`<div style="font-size:16px;font-weight:900">${calc.final}€ 🎂</div><div style="font-size:10px;margin-top:4px">${sel.name} • Από ${sel.price}€ → ${calc.final}€<br>🎂 -15€ μέχρι τέλος μήνα</div>`;else box.innerHTML=`<div style="font-size:16px;font-weight:900">${sel.price}€</div><div style="font-size:10px;margin-top:4px">${sel.name} • ${durations[sel.name]}′</div>`;box.dataset.final=calc.final;box.dataset.bdayType=calc.type}
+const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);document.getElementById('lbDate').min=tomorrow.toISOString().split('T')[0];
+document.getElementById('lbDate').addEventListener('change',async()=>{const bd=document.getElementById('lbDate').value;const calc=calcBday(currentUser?.birthday,bd,sel?sel.price:35);document.getElementById('lbBdayExact').classList.toggle('lb-hidden',calc.type!=="BDAY_FREE");document.getElementById('lbBdayAfter').classList.toggle('lb-hidden',calc.type!=="BDAY_15");lbRenderServices();await lbLoadBlocked();lbUpdateTimes();lbUpdateFinal()});
+async function lbLoadBlocked(){const date=document.getElementById('lbDate').value;if(!date)return;document.getElementById('lbLoading').classList.remove('lb-hidden');try{const r=await fetch(`${SCRIPT_URL}?action=getBlocked&date=${date}`);blocked=await r.json();if(!Array.isArray(blocked))blocked=[]}catch{blocked=[]}document.getElementById('lbLoading').classList.add('lb-hidden')}
+function addM(t,m){const[h,mi]=t.split(':').map(Number);const tot=h*60+mi+m;return `${String(Math.floor(tot/60)%24).padStart(2,'0')}:${String(tot%60).padStart(2,'0')}`;}
+function isBlocked(s){if(!sel)return false;const e=addM(s,sel.dur);return blocked.some(b=>s<b.end&&b.start<e)}
+function lbUpdateTimes(){const div=document.getElementById('lbTimes');div.innerHTML='';if(!sel||!document.getElementById('lbDate').value)return;for(let h=9;h<19;h++){for(let m of[0,30]){const ts=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;const d=document.createElement('div');d.className='lb-time';d.textContent=ts;if(isBlocked(ts))d.classList.add('block');else d.onclick=()=>{document.querySelectorAll('.lb-time').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');selTime=ts;lbCheckBook()};div.appendChild(d)}}}
+function lbCheckBook(){const ok=sel&&selTime&&document.getElementById('lbDate').value;document.getElementById('lbBtnBook').disabled=!ok;if(sel){const t=document.getElementById('lbFinal').dataset.bdayType;if(t==="BDAY_FREE")document.getElementById('lbBtnBook').textContent='ΚΛΕΙΣΕ ΔΩΡΕΑΝ 🎂🎁';else document.getElementById('lbBtnBook').textContent=`ΚΛΕΙΣΕ ΜΕ ${document.getElementById('lbFinal').dataset.final}€`}}
+async function lbLoadHistory(){const ph=currentUser?.phone||JSON.parse(localStorage.getItem('velisse_profile')||'{}').phone;if(!ph)return;const l=document.getElementById('lbHistoryList');l.innerHTML='<div style="text-align:center;padding:12px;color:#A08B7D;font-size:11px">Φόρτωση...</div>';try{const r=await fetch(`${SCRIPT_URL}?action=getBookings&phone=${encodeURIComponent(ph)}`);const b=await r.json();if(b.length===0){l.innerHTML='<div style="text-align:center;padding:12px;color:#A08B7D;font-size:11px">Δεν έχεις ραντεβού ακόμα</div>';return}l.innerHTML='';b.forEach(x=>{const d=document.createElement('div');d.style.cssText='border:1.5px solid #F0E9DE;border-radius:16px;padding:12px;margin-bottom:8px;background:#FDFBF5';const dt=new Date(x.date);const ds=dt.toLocaleDateString('el-GR',{day:'2-digit',month:'short',year:'numeric'});const isFree=x.final_price==0;d.innerHTML=`<div style="background:#1A1A1A;color:white;font-size:9px;font-weight:700;padding:4px 10px;border-radius:999px;display:inline-block">📅 ${ds} • ${x.start}-${x.end}</div>${isFree?'<span style="background:#8C6A5D;color:white;font-size:8px;padding:3px 8px;border-radius:999px;margin-left:6px">🎂 ΔΩΡΕΑΝ</span>':''}<div style="font-weight:700;margin-top:6px;font-size:12px">${x.service}</div><div style="font-size:10px;color:#A08B7D;margin-top:4px">Τιμή: <b>${x.final_price==0?'ΔΩΡΕΑΝ 🎂':x.final_price+'€'}</b></div>`;l.appendChild(d)})}catch{l.innerHTML='Σφάλμα'}}
+window.lbBook=async function(){const btn=document.getElementById('lbBtnBook');btn.disabled=true;btn.textContent='Κλείνω...';const bd=document.getElementById('lbDate').value;const bdayCalc=calcBday(currentUser.birthday,bd,sel.price);const finalPrice=bdayCalc.final;const payload={id:Date.now().toString(),name:currentUser.name,phone:currentUser.phone,birthday:currentUser.birthday,email:currentUser.email||"",service:sel.name,duration:sel.dur,date:bd,start_time:selTime,end_time:addM(selTime,sel.dur),price:pricelist.normal[sel.name]||sel.price,final_price:finalPrice,client_type:currentOffer+" "+bdayCalc.gift,gift:bdayCalc.gift};try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});document.getElementById('lb-book').classList.add('lb-hidden');document.getElementById('lb-success').classList.remove('lb-hidden');document.getElementById('lbSuccessText').innerHTML=bdayCalc.type==="BDAY_FREE"?`<b>${sel.name}</b><br><span style="font-size:18px;font-weight:800">🎂 ΔΩΡΕΑΝ! Χρόνια Πολλά!</span><br>${payload.date} ${payload.start_time}-${payload.end_time}`:`<b>${sel.name}</b><br>${payload.date} • ${payload.start_time}-${payload.end_time}<br>Τιμή: <b>${finalPrice===0?'ΔΩΡΕΑΝ 🎂':finalPrice+'€'}</b> ${bdayCalc.gift}`;const sd=new Date(`${payload.date}T${payload.start_time}`),ed=new Date(`${payload.date}T${payload.end_time}`);const fmt=d=>d.toISOString().replace(/-|:|\.\d+/g,'');const title=`Velisse - ${sel.name}`;document.getElementById('lbGoogle').href=`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${fmt(sd)}/${fmt(ed)}`;const ics=`BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:${fmt(sd)}\nDTEND:${fmt(ed)}\nSUMMARY:${title}\nEND:VEVENT\nEND:VCALENDAR`;const blob=new Blob([ics],{type:'text/calendar'});document.getElementById('lbApple').href=URL.createObjectURL(blob)}catch(e){alert('Σφάλμα');btn.disabled=false}}
+window.lbLogout=function(){localStorage.removeItem('velisse_profile');localStorage.removeItem('velisse_offer');location.reload()}
+(function init(){
+  const saved=localStorage.getItem('velisse_profile');
+  if(saved){try{currentUser=JSON.parse(saved);document.getElementById('lbPhone').value=currentUser.phone;document.getElementById('lbName').value=currentUser.name;if(currentUser.birthday)document.getElementById('lbBirthday').value=currentUser.birthday;if(currentUser.email)document.getElementById('lbEmail').value=currentUser.email;currentOffer=localStorage.getItem('velisse_offer')||'normal';}catch{}}
+  setTimeout(()=>{lbSelectOffer(currentOffer); lbRenderServices();},300);
+  document.getElementById('lbOffers').addEventListener('click', (e)=>{const card=e.target.closest('.lb-offer');if(card && card.dataset.offer) lbSelectOffer(card.dataset.offer);});
+})();
+</script>
+<!-- ===== END FULL BOOKING ===== -->
+
+        <!-- AFTERCARE SECTION -->
+        <section class="section-card reveal">
+            <h2 class="section-title">Οδηγίες Aftercare</h2>
+            <p class="section-subtitle">ΦΡΟΝΤΙΔΑ ΜΕΤΑ ΤΗ ΘΕΡΑΠΕΙΑ</p>
+            <div class="aftercare-container">
+                <details class="aftercare-item">
+                    <summary>Aftercare για Lash Extensions</summary>
+                    <div class="content">
+                        <p><strong>Πρώτες 24 ώρες:</strong> Αποφύγετε το νερό, τον ατμό, τη σάουνα και το κολύμπι.</p>
+                        <ul>
+                            <li>Μην τρίβετε και μην τραβάτε τα extensions σας.</li>
+                            <li>Αποφύγετε το ψαλιδάκι βλεφαρίδων και τη μάσκαρα.</li>
+                            <li>Χρησιμοποιείτε καθαριστικό χωρίς έλαια (oil-free).</li>
+                            <li>Καθαρίζετε τακτικά με ειδικό σαμπουάν βλεφαρίδων και χτενίζετε καθημερινά.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="aftercare-item">
+                    <summary>Aftercare για Lash Lift</summary>
+                    <div class="content">
+                        <p><strong>Πρώτες 24 ώρες:</strong> Αποφύγετε το νερό στα μάτια, τον ατμό και τη σάουνα.</p>
+                        <ul>
+                            <li>Αποφύγετε να τρίβετε τα μάτια σας ή να κοιμάστε μπρούμυτα.</li>
+                            <li>Χτενίζετε καθημερινά με καθαρό βουρτσάκι.</li>
+                            <li>Εφαρμόζετε καθημερινά serum βλεφαρίδων για ενυδάτωση.</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details class="aftercare-item">
+                    <summary>Aftercare για Brow Lamination</summary>
+                    <div class="content">
+                        <ul>
+                            <li><strong>Πρώτες 24-48 ώρες:</strong> Αποφύγετε το νερό στα φρύδια.</li>
+                            <li>Μετά τις 24 ώρες, καθαρίζετε απαλά με χλιαρό νερό.</li>
+                            <li>Εφαρμόζετε κάθε βράδυ θρεπτικό serum ή λάδι για ενυδάτωση.</li>
+                            <li>Χτενίζετε τα φρύδια καθημερινά προς τα πάνω για να διατηρήσουν το σχήμα τους.</li>
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-card reveal">
+            <h2 class="section-title" data-key="faq_title">FAQ & ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ</h2>
+            <p class="section-subtitle" data-key="faq_subtitle">ΜΥΘΟΙ ΚΑΙ ΑΛΗΘΕΙΕΣ ΓΙΑ ΠΡΩΤΗ ΦΟΡΑ</p>
+            
+            <div class="faq-item">
+                <div class="faq-question" data-key="faq1_q">❌ Μύθος: «Τα extensions καταστρέφουν τις φυσικές βλεφαρίδες.»</div>
+                <div style="font-size:0.85rem;" data-key="faq1_a">✔️ <strong>Αλήθεια:</strong> Όταν η εφαρμογή γίνεται σωστά από επαγγελματία με ποιοτικά υλικά και σωστή απομόνωση, οι φυσικές βλεφαρίδες παραμένουν υγιείς. Πέφτουν μόνο όταν ολοκληρώνεται ο φυσικός τους κύκλος ζωής.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" data-key="faq2_q">❌ Μύθος: «Δεν θα μπορώ να πλένω το πρόσωπό μου.»</div>
+                <div style="font-size:0.85rem;" data-key="faq2_a">✔️ <strong>Αλήθεια:</strong> Μετά τις πρώτες 24-48 ώρες, μπορείτε κανονικά να πλένετε το πρόσωπό σας και να χαρείτε τη θάλασσα ή το μπάνιο σας, αποφεύγοντας απλώς τα προϊόντα με βάση το λάδι.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" data-key="faq3_q">✨ Τι είναι το Lash & Brow Lift?</div>
+                <div style="font-size:0.85rem;" data-key="faq3_a">Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων. Η διαδικασία είναι απόλυτα χαλαρωτική και ανώδυνη.</div>
+            </div>
+        </section>
+
+        <!-- CONTACT & CONNECT -->
+        <section id="contact" class="section-card reveal">
+            <h2 class="section-title" data-key="contact_title">CONNECT WITH US</h2>
+            <p class="section-subtitle" data-key="contact_subtitle">FOLLOW & CONTACT</p>
+            <div style="text-align: center; margin-bottom: 20px; line-height: 1.8; font-size: 0.85rem;">
+                <p><i class="fa-solid fa-location-dot" style="color:#b89782;"></i> <strong data-key="lbl_addr">Διεύθυνση:</strong> Άγιος Ελευθέριος, Αριστείδου Κουρτίδου 122</p>
+                <p><i class="fa-solid fa-phone" style="color:#b89782;"></i> <strong data-key="lbl_tel">Τηλέφωνο:</strong> +30 6909392922</p>
+                <p><i class="fa-brands fa-whatsapp" style="color:#b89782;"></i> <strong>WhatsApp & Viber:</strong> +30 6909392922</p>
+                <p><i class="fa-solid fa-envelope" style="color:#b89782;"></i> <strong>Email:</strong> Velisselashesland@gmail.com</p>
+            </div>
+            <div class="social-grid">
+                <a href="https://www.instagram.com/velisselasheyland/" target="_blank" class="social-box"><i class="fa-brands fa-instagram"></i> Instagram</a>
+                <a href="https://wa.me/306909392922" target="_blank" class="social-box"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                <a href="viber://chat?number=%2B306909392922" class="social-box"><i class="fa-brands fa-viber"></i> Viber</a>
+                <a href="tel:+306909392922" class="social-box" data-key="soc_call"><i class="fa-solid fa-phone"></i> Call Us</a>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 VELISSE LASH & BROW STUDIO - All Rights Reserved
+        </footer>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHBJ5KO_vofsZ9dnVv4BFaeKbwxSSkkO0",
+            authDomain: "velissebook.firebaseapp.com",
+            projectId: "velissebook",
+            storageBucket: "velissebook.firebasestorage.app",
+            messagingSenderId: "223338416423",
+            appId: "1:223338416423:web:3ffd9c6fdb767ad5100102",
+            measurementId: "G-7GPKKBH9C3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- TRANSLATION SYSTEM (GR / EN) ---
+        const translations = {
+            el: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_policy: "Policy",
+                nav_booking: "Booking",
+                nav_contact: "Contact",
+                hero_title: 'Wake up to <span>FLAWLESS LASHES</span>',
+                hero_btn: "BOOK NOW",
+                promo_title: "✨ SPECIAL OFFERS & GIFTS ✨",
+                promo_subtitle: "ΑΝΑΚΑΛΥΨΤΕ ΤΑ ΠΡΟΝΟΜΙΑ ΤΗΣ ΣΕΖΟΝ",
+                promo_box_title: "🍂 ΦΘΙΝΩΠΩΡΙΝΗ ΠΡΟΣΦΟΡΑ ΓΕΝΕΘΛΙΩΝ & ΥΠΗΡΕΣΙΩΝ",
+                promo_box_text: "Κλείστε οποιοδήποτε σετ <strong>Eyelash Extensions</strong> και κερδίστε <strong>ΕΝΤΕΛΩΣ ΔΩΡΟ ΤΟ BROW LIFT</strong> αξίας έως 60€!",
+                promo_box_note: "* Ισχύει για κρατήσεις έως τέλη Οκτωβρίου.",
+                promo_btn: "ΔΕΙΤΕ ΤΙΜΟΚΑΤΑΛΟΓΟ",
+                about_title: "ABOUT US",
+                about_subtitle: "YOUR PARTNER IN LASH PERFECTION",
+                about_p1: "Καλώς ήρθατε στο <strong>VELISSE Lash & Brow Studio</strong>!",
+                about_p2: "Πίσω από το <strong>Velisselashesland</strong> βρίσκεται η απόλυτη αγάπη και το πάθος για την ανάδειξη της φυσικής ομορφιάς κάθε γυναίκας. Σκοπός μας είναι να προσφέρουμε υψηλής ποιότητας εξειδικευμένες υπηρεσίες προσαρμοσμένες στα χαρακτηριστικά σας.",
+                price_subtitle: "AUTUMN OFFERS & PRICELIST",
+                price_banner: "🔥 ΟΙ ΠΡΟΣΦΟΡΕΣ ΙΣΧΥΟΥΝ ΕΩΣ ΤΕΛΗ ΟΚΤΩΒΡΙΟΥ 🔥",
+                single_offers: "| ΑΤΟΜΙΚΈΣ ΠΡΟΣΦΟΡΈΣ",
+                friend_title: "| BRING A FRIEND OFFERS",
+                friend_subtitle: "Τιμή ανά άτομο όταν έρχεστε μαζί",
+                friend_p1: "25€ / άτομο",
+                friend_p2: "30€ / άτομο",
+                friend_p3: "50€ / άτομο",
+                reg_subtitle: "ΦΟΡΜΑ ΕΓΓΡΑΦΗΣ & ΠΡΟΦΙΛ ΠΕΛΑΤΗ",
+                reg_box_title: "| ΠΡΟΣΩΠΙΚΆ ΣΤΟΙΧΕΊΑ",
+                lbl_name: "Ονοματεπώνυμο:",
+                lbl_phone: "Τηλέφωνο Επικοινωνίας:",
+                birthday_gift: "✨ <strong>Δώρο Γενεθλίων:</strong>",
+                lbl_bday: "Ημερομηνία Γενεθλίων (ΗΗ/ΜΜ/ΕΕΕΕ):",
+                btn_submit_reg: "ΥΠΟΒΟΛΗ ΣΤΟΙΧΕΙΩΝ",
+                acc_title: "MY ACCOUNT & HISTORY",
+                acc_subtitle: "ΔΕΙΤΕ ΤΟ ΙΣΤΟΡΙΚΟ ΤΩΝ ΡΑΝΤΕΒΟΥ ΣΑΣ",
+                btn_search_hist: "ΑΝΑΖΗΤΗΣΗ ΙΣΤΟΡΙΚΟΥ",
+                policy_title: "STUDIO POLICY",
+                policy_subtitle: "PLEASE READ BEFORE BOOKING",
+                policy_1: "<strong>Πολιτική Ακυρώσεων:</strong> Σε περίπτωση που πελάτης ακυρώσει το ραντεβού του πάνω από 2 φορές συνεχόμενα, δεν θα είναι δυνατή η πραγματοποίηση μελλοντικών ραντεβού από το ίδιο άτομο.",
+                policy_2: "<strong>Ενημέρωση:</strong> Απαιτείται ενημέρωση τουλάχιστον 24 ώρες νωρίτερα για οποιαδήποτε αλλαγή.",
+                policy_3: "<strong>Προσέλευση:</strong> Σε καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα τροποποίησης του ραντεβού.",
+                book_title: "BOOK APPOINTMENT",
+                book_subtitle: "ΕΠΙΛΕΞΤΕ ΥΠΗΡΕΣΙΑ, ΗΜΕΡΑ & ΩΡΑ (08:00 - 20:00)",
+                book_step1: "1. Επιλέξτε Υπηρεσία",
+                sel_service: "-- Επιλέξτε Υπηρεσία --",
+                book_step2: "2. Επιλέξτε Ημερομηνία",
+                book_step3: "3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)",
+                book_prompt: "Παρακαλώ επιλέξτε υπηρεσία και ημερομηνία.",
+                book_step4: "4. Συμπληρώστε τα στοιχεία σας",
+                lbl_notes: "Σημειώσεις",
+                btn_submit_appt: "ΚΛΕΙΣΤΕ ΡΑΝΤΕΒΟΥ",
+                faq_title: "FAQ & ΣΥΧΝΕΣ ΕΡΩΤΗΣΕΙΣ",
+                faq_subtitle: "ΜΥΘΟΙ ΚΑΙ ΑΛΗΘΕΙΕΣ ΓΙΑ ΠΡΩΤΗ ΦΟΡΑ",
+                faq1_q: "❌ Μύθος: «Τα extensions καταστρέφουν τις φυσικές βλεφαρίδες.»",
+                faq1_a: "✔️ <strong>Αλήθεια:</strong> Όταν η εφαρμογή γίνεται σωστά από επαγγελματία με ποιοτικά υλικά και σωστή απομόνωση, οι φυσικές βλεφαρίδες παραμένουν υγιείς. Πέφτουν μόνο όταν ολοκληρώνεται ο φυσικός τους κύκλος ζωής.",
+                faq2_q: "❌ Μύθος: «Δεν θα μπορώ να πλένω το πρόσωπό μου.»",
+                faq2_a: "✔️ <strong>Αλήθεια:</strong> Μετά τις πρώτες 24-48 ώρες, μπορείτε κανονικά να πλένετε το πρόσωπό σας και να χαρείτε τη θάλασσα ή το μπάνιο σας, αποφεύγοντας απλώς τα προϊόντα με βάση το λάδι.",
+                faq3_q: "✨ Τι είναι το Lash & Brow Lift?",
+                faq3_a: "Είναι φυσικές θεραπείες θρέψης, ανύψωσης και διαμόρφωσης που αναδεικνύουν τις δικές σας τρίχες δίνοντας τέλεια καμπύλη και σχήμα διάρκειας έως 6-8 εβδομάδων.",
+                contact_title: "CONNECT WITH US",
+                contact_subtitle: "FOLLOW & CONTACT",
+                lbl_addr: "Διεύθυνση:",
+                lbl_tel: "Τηλέφωνο:",
+                soc_call: "Call Us"
+            },
+            en: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_policy: "Policy",
+                nav_booking: "Booking",
+                nav_contact: "Contact",
+                hero_title: 'Wake up to <span>FLAWLESS LASHES</span>',
+                hero_btn: "BOOK NOW",
+                promo_title: "✨ SPECIAL OFFERS & GIFTS ✨",
+                promo_subtitle: "DISCOVER OUR SEASONAL PERKS",
+                promo_box_title: "🍂 AUTUMN BIRTHDAY & SERVICE OFFER",
+                promo_box_text: "Book any set of <strong>Eyelash Extensions</strong> and get <strong>A FREE BROW LIFT</strong> worth up to 60€!",
+                promo_box_note: "* Valid for bookings until the end of October.",
+                promo_btn: "VIEW PRICELIST",
+                about_title: "ABOUT US",
+                about_subtitle: "YOUR PARTNER IN LASH PERFECTION",
+                about_p1: "Welcome to <strong>VELISSE Lash & Brow Studio</strong>!",
+                about_p2: "Behind <strong>Velisselashesland</strong> lies an absolute love and passion for enhancing every woman's natural beauty. Our goal is to offer high-quality specialized services tailored to your features.",
+                price_subtitle: "AUTUMN OFFERS & PRICELIST",
+                price_banner: "🔥 OFFERS VALID UNTIL THE END OF OCTOBER 🔥",
+                single_offers: "| INDIVIDUAL OFFERS",
+                friend_title: "| BRING A FRIEND OFFERS",
+                friend_subtitle: "Price per person when coming together",
+                friend_p1: "25€ / person",
+                friend_p2: "30€ / person",
+                friend_p3: "50€ / person",
+                reg_subtitle: "CLIENT REGISTRATION & PROFILE",
+                reg_box_title: "| PERSONAL DETAILS",
+                lbl_name: "Full Name:",
+                lbl_phone: "Phone Number:",
+                birthday_gift: "✨ <strong>Birthday Gift:</strong>",
+                lbl_bday: "Date of Birth (DD/MM/YYYY):",
+                btn_submit_reg: "SUBMIT DETAILS",
+                acc_title: "MY ACCOUNT & HISTORY",
+                acc_subtitle: "VIEW YOUR APPOINTMENT HISTORY",
+                btn_search_hist: "SEARCH HISTORY",
+                policy_title: "STUDIO POLICY",
+                policy_subtitle: "PLEASE READ BEFORE BOOKING",
+                policy_1: "<strong>Cancellation Policy:</strong> If a client cancels their appointment more than 2 times consecutively, future bookings from the same person will not be possible.",
+                policy_2: "<strong>Notice:</strong> Please notify us at least 24 hours in advance for any changes.",
+                policy_3: "<strong>Arrival:</strong> For delays over 10 minutes, we reserve the right to reschedule your appointment.",
+                book_title: "BOOK APPOINTMENT",
+                book_subtitle: "SELECT SERVICE, DATE & TIME (08:00 - 20:00)",
+                book_step1: "1. Select Service",
+                sel_service: "-- Select Service --",
+                book_step2: "2. Select Date",
+                book_step3: "3. Select Available Time (08:00 to 20:00)",
+                book_prompt: "Please select service and date.",
+                book_step4: "4. Fill in your details",
+                lbl_notes: "Notes",
+                btn_submit_appt: "BOOK APPOINTMENT",
+                faq_title: "FAQ & FREQUENT QUESTIONS",
+                faq_subtitle: "MYTHS & TRUTHS FOR FIRST TIMERS",
+                faq1_q: "❌ Myth: «Extensions ruin your natural lashes.»",
+                faq1_a: "✔️ <strong>Truth:</strong> When applied correctly by a professional using quality products and proper isolation, natural lashes remain healthy.",
+                faq2_q: "❌ Myth: «I won't be able to wash my face.»",
+                faq2_a: "✔️ <strong>Truth:</strong> After the first 24-48 hours, you can wash your face normally, simply avoiding oil-based products.",
+                faq3_q: "✨ What is a Lash & Brow Lift?",
+                faq3_a: "Natural nourishing, lifting, and shaping treatments that enhance your own hairs giving a perfect curl lasting up to 6-8 weeks.",
+                contact_title: "CONNECT WITH US",
+                contact_subtitle: "FOLLOW & CONTACT",
+                lbl_addr: "Address:",
+                lbl_tel: "Phone:",
+                soc_call: "Call Us"
+            }
+        };
+
+        let currentLang = 'el';
+        const langToggleBtn = document.getElementById('langToggle');
+
+        langToggleBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'el' ? 'en' : 'el';
+            langToggleBtn.innerHTML = `<i class="fa-solid fa-globe"></i> ${currentLang === 'el' ? 'EN' : 'ΕΛ'}`;
+            
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+        });
+
+        // Scroll Reveal Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Registration
+        const registrationForm = document.getElementById('registrationForm');
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('regName').value;
+                const phone = document.getElementById('regPhone').value;
+                const email = document.getElementById('regEmail').value;
+                const birthday = document.getElementById('regBirthday').value;
+
+                document.getElementById('regSubmitBtn').disabled = true;
+                document.getElementById('regSubmitBtn').innerText = currentLang === 'el' ? "ΑΠΟΣΤΟΛΗ..." : "SENDING...";
+
+                try {
+                    await addDoc(collection(db, "registrations"), { name, phone, email, birthday, createdAt: new Date() });
+                    document.getElementById('registrationContainer').innerHTML = `<div style="text-align: center; padding: 20px;"><i class="fa-solid fa-circle-check" style="font-size: 2.5rem; color: #b89782; margin-bottom: 15px;"></i><h3 style="color:#b89782;">${currentLang === 'el' ? 'Επιτυχής Εγγραφή!' : 'Successful Registration!'}</h3></div>`;
+                } catch (error) {
+                    alert(currentLang === 'el' ? "Σφάλμα. Δοκιμάστε ξανά." : "Error. Try again.");
+                    document.getElementById('regSubmitBtn').disabled = false;
+                }
+            });
+        }
+
+        // Search History
+        const searchHistoryBtn = document.getElementById('searchHistoryBtn');
+        if(searchHistoryBtn) {
+            searchHistoryBtn.addEventListener('click', async () => {
+                const phoneInput = document.getElementById('searchPhone').value.trim();
+                const container = document.getElementById('historyResultContainer');
+                if(!phoneInput) return alert(currentLang === 'el' ? "Εισάγετε τηλέφωνο." : "Please enter phone.");
+                container.innerHTML = currentLang === 'el' ? "Αναζήτηση..." : "Searching...";
+                try {
+                    const q = query(collection(db, "appointments"), where("phone", "==", phoneInput));
+                    const querySnapshot = await getDocs(q);
+                    if(querySnapshot.empty) {
+                        container.innerHTML = `<p style="color: #8c7b70; font-style: italic; font-size: 0.85rem;">${currentLang === 'el' ? 'Δεν βρέθηκαν ραντεβού.' : 'No appointments found.'}</p>`;
+                        return;
+                    }
+                    let html = `<h4 style="color:#b89782; font-size:0.9rem;">${currentLang === 'el' ? 'Τα ραντεβού σας:' : 'Your appointments:'}</h4><ul style="list-style:none; padding:0; margin-top:8px;">`;
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        html += `<li style="background:#fff; border:1px solid #e8e1da; padding:10px; margin-bottom:8px; border-radius:4px; font-size:0.85rem;"><strong>${data.service}</strong> - ${data.date} (${data.time})</li>`;
+                    });
+                    html += `</ul>`;
+                    container.innerHTML = html;
+                } catch(e) { container.innerHTML = `<p style="color:red; font-size:0.85rem;">${currentLang === 'el' ? 'Σφάλμα ανάκτησης.' : 'Retrieval error.'}</p>`; }
+            });
+        }
+
+        // Booking slots logic
+       
+    </script>
+    <script>
+function toggleMenu() {
+    const menu = document.getElementById('dropdownMenu');
+    menu.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
