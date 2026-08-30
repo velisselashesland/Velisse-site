@@ -35,16 +35,24 @@
     .section-subtitle{text-transform:uppercase;font-size:11px;color:#7a6b5f;text-align:center;margin-bottom:12px}
 
     /* pricing tabs */
-    .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
-    .tabs button{padding:8px 16px;border-radius:999px;border:none;background:transparent;cursor:pointer}
+    .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+    .tabs button{padding:8px 16px;border-radius:999px;border:none;background:transparent;cursor:pointer;transition:all .3s}
     .tabs button.active{background:#1a1a1a;color:#fff}
     .price-list{display:block}
     .price-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}
 
+    /* booking customer type */
+    .customer-type-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
+    .customer-type-tabs button{padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:transparent;cursor:pointer;transition:all .3s;font-weight:500}
+    .customer-type-tabs button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
     /* booking simple */
     .form-row{display:flex;gap:8px;flex-wrap:wrap}
     .form-row input,.form-row select{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px}
-    .btn-submit{background:#1a1a1a;color:#fff;padding:12px;border-radius:8px;border:none;cursor:pointer}
+    .btn-submit{background:#1a1a1a;color:#fff;padding:12px;border-radius:8px;border:none;cursor:pointer;transition:all .3s}
+    .btn-submit:hover{background:#C5A059;cursor:pointer}
+
+    .price-display{background:#f9f7f4;padding:12px;border-radius:8px;margin:12px 0;text-align:center;font-weight:600;color:#C5A059}
 
     footer{text-align:center;padding:18px 0;color:#777;font-size:.85rem}
 
@@ -99,39 +107,72 @@
 
     <section id="booking" class="section-card">
       <div class="section-title">Κλείσε Ραντεβού</div>
-      <div class="section-subtitle">Απλό φόρμα κράτησης (τοπικά - χωρίς 3rd party)</div>
+      <div class="section-subtitle">Επιλέξτε τύπο πελάτη και κρατήστε το ραντεβού σας</div>
+      
+      <div style="margin-bottom:16px">
+        <div style="font-weight:600;margin-bottom:8px;text-align:center">Τύπος Πελάτη</div>
+        <div class="customer-type-tabs">
+          <button id="type-regular" class="active" onclick="selectCustomerType('regular')">Κανονική Τιμή</button>
+          <button id="type-student" onclick="selectCustomerType('student')">Φοιτήτρια</button>
+          <button id="type-first" onclick="selectCustomerType('first')">First Visit</button>
+        </div>
+      </div>
+
       <form id="bookingForm">
         <div class="form-row">
           <input id="name" placeholder="Ονοματεπώνυμο *" required>
-          <input id="phone" placeholder="Κινητό *" required>
+          <input id="phone" placeholder="Κινητό *" type="tel" required>
         </div>
         <div class="form-row" style="margin-top:8px">
-          <select id="service">
-            <option>Half Set - 35€</option>
-            <option>One by One - 45€</option>
-            <option>Volume 2D-3D - 50€</option>
+          <input id="email" placeholder="Email (για υπενθύμηση) *" type="email" required>
+        </div>
+        <div class="form-row" style="margin-top:8px">
+          <select id="service" required>
+            <option value="">-- Επιλέξτε υπηρεσία --</option>
+            <option value="Half Set">Half Set</option>
+            <option value="One by One">One by One</option>
+            <option value="Volume 2D-3D">Volume 2D-3D</option>
           </select>
           <input id="date" type="date" required>
+          <input id="time" type="time" required>
         </div>
+
+        <div class="price-display" id="priceDisplay">Τιμή: Επιλέξτε υπηρεσία</div>
+
         <div style="margin-top:12px">
-          <button type="submit" class="btn-submit">Υποβολή Κράτησης</button>
+          <button type="submit" class="btn-submit">✓ Κλείσιμο Ραντεβού</button>
         </div>
-        <p id="bookingMsg" style="margin-top:10px;color:#6b5d4d"></p>
+        <p id="bookingMsg" style="margin-top:10px;color:#6b5d4d;text-align:center"></p>
+
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+          <button type="button" onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4;flex:0">📅 Google Calendar</button>
+          <button type="button" onclick="downloadICS()" class="btn-submit" style="background:#17a2b8;flex:0">📥 Κατέβασμα Calendar</button>
+        </div>
       </form>
     </section>
 
     <section id="contact" class="section-card">
       <div class="section-title">Aftercare & FAQ</div>
       <div class="section-subtitle">Οδηγίες και Συχνές Ερωτήσεις</div>
-      <p style="margin-top:8px">Φροντίδα μετά την εφαρμογή: Διατηρήστε τα φυσικά σας βλέφαρα καθαρά και ξηρά για τις πρώτες 24 ώρες. Αποφύγετε το νερό, την ατμό και τα καλλυντικά. Χρησιμοποιήστε τη βούρτσα που σας δώσαμε καθημερινά.</p>
+      <p style="margin-top:8px"><strong>Φροντίδα μετά την εφαρμογή:</strong> Διατηρήστε τα φυσικά σας βλέφαρα καθαρά και ξηρά για τις πρώτες 24 ώρες. Αποφύγετε το νερό, την ατμό και τα καλλυντικά. Χρησιμοποιήστε τη βούρτσα που σας δώσαμε καθημερινά για αποφυγή μάτσων.</p>
     </section>
 
   </div>
 
   <footer>© VELISSE - All rights reserved</footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    // Basic helpers to avoid ReferenceErrors
+    let currentCustomerType = 'regular';
+    let currentService = '';
+    let currentPrice = 0;
+
+    const serviceprices = {
+      regular:{'Half Set':35,'One by One':45,'Volume 2D-3D':50},
+      student:{'Half Set':25,'One by One':35,'Volume 2D-3D':40},
+      first:{'Half Set':30,'One by One':40,'Volume 2D-3D':45}
+    };
+
     function toggleMenu(){
       try{
         const nav=document.getElementById('dropdownMenu');
@@ -141,25 +182,20 @@
       }catch(e){console.warn(e)}
     }
 
-    // Simple slideshow (robust)
+    // Simple slideshow
     (function(){
       const slides = Array.from(document.querySelectorAll('.hero-slide'));
       if(!slides.length) return;
       let idx=0;
       function show(i){ slides.forEach((s,si)=> s.classList.toggle('active', si===i)); }
       setInterval(()=>{ idx=(idx+1)%slides.length; show(idx); },4000);
-      // lazy warn if images missing
       slides.forEach(img=>{
         img.addEventListener('error', ()=>console.warn('Missing hero image:', img.src));
       });
     })();
 
-    // Pricing data (kept simple)
-    const pricelist = {
-      regular:{'Half Set':35,'One by One':45,'Volume 2D-3D':50},
-      student:{'Half Set':25,'One by One':35,'Volume 2D-3D':40},
-      first:{'Half Set':30,'One by One':40,'Volume 2D-3D':45}
-    };
+    // Pricing data
+    const pricelist = serviceprices;
     function showPrice(key){
       document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
       const active=document.getElementById('tab-'+key);
@@ -174,29 +210,184 @@
         row.appendChild(left);row.appendChild(right);container.appendChild(row);
       });
     }
-    // initial
     showPrice('regular');
 
-    // Simple booking form (no external dependencies)
+    // Customer Type Selection
+    function selectCustomerType(type){
+      currentCustomerType = type;
+      document.querySelectorAll('.customer-type-tabs button').forEach(b=>b.classList.remove('active'));
+      document.getElementById('type-'+type).classList.add('active');
+      updatePrice();
+    }
+
+    // Update price display
+    function updatePrice(){
+      const service = document.getElementById('service').value;
+      if(service){
+        const prices = serviceprices[currentCustomerType];
+        currentPrice = prices[service] || 0;
+        document.getElementById('priceDisplay').textContent = `Τιμή: ${currentPrice}€`;
+        currentService = service;
+      } else {
+        document.getElementById('priceDisplay').textContent = 'Τιμή: Επιλέξτε υπηρεσία';
+        currentPrice = 0;
+      }
+    }
+
+    document.getElementById('service').addEventListener('change', updatePrice);
+
+    // Booking Form Submission
     document.getElementById('bookingForm').addEventListener('submit', function(e){
       e.preventDefault();
-      const name=document.getElementById('name').value.trim();
-      const phone=document.getElementById('phone').value.trim();
-      const date=document.getElementById('date').value;
-      const service=document.getElementById('service').value;
-      if(!name||!phone||!date){ document.getElementById('bookingMsg').textContent='Συμπλήρωσε όλα τα πεδία.'; return; }
-      // store locally for now
-      const bookings = JSON.parse(localStorage.getItem('velisse_bookings') || '[]') || [];
-      bookings.push({name,phone,date,service,created: new Date().toISOString()});
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+
+      if(!name||!phone||!email||!service||!date||!time){
+        document.getElementById('bookingMsg').textContent='❌ Συμπλήρωσε όλα τα πεδία.';
+        return;
+      }
+
+      // Store booking
+      const booking = {
+        name, phone, email, service, date, time, 
+        type: currentCustomerType, 
+        price: currentPrice,
+        created: new Date().toISOString()
+      };
+
+      const bookings = JSON.parse(localStorage.getItem('velisse_bookings') || '[]');
+      bookings.push(booking);
       localStorage.setItem('velisse_bookings', JSON.stringify(bookings));
-      document.getElementById('bookingMsg').textContent='Το ραντεβού αποθηκεύτηκε τοπικά!';
-      this.reset();
+
+      // Send reminders
+      scheduleReminders(booking);
+
+      // Show success
+      document.getElementById('bookingMsg').innerHTML = `
+        ✅ <strong>Ραντεβού κλειστό!</strong><br>
+        Θα λάβετε υπενθύμηση σε 1 ημέρα και 2 ώρες πριν.
+      `;
+
+      setTimeout(() => this.reset(), 2000);
     });
 
-    // Global error handler to avoid stopping other scripts
+    // Schedule automatic reminders
+    function scheduleReminders(booking){
+      const bookingDateTime = new Date(booking.date + 'T' + booking.time);
+      
+      // 1 day before reminder
+      const oneDayBefore = new Date(bookingDateTime.getTime() - 24*60*60*1000);
+      const hoursUntilOneDayReminder = (oneDayBefore.getTime() - new Date().getTime()) / (1000 * 60 * 60);
+      
+      if(hoursUntilOneDayReminder > 0){
+        setTimeout(() => {
+          sendReminder(booking, '1 ημέρα πριν');
+        }, hoursUntilOneDayReminder * 60 * 60 * 1000);
+      }
+
+      // 2 hours before reminder
+      const twoHoursBefore = new Date(bookingDateTime.getTime() - 2*60*60*1000);
+      const minutesUntilTwoHourReminder = (twoHoursBefore.getTime() - new Date().getTime()) / (1000 * 60);
+      
+      if(minutesUntilTwoHourReminder > 0){
+        setTimeout(() => {
+          sendReminder(booking, '2 ώρες πριν');
+        }, minutesUntilTwoHourReminder * 60 * 1000);
+      }
+    }
+
+    // Send reminder (email simulation)
+    function sendReminder(booking, reminderType){
+      const message = `
+        Υπενθύμηση: Το ραντεβού σας με VELISSE είναι ${reminderType}
+        Ημερομηνία: ${booking.date} Ώρα: ${booking.time}
+        Υπηρεσία: ${booking.service}
+        Τιμή: ${booking.price}€
+      `;
+      
+      console.log('📧 Reminder:', message);
+      
+      // In production, send email via EmailJS or backend
+      // Example: sendEmailViaBackend(booking.email, message);
+    }
+
+    // Add to Google Calendar
+    function addToGoogleCalendar(){
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const service = document.getElementById('service').value;
+      const name = document.getElementById('name').value;
+
+      if(!date || !time || !service){
+        alert('Συμπλήρωσε όλα τα πεδία πρώτα');
+        return;
+      }
+
+      const startDateTime = new Date(date + 'T' + time);
+      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000); // 1 hour duration
+
+      const googleCalendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=VELISSE%20-%20${encodeURIComponent(service)}&dates=${startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z/${endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z&details=Πελάτης:%20${encodeURIComponent(name)}&location=VELISSE%20Studio`;
+
+      window.open(googleCalendarUrl, '_blank');
+    }
+
+    // Download as ICS file
+    function downloadICS(){
+      const date = document.getElementById('date').value;
+      const time = document.getElementById('time').value;
+      const service = document.getElementById('service').value;
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      if(!date || !time || !service){
+        alert('Συμπλήρωσε όλα τα πεδία πρώτα');
+        return;
+      }
+
+      const startDateTime = new Date(date + 'T' + time);
+      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000);
+
+      const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//VELISSE//Booking//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:velisse-${Date.now()}@velisse.studio
+DTSTART:${startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z
+DTEND:${endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z
+SUMMARY:VELISSE - ${service}
+DESCRIPTION:Πελάτης: ${name}\\nΤηλέφωνο: ${phone}\\nΥπηρεσία: ${service}\\nΤιμή: ${currentPrice}€
+LOCATION:VELISSE Lash & Brow Studio
+BEGIN:VALARM
+TRIGGER:-PT24H
+DESCRIPTION:Υπενθύμηση ραντεβού
+ACTION:DISPLAY
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-PT2H
+DESCRIPTION:Το ραντεβού σας είναι σε 2 ώρες
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent));
+      element.setAttribute('download', `velisse-rantevou-${date}.ics`);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+
+    // Global error handler
     window.addEventListener('error', function(e){
       console.warn('Page error caught:', e.message);
-      // don't rethrow so other scripts can continue
     });
   </script>
 </body>
