@@ -189,7 +189,8 @@
 
   <script>
     // GOOGLE SHEET CONFIGURATION
-const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGDJzHhY6-U8K45U-RL6M__Q2j73SZAGy2JlY023TnuzbF6roiz4FKCAexMOYdII2TnQ/exec';
+
     let currentCustomerType = 'regular';
     let currentService = '';
     let currentPrice = 0;
@@ -290,6 +291,7 @@ const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
 
       // Prepare booking data
       const booking = {
+        action: 'addBooking',
         id: Date.now(),
         name, 
         phone, 
@@ -346,34 +348,9 @@ const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
 
     // Google Sheet Integration
     function sendToGoogleSheet(booking){
-      const payload = {
-        action: 'addBooking',
-        id: booking.id,
-        name: booking.name,
-        phone: booking.phone,
-        birthday: booking.birthday,
-        service: booking.service,
-        duration: booking.duration,
-        data: booking.date,
-        start_time: booking.start_time,
-        end_time: booking.end_time,
-        price: booking.price,
-        final_price: booking.final_price,
-        client_type: booking.client_type,
-        discount: booking.discount,
-        friend_name: booking.friend_name,
-        friend_phone: booking.friend_phone,
-        is_first_time: booking.is_first_time,
-        is_student: booking.is_student,
-        is_bring_friend: booking.is_bring_friend,
-        gift: booking.gift,
-        created_at: booking.created_at,
-        birthday_type: booking.birthday_type
-      };
-
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        body: JSON.stringify(payload),
+        body: JSON.stringify(booking),
         mode: 'no-cors'
       })
       .then(() => console.log('✅ Ραντεβού αποθηκεύτηκε στο Google Sheet'))
@@ -412,7 +389,6 @@ const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
       if(document.getElementById('remind_whatsapp').checked){
         const whatsappUrl = `https://wa.me/${booking.phone.replace('+','').replace(/\s/g,'')}?text=${encodeURIComponent(message)}`;
         console.log('📱 WhatsApp reminder:', whatsappUrl);
-        // In production: open URL or use WhatsApp API
       }
 
       // Viber
@@ -424,7 +400,6 @@ const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
       // Email (simple)
       if(document.getElementById('remind_sms').checked){
         console.log('📧 Email reminder to:', booking.email, message);
-        // In production: send via backend
       }
     }
 
@@ -447,7 +422,6 @@ const GOOGLE_SCRIPT_URL = 'YOUR_DEPLOYMENT_URL_HERE';
       const endISO = endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0] + 'Z';
 
       const googleCalendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=VELISSE%20-%20${encodeURIComponent(service)}&dates=${startISO}/${endISO}&details=Πελάτης:%20${encodeURIComponent(name)}`;
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzillTz-I7lsWBQavkbk-ypIAlQswlzliXcxDVaMSgEn6-7oqkLE86vIZVVHIG9gro9Eg/exec";
 
       window.open(googleCalendarUrl, '_blank');
     }
@@ -507,9 +481,5 @@ END:VCALENDAR`;
       console.warn('Page error caught:', e.message);
     });
   </script>
-</body>
-</html>
-
-
 </body>
 </html>
