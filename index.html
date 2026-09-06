@@ -521,7 +521,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
         row.innerHTML = `
           <div class="price-service-name">
             ${item.name}
-            ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 20€</span>' : ''}
+            ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 35€</span>' : ''}
           </div>
           <div class="price-value">${finalPrice}€</div>
         `;
@@ -546,7 +546,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
       const grid = document.getElementById('timeGrid');
       grid.innerHTML = '';
       const times = [
-       "08:00", "08:30", "09:00", "09:30",
+        "08:00", "08:30", "09:00", "09:30",
         "10:00", "10:30", "11:00", "11:30",
         "12:00", "12:30", "13:00", "13:30",
         "14:00", "14:30", "15:00", "15:30",
@@ -554,22 +554,17 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
         "18:00", "18:30", "19:00", "19:30"
       ];
 
-      // Παράδειγμα διαθέσιμων ωρών (όπως στη φωτο)
-      const availableTimes = [availableTimes.includes];
-
+      // Όλες οι ώρες είναι διαθέσιμες για επιλογή
       times.forEach(t => {
         const slot = document.createElement('div');
-        const isAvail = availableTimes.includes(t);
-        slot.className = `time-slot ${isAvail ? 'available' : ''}`;
+        slot.className = 'time-slot available';
         slot.textContent = t;
 
-        if(isAvail) {
-          slot.onclick = function() {
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            slot.classList.add('selected');
-            document.getElementById('selectedTime').value = t;
-          }
-        }
+        slot.onclick = function() {
+          document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+          slot.classList.add('selected');
+          document.getElementById('selectedTime').value = t;
+        };
         grid.appendChild(slot);
       });
     }
@@ -589,15 +584,50 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
       document.getElementById('dateInput').value = today;
     });
 
-    // FORM SUBMIT
+    // FORM SUBMIT & GOOGLE SHEET/TELEGRAM INTEGRATION
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      const service = document.getElementById('serviceSelect').value;
+      const date = document.getElementById('dateInput').value;
       const time = document.getElementById('selectedTime').value;
+      const name = document.getElementById('clientName').value.trim();
+      const phone = document.getElementById('clientPhone').value.trim();
+      const email = document.getElementById('clientEmail').value.trim();
+
       if(!time) {
         alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
         return;
       }
-      document.getElementById('bookingMsg').innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
+
+      const msgContainer = document.getElementById('bookingMsg');
+      msgContainer.style.color = '#1A1A1A';
+      msgContainer.innerHTML = '⏳ Αποστολή κρατήσης...';
+
+      const bookingData = {
+        name: name,
+        phone: phone,
+        email: email,
+        service: service,
+        date: date,
+        time: time
+      };
+
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(bookingData),
+        mode: 'no-cors'
+      })
+      .then(() => {
+        msgContainer.innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
+        document.getElementById('bookingForm').reset();
+        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
+      })
+      .catch(err => {
+        console.error('Error:', err);
+        msgContainer.innerHTML = '❌ Υπήρξε πρόβλημα κατά την αποστολή. Παρακαλώ δοκιμάστε ξανά.';
+      });
     });
   </script>
 </body>
