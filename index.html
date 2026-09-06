@@ -593,8 +593,7 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
       const time = document.getElementById('selectedTime').value;
       const name = document.getElementById('clientName').value.trim();
       const phone = document.getElementById('clientPhone').value.trim();
-      const email = document.getElementById('clientEmail').value.trim();
-
+      
       if(!time) {
         alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
         return;
@@ -607,7 +606,6 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
       const bookingData = {
         name: name,
         phone: phone,
-        email: email,
         service: service,
         date: date,
         time: time
