@@ -4,71 +4,385 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VELISSE Lash & Brow Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root{--bg:#F4F1EA;--text:#1A1A1A;--border:#D9D2C9;--accent:#C5A059}
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-    header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:1000}
-    .logo{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:3px}
-    .header-right{display:flex;align-items:center;gap:10px}
-    .lang-switcher{border:1px solid var(--text);padding:6px 10px;border-radius:20px;background:transparent;cursor:pointer}
-    .menu-toggle{background:none;border:none;font-size:22px;cursor:pointer}
-    .dropdown-menu{display:none;position:absolute;top:64px;left:0;width:100%;background:var(--bg);padding:12px 20px;border-bottom:1px solid var(--border);z-index:999}
-    .dropdown-menu.active{display:block}
-    .dropdown-menu a{display:block;padding:8px 0;text-decoration:none;color:var(--text)}
+    :root {
+      --bg: #F5F2EC;
+      --card-bg: #FFFFFF;
+      --pill-bg: #F2EBE1;
+      --text: #1A1A1A;
+      --subtext: #8E867E;
+      --border: #E8E2D9;
+      --accent: #D4B483;
+      --badge-bg: #F7EFE3;
+      --badge-text: #A38051;
+      --time-border: #D0D8E0;
+      --time-blue: #2B72C4;
+    }
 
-    .hero{position:relative;height:70vh;min-height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#111}
-    .hero-slides{position:absolute;inset:0}
-    .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
-    .hero-slide.active{opacity:1}
-    .hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.35)}
-    .hero-content{position:relative;z-index:2;color:#fff;text-align:center;padding:0 20px}
-    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);line-height:1.05}
-    .btn{display:inline-block;background:#fdfaf6;color:#1a1a1a;padding:12px 28px;border-radius:26px;text-decoration:none;margin-top:18px}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
 
-    .container{max-width:920px;margin:28px auto;padding:0 16px}
-    .section-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:20px}
-    .section-title{font-family:'Cormorant Garamond',serif;font-size:22px;margin-bottom:6px;text-align:center}
-    .section-subtitle{text-transform:uppercase;font-size:11px;color:#7a6b5f;text-align:center;margin-bottom:12px}
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 24px;
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0,0,0,0.03);
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #111;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      font-weight: 500;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-switcher {
+      border: 1px solid var(--text);
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .menu-toggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text);
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: var(--bg);
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+    }
+    .dropdown-menu.active { display: block; }
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+    }
 
-    .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
-    .tabs button{padding:8px 16px;border-radius:999px;border:none;background:transparent;cursor:pointer;transition:all .3s}
-    .tabs button.active{background:#1a1a1a;color:#fff}
-    .price-list{display:block}
-    .price-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #eee}
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 60vh;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #111;
+    }
+    .hero-slides { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity .8s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
 
-    .customer-type-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
-    .customer-type-tabs button{padding:10px 20px;border-radius:8px;border:2px solid var(--border);background:transparent;cursor:pointer;transition:all .3s;font-weight:500}
-    .customer-type-tabs button.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+    /* CONTAINER & CARDS */
+    .container {
+      max-width: 680px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 32px 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    }
 
-    .form-row{display:flex;gap:8px;flex-wrap:wrap}
-    .form-row input,.form-row select{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;min-width:150px}
-    .form-row label{display:flex;align-items:center;gap:6px;flex:0}
-    .form-row label input{margin:0}
-    .btn-submit{background:#1a1a1a;color:#fff;padding:12px 20px;border-radius:8px;border:none;cursor:pointer;transition:all .3s}
-    .btn-submit:hover{background:#C5A059;cursor:pointer}
+    /* PRICELIST SECTION STYLING */
+    .price-header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 5px;
+      text-align: center;
+      color: #8E867E;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .price-sub-info {
+      text-align: center;
+      font-size: 13px;
+      color: #4A4A4A;
+      margin-bottom: 20px;
+    }
+    .badge-gift-header {
+      display: inline-block;
+      background: #FFF8EE;
+      border: 1px dashed #E5C396;
+      color: #B58A4C;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 4px;
+    }
 
-    .price-display{background:#f9f7f4;padding:12px;border-radius:8px;margin:12px 0;text-align:center;font-weight:600;color:#C5A059}
-    .reminder-options{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0;justify-content:center}
-    .reminder-options label{display:flex;align-items:center;gap:6px;border:1px solid var(--border);padding:8px 12px;border-radius:6px;cursor:pointer}
-    .reminder-options input[type="checkbox"]{cursor:pointer}
+    /* OFFERS TABS CONTAINER (PILL STYLE) */
+    .offers-pill-container {
+      background: var(--pill-bg);
+      border-radius: 30px;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .offer-tab-btn {
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      color: #555;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+    .offer-tab-btn.active {
+      background: #1A1A1A;
+      color: #FFFFFF;
+      font-weight: 500;
+    }
 
-    footer{text-align:center;padding:18px 0;color:#777;font-size:.85rem}
+    /* PRICE LIST TABLE */
+    .price-table-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #999;
+      text-transform: uppercase;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #F0F0F0;
+      margin-bottom: 8px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #F7F7F7;
+    }
+    .price-service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1A1A1A;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .item-gift-badge {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+    }
+    .price-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1A1A;
+    }
 
-    @media(min-width:700px){.form-row input{flex:unset;min-width:200px}}
+    /* BOOKING SECTION STYLING */
+    .booking-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .booking-subtitle {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #8E867E;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .form-step-label {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 8px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .booking-input, .booking-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #FFF;
+      font-size: 14px;
+      color: #333;
+      outline: none;
+      margin-bottom: 20px;
+      font-family: inherit;
+    }
+    .booking-input:focus, .booking-select:focus {
+      border-color: #1A1A1A;
+    }
+
+    /* TIME GRID */
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .time-slot {
+      padding: 10px 0;
+      border: 1px solid #EAEAEA;
+      border-radius: 8px;
+      background: #FAFAFA;
+      color: #BBB;
+      font-size: 13px;
+      text-align: center;
+      cursor: not-allowed;
+      transition: all 0.2s ease;
+    }
+    .time-slot.available {
+      background: #FFFFFF;
+      border-color: var(--time-border);
+      color: var(--time-blue);
+      cursor: pointer;
+    }
+    .time-slot.available:hover, .time-slot.selected {
+      background: var(--time-blue);
+      color: #FFF;
+      border-color: var(--time-blue);
+    }
+
+    /* CLIENT FORM FIELDS */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .btn-submit-booking {
+      width: 100%;
+      background: #1A1A1A;
+      color: #FFF;
+      padding: 16px;
+      border-radius: 30px;
+      border: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    .btn-submit-booking:hover {
+      background: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 0;
+      color: #999;
+      font-size: 0.8rem;
+    }
+
+    @media(max-width: 480px) {
+      .time-grid { grid-template-columns: repeat(4, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
   <header>
-    <a href="#home" class="logo">VELISSE</a>
+    <a href="#home" class="logo-container">
+      <div class="logo-icon"><i class="fa-regular fa-eye"></i></div>
+      <span class="logo-text">VELISSE</span>
+    </a>
     <div class="header-right">
-      <button id="langToggle" class="lang-switcher">EN</button>
-      <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+      <button id="langToggle" class="lang-switcher"><i class="fa-solid fa-globe"></i> EN</button>
+      <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
     </div>
-    <nav id="dropdownMenu" class="dropdown-menu" aria-hidden="true">
+    <nav id="dropdownMenu" class="dropdown-menu">
       <a href="#home">Αρχική</a>
       <a href="#pricing">Τιμές</a>
       <a href="#booking">Κλείσε Ραντεβού</a>
@@ -76,408 +390,193 @@
     </nav>
   </header>
 
+  <!-- HERO SECTION -->
   <section id="home" class="hero">
     <div class="hero-slides">
       <img src="slide1.jpg" alt="" class="hero-slide active">
       <img src="slide2.jpg" alt="" class="hero-slide">
-      <img src="slide3.jpg" alt="" class="hero-slide">
-      <img src="slide4.jpg" alt="" class="hero-slide">
-      <img src="slide5.jpg" alt="" class="hero-slide">
-      <img src="slide6.jpg" alt="" class="hero-slide">
-      <img src="slide7.jpg" alt="" class="hero-slide">
-      <img src="slide8.jpg" alt="" class="hero-slide">
-      <img src="slide9.jpg" alt="" class="hero-slide">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1>Wake up to<br><span style="font-weight:700;font-style:italic;letter-spacing:2px">FLAWLESS LASHES</span></h1>
+      <h1>Wake up to<br><span style="font-weight:600; font-style:italic;">FLAWLESS LASHES</span></h1>
     </div>
   </section>
 
   <div class="container">
+
+    <!-- PRICELIST SECTION -->
     <section id="pricing" class="section-card">
-      <div class="section-title">Τιμοκατάλογος 2026</div>
-      <div class="section-subtitle">PRICELIST & OFFERS</div>
-      <div class="tabs" role="tablist">
-        <button id="tab-regular" class="active" onclick="showPrice('regular')">Κανονικά</button>
-        <button id="tab-student" onclick="showPrice('student')">Φοιτήτρια</button>
-        <button id="tab-first" onclick="showPrice('first')">First Visit</button>
+      <div class="price-header-title">2026 Pricelist & Offers</div>
+      <div class="price-sub-info">
+        Όλες οι υπηρεσίες <strong>Eyelash Extensions</strong> περιλαμβάνουν 
+        <span class="badge-gift-header">ΔΩΡΟ Brow Lamination 20€</span>
       </div>
-      <div id="priceContainer" class="price-list"></div>
+
+      <!-- OFFERS PILLS -->
+      <div class="offers-pill-container">
+        <button class="offer-tab-btn active" onclick="selectOffer('regular', this)">Κανονικός</button>
+        <button class="offer-tab-btn" onclick="selectOffer('student', this)">Student -10€</button>
+        <button class="offer-tab-btn" onclick="selectOffer('first', this)">First Visit -5€</button>
+        <button class="offer-tab-btn" onclick="selectOffer('friend', this)">Bring a Friend -10€</button>
+      </div>
+
+      <!-- PRICE TABLE -->
+      <div class="price-table-header">
+        <span>SERVICE</span>
+        <span>PRICE</span>
+      </div>
+      <div id="priceListContainer">
+        <!-- Δυναμική φόρτωση με JavaScript -->
+      </div>
     </section>
 
+    <!-- BOOKING SECTION -->
     <section id="booking" class="section-card">
-      <div class="section-title">Κλείσε Ραντεβού</div>
-      <div class="section-subtitle">Επιλέξτε τύπο πελάτη και κρατήστε το ραντεβού σας</div>
-      
-      <div style="margin-bottom:16px">
-        <div style="font-weight:600;margin-bottom:8px;text-align:center">Τύπος Πελάτη</div>
-        <div class="customer-type-tabs">
-          <button id="type-regular" class="active" onclick="selectCustomerType('regular')">Κανονική Τιμή</button>
-          <button id="type-student" onclick="selectCustomerType('student')">Φοιτήτρια</button>
-          <button id="type-first" onclick="selectCustomerType('first')">First Visit</button>
-        </div>
-      </div>
+      <div class="booking-title">Book Appointment</div>
+      <div class="booking-subtitle">ΕΠΙΛΕΞΤΕ ΥΠΗΡΕΣΙΑ, ΗΜΕΡΑ & ΩΡΑ (08:00 - 20:00)</div>
 
       <form id="bookingForm">
-        <div class="form-row">
-          <input id="name" placeholder="Ονοματεπώνυμο *" required>
-          <input id="phone" placeholder="Κινητό (με +30) *" type="tel" pattern="^\+30[0-9]{10}$" required>
-        </div>
-        
-        <div class="form-row" style="margin-top:8px">
-          <input id="email" placeholder="Email *" type="email" required>
-          <input id="birthday" placeholder="Γενέθλια (MM/DD)" type="text" pattern="^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$">
-        </div>
+        <!-- Step 1 -->
+        <label class="form-step-label">1. Επιλέξτε Υπηρεσία</label>
+        <select id="serviceSelect" class="booking-select" required onchange="updatePriceDisplay()">
+          <option value="">-- Επιλέξτε υπηρεσία --</option>
+          <option value="Brow Wax" data-price="10">Brow Wax (10€)</option>
+          <option value="Half Set" data-price="35">Half Set (35€)</option>
+          <option value="One by One" data-price="45">One by One (45€)</option>
+          <option value="Volume 2D-3D" data-price="50">Volume 2D-3D (50€)</option>
+          <option value="Lash Lift + Tint" data-price="35">Lash Lift + Tint (35€)</option>
+        </select>
 
-        <div class="form-row" style="margin-top:8px">
-          <select id="service" required>
-            <option value="">-- Επιλέξτε υπηρεσία --</option>
-            <option value="Half Set">Half Set</option>
-            <option value="One by One">One by One</option>
-            <option value="Volume 2D-3D">Volume 2D-3D</option>
-          </select>
-          <input id="duration" type="hidden" value="60">
-          <input id="date" type="date" required>
-          <input id="time" type="time" required>
-        </div>
+        <!-- Step 2 -->
+        <label class="form-step-label">2. Επιλέξτε Ημερομηνία</label>
+        <input type="date" id="dateInput" class="booking-input" required>
 
-        <div class="form-row" style="margin-top:8px">
-          <label><input id="is_first_time" type="checkbox"> Πρώτη φορά</label>
-          <label><input id="is_student" type="checkbox"> Είμαι φοιτήτρια</label>
-          <label><input id="is_bring_friend" type="checkbox"> Φέρνω φίλη</label>
+        <!-- Step 3 -->
+        <label class="form-step-label">3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)</label>
+        <div class="time-grid" id="timeGrid">
+          <!-- Δυναμική φόρτωση ωρών -->
         </div>
+        <input type="hidden" id="selectedTime" required>
 
-        <div class="form-row" style="margin-top:8px" id="friendSection" style="display:none">
-          <input id="friend_name" placeholder="Όνομα φίλης">
-          <input id="friend_phone" placeholder="Τηλέφωνο φίλης (με +30)">
+        <!-- Step 4: Στοιχεία Πελάτη -->
+        <label class="form-step-label" style="margin-top:15px;">4. Στοιχεία Επικοινωνίας</label>
+        <div class="form-grid">
+          <input type="text" id="clientName" class="booking-input" placeholder="Ονοματεπώνυμο *" required style="margin-bottom:0;">
+          <input type="tel" id="clientPhone" class="booking-input" placeholder="Κινητό (+30) *" required style="margin-bottom:0;">
         </div>
+        <input type="email" id="clientEmail" class="booking-input" placeholder="Email *" required style="margin-top:12px;">
 
-        <div class="price-display" id="priceDisplay">Τιμή: Επιλέξτε υπηρεσία</div>
-
-        <div style="margin:12px 0">
-          <div style="font-weight:600;margin-bottom:8px">Πώς θέλετε να λάβετε υπενθύμιση;</div>
-          <div class="reminder-options">
-            <label><input id="remind_whatsapp" type="checkbox" checked> 💬 WhatsApp</label>
-            <label><input id="remind_viber" type="checkbox"> 📞 Viber</label>
-            <label><input id="remind_sms" type="checkbox"> 📧 Email</label>
-          </div>
-        </div>
-
-        <div style="margin-top:12px">
-          <button type="submit" class="btn-submit">✓ Κλείσιμο Ραντεβού</button>
-        </div>
-        <p id="bookingMsg" style="margin-top:10px;color:#6b5d4d;text-align:center"></p>
-
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-          <button type="button" onclick="addToGoogleCalendar()" class="btn-submit" style="background:#4285F4">📅 Google Calendar</button>
-          <button type="button" onclick="downloadICS()" class="btn-submit" style="background:#17a2b8">📥 ICS File</button>
-        </div>
+        <button type="submit" class="btn-submit-booking">ΚΡΑΤΗΣΗ ΡΑΝΤΕΒΟΥ</button>
+        <p id="bookingMsg" style="margin-top:12px; text-align:center; font-size:14px;"></p>
       </form>
-    </section>
-
-    <section id="contact" class="section-card">
-      <div class="section-title">Aftercare & FAQ</div>
-      <div class="section-subtitle">Οδηγίες και Συχνές Ερωτήσεις</div>
-      <p style="margin-top:8px"><strong>Φροντίδα μετά την εφαρμογή:</strong> Διατηρήστε τα φυσικά σας βλέφαρα καθαρά και ξηρά για τις πρώτες 24 ώρες. Αποφύγετε το νερό, την ατμό και τα καλλυντικά. Χρησιμοποιήστε τη βούρτσα που σας δώσαμε καθημερινά.</p>
     </section>
 
   </div>
 
-  <footer>© VELISSE - All rights reserved</footer>
+  <footer>© VELISSE Lash & Brow Studio</footer>
 
   <script>
-    // GOOGLE SHEET CONFIGURATION
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyGDJzHhY6-U8K45U-RL6M__Q2j73SZAGy2JlY023TnuzbF6roiz4FKCAexMOYdII2TnQ/exec';
+    // PRICE DATA
+    const servicesData = [
+      { name: "Half Set", price: 35, gift: true },
+      { name: "One by One", price: 45, gift: true },
+      { name: "Volume 2D-3D", price: 50, gift: true },
+      { name: "Volume 4D-6D", price: 55, gift: true },
+      { name: "Special Effects", price: 55, gift: true },
+      { name: "Lash Lift + Tint", price: 35, gift: false },
+      { name: "Brow Lift + Tint", price: 30, gift: false },
+      { name: "Lash Lift + Brow Lift", price: 55, gift: false }
+    ];
 
-    let currentCustomerType = 'regular';
-    let currentService = '';
-    let currentPrice = 0;
+    let currentDiscount = 0;
 
-    const serviceprices = {
-      regular:{'Half Set':35,'One by One':45,'Volume 2D-3D':50},
-      student:{'Half Set':25,'One by One':35,'Volume 2D-3D':40},
-      first:{'Half Set':30,'One by One':40,'Volume 2D-3D':45}
-    };
-
-    function toggleMenu(){
-      try{
-        const nav=document.getElementById('dropdownMenu');
-        if(!nav) return;
-        nav.classList.toggle('active');
-        nav.setAttribute('aria-hidden', !nav.classList.contains('active'));
-      }catch(e){console.warn(e)}
-    }
-
-    // Slideshow
-    (function(){
-      const slides = Array.from(document.querySelectorAll('.hero-slide'));
-      if(!slides.length) return;
-      let idx=0;
-      function show(i){ slides.forEach((s,si)=> s.classList.toggle('active', si===i)); }
-      setInterval(()=>{ idx=(idx+1)%slides.length; show(idx); },4000);
-      slides.forEach(img=>{
-        img.addEventListener('error', ()=>console.warn('Missing hero image:', img.src));
-      });
-    })();
-
-    // Pricing
-    const pricelist = serviceprices;
-    function showPrice(key){
-      document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
-      const active=document.getElementById('tab-'+key);
-      if(active) active.classList.add('active');
-      const container=document.getElementById('priceContainer');
-      container.innerHTML='';
-      const list=pricelist[key]||pricelist.regular;
-      Object.keys(list).forEach(name=>{
-        const row=document.createElement('div');row.className='price-row';
-        const left=document.createElement('div');left.textContent=name;
-        const right=document.createElement('div');right.textContent=list[name]+'€';
-        row.appendChild(left);row.appendChild(right);container.appendChild(row);
+    function renderPrices() {
+      const container = document.getElementById('priceListContainer');
+      container.innerHTML = '';
+      servicesData.forEach(item => {
+        const finalPrice = Math.max(0, item.price - currentDiscount);
+        const row = document.createElement('div');
+        row.className = 'price-row';
+        row.innerHTML = `
+          <div class="price-service-name">
+            ${item.name}
+            ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 20€</span>' : ''}
+          </div>
+          <div class="price-value">${finalPrice}€</div>
+        `;
+        container.appendChild(row);
       });
     }
-    showPrice('regular');
 
-    // Customer Type
-    function selectCustomerType(type){
-      currentCustomerType = type;
-      document.querySelectorAll('.customer-type-tabs button').forEach(b=>b.classList.remove('active'));
-      document.getElementById('type-'+type).classList.add('active');
-      updatePrice();
+    function selectOffer(type, btn) {
+      document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      if(type === 'student') currentDiscount = 10;
+      else if(type === 'first') currentDiscount = 5;
+      else if(type === 'friend') currentDiscount = 10;
+      else currentDiscount = 0;
+
+      renderPrices();
     }
 
-    function updatePrice(){
-      const service = document.getElementById('service').value;
-      if(service){
-        const prices = serviceprices[currentCustomerType];
-        currentPrice = prices[service] || 0;
-        document.getElementById('priceDisplay').textContent = `Τιμή: ${currentPrice}€`;
-        currentService = service;
-      } else {
-        document.getElementById('priceDisplay').textContent = 'Τιμή: Επιλέξτε υπηρεσία';
-        currentPrice = 0;
-      }
+    // GENERATE TIME SLOTS
+    function renderTimeSlots() {
+      const grid = document.getElementById('timeGrid');
+      grid.innerHTML = '';
+      const times = [
+        "08:00", "08:30", "09:00", "09:30",
+        "10:00", "10:30", "11:00", "11:30",
+        "12:00", "12:30", "13:00", "13:30",
+        "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30",
+        "18:00", "18:30", "19:00", "19:30"
+      ];
+
+      // Παράδειγμα διαθέσιμων ωρών (όπως στη φωτο)
+      const availableTimes = ["12:00", "12:30", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"];
+
+      times.forEach(t => {
+        const slot = document.createElement('div');
+        const isAvail = availableTimes.includes(t);
+        slot.className = `time-slot ${isAvail ? 'available' : ''}`;
+        slot.textContent = t;
+
+        if(isAvail) {
+          slot.onclick = function() {
+            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+            slot.classList.add('selected');
+            document.getElementById('selectedTime').value = t;
+          }
+        }
+        grid.appendChild(slot);
+      });
     }
 
-    document.getElementById('service').addEventListener('change', updatePrice);
+    function toggleMenu() {
+      const nav = document.getElementById('dropdownMenu');
+      nav.classList.toggle('active');
+    }
 
-    // Show/hide friend fields
-    document.getElementById('is_bring_friend').addEventListener('change', function(){
-      document.getElementById('friendSection').style.display = this.checked ? 'flex' : 'none';
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPrices();
+      renderTimeSlots();
+      
+      // Default Date setup to today
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('dateInput').value = today;
     });
 
-    // Form Submission
-    document.getElementById('bookingForm').addEventListener('submit', function(e){
+    // FORM SUBMIT
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const birthday = document.getElementById('birthday').value.trim();
-      const service = document.getElementById('service').value;
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const is_first_time = document.getElementById('is_first_time').checked;
-      const is_student = document.getElementById('is_student').checked;
-      const is_bring_friend = document.getElementById('is_bring_friend').checked;
-      const friend_name = document.getElementById('friend_name').value.trim() || '';
-      const friend_phone = document.getElementById('friend_phone').value.trim() || '';
-
-      if(!name||!phone||!email||!service||!date||!time){
-        document.getElementById('bookingMsg').textContent='❌ Συμπλήρωσε όλα τα υποχρεωτικά πεδία.';
+      const time = document.getElementById('selectedTime').value;
+      if(!time) {
+        alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
         return;
       }
-
-      // Prepare booking data
-      const booking = {
-        action: 'addBooking',
-        id: Date.now(),
-        name, 
-        phone, 
-        email, 
-        birthday,
-        service, 
-        date, 
-        time,
-        duration: 60,
-        start_time: time,
-        end_time: calculateEndTime(time),
-        price: currentPrice,
-        final_price: currentPrice,
-        client_type: currentCustomerType,
-        is_first_time,
-        is_student,
-        is_bring_friend,
-        friend_name,
-        friend_phone,
-        discount: 0,
-        gift: false,
-        created_at: new Date().toISOString(),
-        birthday_type: 'none'
-      };
-
-      // Save locally
-      const bookings = JSON.parse(localStorage.getItem('velisse_bookings') || '[]');
-      bookings.push(booking);
-      localStorage.setItem('velisse_bookings', JSON.stringify(bookings));
-
-      // Send to Google Sheet
-      sendToGoogleSheet(booking);
-
-      // Schedule reminders
-      scheduleReminders(booking);
-
-      // Show success
-      document.getElementById('bookingMsg').innerHTML = `
-        ✅ <strong>Ραντεβού κλειστό!</strong><br>
-        Θα λάβετε υπενθύμιση σε 1 ημέρα και 2 ώρες πριν.
-      `;
-
-      setTimeout(() => {
-        this.reset();
-        document.getElementById('friendSection').style.display = 'none';
-      }, 2000);
-    });
-
-    function calculateEndTime(startTime){
-      const [hours, minutes] = startTime.split(':');
-      const endHours = (parseInt(hours) + 1) % 24;
-      return `${String(endHours).padStart(2, '0')}:${minutes}`;
-    }
-
-    // Google Sheet Integration
-    function sendToGoogleSheet(booking){
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(booking),
-        mode: 'no-cors'
-      })
-      .then(() => console.log('✅ Ραντεβού αποθηκεύτηκε στο Google Sheet'))
-      .catch(err => console.log('Google Sheet sync error:', err));
-    }
-
-    // Reminders
-    function scheduleReminders(booking){
-      const bookingDateTime = new Date(booking.date + 'T' + booking.time);
-      
-      // 1 day before
-      const oneDayBefore = new Date(bookingDateTime.getTime() - 24*60*60*1000);
-      const hoursUntilOneDayReminder = (oneDayBefore.getTime() - new Date().getTime()) / (1000 * 60 * 60);
-      
-      if(hoursUntilOneDayReminder > 0){
-        setTimeout(() => {
-          sendReminder(booking, '1 ημέρα πριν');
-        }, hoursUntilOneDayReminder * 60 * 60 * 1000);
-      }
-
-      // 2 hours before
-      const twoHoursBefore = new Date(bookingDateTime.getTime() - 2*60*60*1000);
-      const minutesUntilTwoHourReminder = (twoHoursBefore.getTime() - new Date().getTime()) / (1000 * 60);
-      
-      if(minutesUntilTwoHourReminder > 0){
-        setTimeout(() => {
-          sendReminder(booking, '2 ώρες πριν');
-        }, minutesUntilTwoHourReminder * 60 * 1000);
-      }
-    }
-
-    function sendReminder(booking, reminderType){
-      const message = `Υπενθύμιση: Το ραντεβού σας με VELISSE είναι ${reminderType}\n📅 Ημερομηνία: ${booking.date}\n⏰ Ώρα: ${booking.time}\n💇 Υπηρεσία: ${booking.service}\n💰 Τιμή: ${booking.price}€`;
-      
-      // WhatsApp
-      if(document.getElementById('remind_whatsapp').checked){
-        const whatsappUrl = `https://wa.me/${booking.phone.replace('+','').replace(/\s/g,'')}?text=${encodeURIComponent(message)}`;
-        console.log('📱 WhatsApp reminder:', whatsappUrl);
-      }
-
-      // Viber
-      if(document.getElementById('remind_viber').checked){
-        const viberUrl = `viber://chat?number=${booking.phone}`;
-        console.log('📞 Viber reminder:', viberUrl);
-      }
-
-      // Email (simple)
-      if(document.getElementById('remind_sms').checked){
-        console.log('📧 Email reminder to:', booking.email, message);
-      }
-    }
-
-    // Google Calendar
-    function addToGoogleCalendar(){
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const service = document.getElementById('service').value;
-      const name = document.getElementById('name').value;
-
-      if(!date || !time || !service){
-        alert('Συμπλήρωσε όλα τα πεδία πρώτα');
-        return;
-      }
-
-      const startDateTime = new Date(date + 'T' + time);
-      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000);
-
-      const startISO = startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0] + 'Z';
-      const endISO = endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0] + 'Z';
-
-      const googleCalendarUrl = `https://calendar.google.com/calendar/r/eventedit?text=VELISSE%20-%20${encodeURIComponent(service)}&dates=${startISO}/${endISO}&details=Πελάτης:%20${encodeURIComponent(name)}`;
-
-      window.open(googleCalendarUrl, '_blank');
-    }
-
-    // Download ICS
-    function downloadICS(){
-      const date = document.getElementById('date').value;
-      const time = document.getElementById('time').value;
-      const service = document.getElementById('service').value;
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-
-      if(!date || !time || !service){
-        alert('Συμπλήρωσε όλα τα πεδία πρώτα');
-        return;
-      }
-
-      const startDateTime = new Date(date + 'T' + time);
-      const endDateTime = new Date(startDateTime.getTime() + 60*60*1000);
-
-      const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//VELISSE//Booking//EN
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-BEGIN:VEVENT
-UID:velisse-${Date.now()}@velisse.studio
-DTSTART:${startDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z
-DTEND:${endDateTime.toISOString().replace(/[:-]/g,'').split('.')[0]}Z
-SUMMARY:VELISSE - ${service}
-DESCRIPTION:Πελάτης: ${name}\\nΤηλέφωνο: ${phone}\\nΥπηρεσία: ${service}\\nΤιμή: ${currentPrice}€
-LOCATION:VELISSE Lash & Brow Studio
-BEGIN:VALARM
-TRIGGER:-PT24H
-DESCRIPTION:Υπενθύμηση ραντεβού
-ACTION:DISPLAY
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-PT2H
-DESCRIPTION:Το ραντεβού σας είναι σε 2 ώρες
-ACTION:DISPLAY
-END:VALARM
-END:VEVENT
-END:VCALENDAR`;
-
-      const element = document.createElement('a');
-      element.setAttribute('href', 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent));
-      element.setAttribute('download', `velisse-rantevou-${date}.ics`);
-      element.style.display = 'none';
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    }
-
-    // Global error handler
-    window.addEventListener('error', function(e){
-      console.warn('Page error caught:', e.message);
+      document.getElementById('bookingMsg').innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
     });
   </script>
 </body>
