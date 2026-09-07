@@ -493,8 +493,8 @@
 
   <footer>© VELISSE Lash & Brow Studio</footer>
 
-  <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxhlyKjXNaJDQgyNk2zJNCtB50EuSj3tGq02sA6x2AzPndVFD9pjO-kOVKvN2U8Tnk/exec';
+ <script>
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCm0FGEoHJDe0v633nzgRb4LK3KTYMt88HpE_JXU_Li6q2lQOLpxRA-Jb8_w8t-OoK/exec';
 
 // PRICE DATA
 const servicesData = [
@@ -514,7 +514,9 @@ let currentDiscount = 0;
 
 function renderPrices() {
   const container = document.getElementById('priceListContainer');
+  if (!container) return;
   container.innerHTML = '';
+
   servicesData.forEach(item => {
     const finalPrice = Math.max(0, item.price - currentDiscount);
     const row = document.createElement('div');
@@ -532,17 +534,17 @@ function renderPrices() {
 
 function selectOffer(type, btn) {
   document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 
-  if(type === 'student') currentDiscount = 10;
-  else if(type === 'first') currentDiscount = 5;
-  else if(type === 'friend') currentDiscount = 10;
+  if (type === 'student') currentDiscount = 10;
+  else if (type === 'first') currentDiscount = 5;
+  else if (type === 'friend') currentDiscount = 10;
   else currentDiscount = 0;
 
   renderPrices();
 }
 
-// TIME SLOTS
+// TIMES
 const TIMES = [
   "08:00", "08:30", "09:00", "09:30",
   "10:00", "10:30", "11:00", "11:30",
@@ -553,6 +555,7 @@ const TIMES = [
 ];
 
 async function getBookedSlots(dateStr) {
+  if (!dateStr) return [];
   try {
     const url = `${GOOGLE_SCRIPT_URL}?action=slots&date=${encodeURIComponent(dateStr)}`;
     const res = await fetch(url, { method: 'GET' });
@@ -567,23 +570,25 @@ async function getBookedSlots(dateStr) {
 
 async function renderTimeSlots() {
   const grid = document.getElementById('timeGrid');
-  grid.innerHTML = '';
-
   const dateEl = document.getElementById('dateInput');
-  const selectedDate = dateEl ? dateEl.value : '';
-  const booked = selectedDate ? await getBookedSlots(selectedDate) : [];
+  const selectedTimeEl = document.getElementById('selectedTime');
+  if (!grid || !dateEl || !selectedTimeEl) return;
+
+  grid.innerHTML = '';
+  const booked = await getBookedSlots(dateEl.value);
 
   TIMES.forEach(t => {
     const slot = document.createElement('div');
     const isBooked = booked.includes(t);
+
     slot.className = isBooked ? 'time-slot' : 'time-slot available';
     slot.textContent = isBooked ? `${t} • booked` : t;
 
     if (!isBooked) {
-      slot.onclick = function() {
+      slot.onclick = function () {
         document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
         slot.classList.add('selected');
-        document.getElementById('selectedTime').value = t;
+        selectedTimeEl.value = t;
       };
     }
 
@@ -593,10 +598,10 @@ async function renderTimeSlots() {
 
 function toggleMenu() {
   const nav = document.getElementById('dropdownMenu');
-  nav.classList.toggle('active');
+  if (nav) nav.classList.toggle('active');
 }
 
-// INITIALIZE
+// INIT
 document.addEventListener('DOMContentLoaded', () => {
   renderPrices();
 
@@ -604,27 +609,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (dateInput) {
     const today = new Date().toISOString().split('T')[0];
     dateInput.value = today;
-    dateInput.addEventListener('change', () => {
-      document.getElementById('selectedTime').value = '';
-      renderTimeSlots();
+    dateInput.addEventListener('change', async () => {
+      const selectedTime = document.getElementById('selectedTime');
+      if (selectedTime) selectedTime.value = '';
+      await renderTimeSlots();
     });
   }
 
   renderTimeSlots();
 
-  // HERO SLIDESHOW AUTOPLAY
+  // HERO SLIDESHOW
   const slides = document.querySelectorAll('.hero-slide');
   if (slides.length > 1) {
-    let i = 0;
+    let current = 0;
     setInterval(() => {
-      slides[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
     }, 3500);
   }
 });
 
-// FORM SUBMIT
+// BOOKING SUBMIT
 document.getElementById('bookingForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -633,6 +639,7 @@ document.getElementById('bookingForm').addEventListener('submit', async function
   const timeEl = document.getElementById('selectedTime');
   const nameEl = document.getElementById('clientName');
   const phoneEl = document.getElementById('clientPhone');
+  const msgContainer = document.getElementById('bookingMsg');
 
   const service = serviceEl ? serviceEl.value : '';
   const date = dateEl ? dateEl.value : '';
@@ -640,44 +647,47 @@ document.getElementById('bookingForm').addEventListener('submit', async function
   const name = nameEl ? nameEl.value.trim() : '';
   const phone = phoneEl ? phoneEl.value.trim() : '';
 
-  if(!time) {
-    alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
+  if (!service || !date || !time || !name || !phone) {
+    if (msgContainer) msgContainer.innerHTML = '❌ Συμπλήρωσε όλα τα πεδία.';
     return;
   }
 
-  const msgContainer = document.getElementById('bookingMsg');
-  if(msgContainer) {
+  if (msgContainer) {
     msgContainer.style.color = '#1A1A1A';
     msgContainer.innerHTML = '⏳ Αποστολή κράτησης...';
   }
 
-  const bookingData = { name, phone, service, date, time };
-
   try {
+    const bookingData = { name, phone, service, date, time };
+
+    // SIMPLE FORM POST (avoids CORS preflight issues)
+    const payload = JSON.stringify(bookingData);
+    const body = new URLSearchParams({ payload });
+
     const res = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(bookingData)
+      body
     });
 
     const data = await res.json();
 
     if (!res.ok || !data || data.ok !== true) {
-      throw new Error((data && data.error) ? data.error : 'Booking failed');
+      throw new Error((data && data.error) ? data.error : 'Failed to fetch');
     }
 
-    if(msgContainer) {
+    if (msgContainer) {
       msgContainer.innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
     }
 
     document.getElementById('bookingForm').reset();
     document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-    if(dateEl) dateEl.value = new Date().toISOString().split('T')[0];
-    document.getElementById('selectedTime').value = '';
-    renderTimeSlots();
+    if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
+    if (timeEl) timeEl.value = '';
+    await renderTimeSlots();
+
   } catch (err) {
-    console.error('Error:', err);
-    if(msgContainer) {
+    console.error('Booking error:', err);
+    if (msgContainer) {
       msgContainer.innerHTML = `❌ ${err.message || 'Υπήρξε πρόβλημα κατά την αποστολή.'}`;
     }
   }
