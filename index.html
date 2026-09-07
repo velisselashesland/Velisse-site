@@ -474,8 +474,8 @@
   <script>
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyxnuerCQ7JS4DAs_I-v53f8UjUjmId-lcqnQwUDqrjKkidUL9cR-PsBY9tYS0rmHpT/exec';
 const STUDIO_PHONE_E164_NO_PLUS = '306909392922'; 
-
-// PRICE DATA
+    
+// -------- PRICE DATA --------
 const servicesData = [
   { name: "Half Set", price: 35, gift: true },
   { name: "One by One", price: 45, gift: true },
@@ -490,63 +490,12 @@ const servicesData = [
 ];
 
 let currentDiscount = 0;
-const TIMES = [
-  "08:00","08:30","09:00","09:30",
-  "10:00","10:30","11:00","11:30",
-  "12:00","12:30","13:00","13:30",
-  "14:00","14:30","15:00","15:30",
-  "16:00","16:30","17:00","17:30",
-  "18:00","18:30","19:00","19:30"
-];
-
-// διάρκεια σε λεπτά
-function serviceDurationMinutes(serviceName) {
-  const s = (serviceName || '').toLowerCase();
-
-  // καθαρισμός φρυδιών 30'
-  if (s.includes('brow wax') || s.includes('τσiμπιδακι') || s.includes('κερι') || s.includes('clean')) return 30;
-
-  // lash/brow lift (μαζί ή ξεχωριστά) 60'
-  if (s.includes('lash lift') || s.includes('brow lift')) return 60;
-
-  // όλα τα lash extensions 150' (2.5 ώρες)
-  if (
-    s.includes('half set') ||
-    s.includes('one by one') ||
-    s.includes('volume') ||
-    s.includes('special effects')
-  ) return 150;
-
-  // default
-  return 60;
-}
-
-function toMinutes(hhmm) {
-  const [h,m] = hhmm.split(':').map(Number);
-  return h*60 + m;
-}
-function toHHMM(total) {
-  const h = Math.floor(total/60).toString().padStart(2,'0');
-  const m = (total%60).toString().padStart(2,'0');
-  return `${h}:${m}`;
-}
-function addMinutes(hhmm, mins) {
-  return toHHMM(toMinutes(hhmm) + mins);
-}
-function buildBlockedSlots(start, duration) {
-  const out = [];
-  const startMin = toMinutes(start);
-  const endMin = startMin + duration; // exclusive
-  for (let t = startMin; t < endMin; t += 30) {
-    out.push(toHHMM(t));
-  }
-  return out;
-}
 
 function renderPrices() {
   const container = document.getElementById('priceListContainer');
   if (!container) return;
   container.innerHTML = '';
+
   servicesData.forEach(item => {
     const finalPrice = Math.max(0, item.price - currentDiscount);
     const row = document.createElement('div');
@@ -561,61 +510,104 @@ function renderPrices() {
     container.appendChild(row);
   });
 }
+
 function selectOffer(type, btn) {
   document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
+
   if (type === 'student') currentDiscount = 10;
   else if (type === 'first') currentDiscount = 5;
   else if (type === 'friend') currentDiscount = 10;
   else currentDiscount = 0;
+
   renderPrices();
 }
-function toggleMenu() {
-  const nav = document.getElementById('dropdownMenu');
-  if (nav) nav.classList.toggle('active');
+
+// -------- BOOKING / AVAILABILITY --------
+const TIMES = [
+  "08:00","08:30","09:00","09:30",
+  "10:00","10:30","11:00","11:30",
+  "12:00","12:30","13:00","13:30",
+  "14:00","14:30","15:00","15:30",
+  "16:00","16:30","17:00","17:30",
+  "18:00","18:30","19:00","19:30"
+];
+
+function serviceDurationMinutes(serviceName) {
+  const s = (serviceName || '').toLowerCase();
+
+  // καθαρισμός φρυδιών / brow wax = 30'
+  if (s.includes('brow wax') || s.includes('τσιμπιδακι') || s.includes('κερι') || s.includes('καθαρισ')) return 30;
+
+  // lash/brow lift (μαζί ή ξεχωριστά) = 60'
+  if (s.includes('lash lift') || s.includes('brow lift')) return 60;
+
+  // lash extensions = 2.5 ώρες
+  if (
+    s.includes('half set') ||
+    s.includes('one by one') ||
+    s.includes('volume') ||
+    s.includes('special effects')
+  ) return 150;
+
+  return 60;
+}
+
+function toMinutes(hhmm) {
+  const [h,m] = hhmm.split(':').map(Number);
+  return h*60 + m;
+}
+function toHHMM(total) {
+  const h = Math.floor(total/60).toString().padStart(2,'0');
+  const m = (total%60).toString().padStart(2,'0');
+  return `${h}:${m}`;
+}
+function buildNeededSlots(start, durationMin) {
+  const arr = [];
+  const s = toMinutes(start);
+  const e = s + durationMin;
+  for (let t = s; t < e; t += 30) arr.push(toHHMM(t));
+  return arr;
+}
+function fitsWorkingHours(start, durationMin) {
+  const s = toMinutes(start);
+  const e = s + durationMin;
+  return s >= toMinutes("08:00") && e <= toMinutes("20:00");
 }
 
 async function getBlockedSlots(dateStr) {
+  if (!dateStr) return [];
   try {
     const url = `${GOOGLE_SCRIPT_URL}?action=slots&date=${encodeURIComponent(dateStr)}`;
-    const res = await fetch(url);
+    const res = await fetch(url, { method: 'GET' });
     const data = await res.json();
     if (data && data.ok && Array.isArray(data.blocked)) return data.blocked;
     return [];
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error('slots error', err);
     return [];
   }
-}
-
-// επιτρέπουμε start μόνο αν χωράει μέχρι 20:00
-function startFitsWorkingHours(start, durationMin) {
-  const startM = toMinutes(start);
-  const endM = startM + durationMin;
-  return startM >= toMinutes("08:00") && endM <= toMinutes("20:00");
 }
 
 async function renderTimeSlots() {
   const grid = document.getElementById('timeGrid');
   const dateEl = document.getElementById('dateInput');
   const serviceEl = document.getElementById('serviceSelect');
-  if (!grid || !dateEl || !serviceEl) return;
+  const selectedTimeEl = document.getElementById('selectedTime');
 
-  const selectedService = serviceEl.value;
-  const durationMin = serviceDurationMinutes(selectedService);
+  if (!grid || !dateEl || !serviceEl || !selectedTimeEl) return;
+
+  const service = serviceEl.value;
+  const durationMin = serviceDurationMinutes(service);
   const blocked = await getBlockedSlots(dateEl.value);
 
   grid.innerHTML = '';
 
   TIMES.forEach(t => {
     const slot = document.createElement('div');
-
-    // slots που θα πιάσει η νέα υπηρεσία αν ξεκινήσει στο t
-    const wouldUse = buildBlockedSlots(t, durationMin);
-
-    const overlapsBlocked = wouldUse.some(x => blocked.includes(x));
-    const fitsHours = startFitsWorkingHours(t, durationMin);
-    const available = !overlapsBlocked && fitsHours && !!selectedService;
+    const needed = buildNeededSlots(t, durationMin);
+    const overlaps = needed.some(n => blocked.includes(n));
+    const available = !!service && fitsWorkingHours(t, durationMin) && !overlaps;
 
     slot.className = available ? 'time-slot available' : 'time-slot';
     slot.textContent = available ? t : `${t}`;
@@ -624,7 +616,7 @@ async function renderTimeSlots() {
       slot.onclick = function () {
         document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
         slot.classList.add('selected');
-        document.getElementById('selectedTime').value = t;
+        selectedTimeEl.value = t;
       };
     }
 
@@ -632,28 +624,34 @@ async function renderTimeSlots() {
   });
 }
 
+function toggleMenu() {
+  const nav = document.getElementById('dropdownMenu');
+  if (nav) nav.classList.toggle('active');
+}
+
 function gatherBooking() {
   return {
-    service: document.getElementById('serviceSelect').value.trim(),
-    date: document.getElementById('dateInput').value.trim(),
-    time: document.getElementById('selectedTime').value.trim(),
-    name: document.getElementById('clientName').value.trim(),
-    phone: document.getElementById('clientPhone').value.trim()
+    service: (document.getElementById('serviceSelect')?.value || '').trim(),
+    date: (document.getElementById('dateInput')?.value || '').trim(),
+    time: (document.getElementById('selectedTime')?.value || '').trim(),
+    name: (document.getElementById('clientName')?.value || '').trim(),
+    phone: (document.getElementById('clientPhone')?.value || '').trim()
   };
 }
-function bookingText(b) {
+function validBooking(b) {
+  return b.service && b.date && b.time && b.name && b.phone;
+}
+function bookingText(b, endTime, durationMin) {
   return `Γεια σας VELISSE! Θέλω ραντεβού:
 Ονοματεπώνυμο: ${b.name}
 Κινητό: ${b.phone}
 Υπηρεσία: ${b.service}
 Ημερομηνία: ${b.date}
-Ώρα: ${b.time}`;
-}
-function validBooking(b) {
-  return b.service && b.date && b.time && b.name && b.phone;
+Ώρα: ${b.time}${endTime ? ' - ' + endTime : ''}
+Διάρκεια: ${durationMin || serviceDurationMinutes(b.service)} λεπτά`;
 }
 
-async function submitBookingAndOpenChannel(channel) {
+async function submitBookingAndOpen(channel) {
   const msg = document.getElementById('bookingMsg');
   const b = gatherBooking();
 
@@ -665,7 +663,6 @@ async function submitBookingAndOpenChannel(channel) {
   msg.innerHTML = '⏳ Καταχώρηση κράτησης...';
 
   try {
-    // καταχώρηση στο backend (κλειδώνει slot)
     const payload = JSON.stringify(b);
     const body = new URLSearchParams({ payload });
 
@@ -676,17 +673,18 @@ async function submitBookingAndOpenChannel(channel) {
       throw new Error((data && data.error) ? data.error : 'Αποτυχία καταχώρησης');
     }
 
-    // αφού καταχωρηθεί, ανοίγει μήνυμα για επικοινωνία
-    const text = encodeURIComponent(bookingText(b));
+    const text = encodeURIComponent(bookingText(b, data.endTime, data.durationMin));
+
     if (channel === 'wa') {
       window.open(`https://wa.me/${STUDIO_PHONE_E164_NO_PLUS}?text=${text}`, '_blank');
     } else {
       window.location.href = `viber://forward?text=${text}`;
     }
 
-    msg.innerHTML = '✅ Η ώρα κλειδώθηκε. Άνοιξε εφαρμογή για αποστολή μηνύματος.';
+    msg.innerHTML = '✅ Η ώρα κλειδώθηκε και σημειώθηκε ως μη διαθέσιμη.';
     document.getElementById('selectedTime').value = '';
-    await renderTimeSlots(); // άμεσο refresh availability
+    await renderTimeSlots();
+
   } catch (err) {
     console.error(err);
     msg.innerHTML = `❌ ${err.message || 'Κάτι πήγε στραβά.'}`;
@@ -699,21 +697,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const dateInput = document.getElementById('dateInput');
   if (dateInput) {
     dateInput.value = new Date().toISOString().split('T')[0];
-    dateInput.addEventListener('change', () => {
+    dateInput.addEventListener('change', async () => {
       document.getElementById('selectedTime').value = '';
-      renderTimeSlots();
+      await renderTimeSlots();
     });
   }
 
   const serviceSelect = document.getElementById('serviceSelect');
   if (serviceSelect) {
-    serviceSelect.addEventListener('change', () => {
+    serviceSelect.addEventListener('change', async () => {
       document.getElementById('selectedTime').value = '';
-      renderTimeSlots();
+      await renderTimeSlots();
     });
   }
 
-  renderTimeSlots();
+  await renderTimeSlots();
 
   // hero slideshow autoplay
   const slides = document.querySelectorAll('.hero-slide');
@@ -726,26 +724,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3500);
   }
 
-  // form submit off
+  // disable normal form submit
   const form = document.getElementById('bookingForm');
-  form.addEventListener('submit', e => e.preventDefault());
+  if (form) form.addEventListener('submit', e => e.preventDefault());
 
-  // buttons (αν υπάρχουν)
   const chooseSendBtn = document.getElementById('chooseSendBtn');
-  const btnWA = document.getElementById('btnWhatsApp');
-  const btnVB = document.getElementById('btnViber');
-
   if (chooseSendBtn) {
     chooseSendBtn.addEventListener('click', () => {
       const msg = document.getElementById('bookingMsg');
       const b = gatherBooking();
       msg.innerHTML = validBooking(b)
-        ? 'Επίλεξε αποστολή: Viber ή WhatsApp. (Η ώρα θα κλειδώσει πρώτα.)'
+        ? 'Επίλεξε αποστολή: Viber ή WhatsApp.'
         : '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
     });
   }
-  if (btnWA) btnWA.addEventListener('click', () => submitBookingAndOpenChannel('wa'));
-  if (btnVB) btnVB.addEventListener('click', () => submitBookingAndOpenChannel('viber'));
+
+  const btnWhatsApp = document.getElementById('btnWhatsApp');
+  const btnViber = document.getElementById('btnViber');
+
+  if (btnWhatsApp) btnWhatsApp.addEventListener('click', () => submitBookingAndOpen('wa'));
+  if (btnViber) btnViber.addEventListener('click', () => submitBookingAndOpen('viber'));
 });
 </script>
 </body>
