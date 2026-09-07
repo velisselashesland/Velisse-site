@@ -494,7 +494,7 @@
   <footer>© VELISSE Lash & Brow Studio</footer>
 
   <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKHaWw5kipj-X9de90AE9q3dKvTQBkCX_pmbFlZjxIs5RFK2yX0W7cJ6WzbZgeOqFe/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyCm0FGEoHJDe0v633nzgRb4LK3KTYMt88HpE_JXU_Li6q2lQOLpxRA-Jb8_w8t-OoK/exec';
     // PRICE DATA
     const servicesData = [
       { name: "Half Set", price: 35, gift: true },
@@ -574,17 +574,20 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKHaWw5kipj-
       nav.classList.toggle('active');
     }
 
-    // INITIALIZE
-    document.addEventListener('DOMContentLoaded', () => {
-      renderPrices();
-      renderTimeSlots();
-      
-      // Default Date setup to today
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('dateInput').value = today;
-    });
+   // INITIALIZE
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof renderPrices === 'function') renderPrices();
+  if (typeof renderTimeSlots === 'function') renderTimeSlots();
 
-    // FORM SUBMIT & GOOGLE SHEET/TELEGRAM INTEGRATION
+  // Default Date setup to today
+  const dateInput = document.getElementById('dateInput');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+  }
+});
+
+// FORM SUBMIT & GOOGLE SHEET/TELEGRAM INTEGRATION
 document.getElementById('bookingForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
@@ -608,7 +611,7 @@ document.getElementById('bookingForm').addEventListener('submit', function(e) {
   const msgContainer = document.getElementById('bookingMsg');
   if(msgContainer) {
     msgContainer.style.color = '#1A1A1A';
-    msgContainer.innerHTML = '⏳ Αποστολή κρατήσης...';
+    msgContainer.innerHTML = '⏳ Αποστολή κράτησης...';
   }
 
   const bookingData = {
