@@ -30,7 +30,6 @@
       line-height: 1.5;
     }
 
-    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
@@ -110,7 +109,6 @@
       font-size: 15px;
     }
 
-    /* HERO */
     .hero {
       position: relative;
       height: 60vh;
@@ -147,7 +145,6 @@
       letter-spacing: 1px;
     }
 
-    /* CONTAINER & CARDS */
     .container {
       max-width: 680px;
       margin: 30px auto;
@@ -161,7 +158,6 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.02);
     }
 
-    /* PRICELIST SECTION STYLING */
     .price-header-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px;
@@ -188,7 +184,6 @@
       margin-left: 4px;
     }
 
-    /* OFFERS TABS CONTAINER (PILL STYLE) */
     .offers-pill-container {
       background: var(--pill-bg);
       border-radius: 30px;
@@ -216,7 +211,6 @@
       font-weight: 500;
     }
 
-    /* PRICE LIST TABLE */
     .price-table-header {
       display: flex;
       justify-content: space-between;
@@ -259,7 +253,6 @@
       color: #1A1A1A;
     }
 
-    /* BOOKING SECTION STYLING */
     .booking-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 28px;
@@ -301,7 +294,6 @@
       border-color: #1A1A1A;
     }
 
-    /* TIME GRID */
     .time-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -331,7 +323,6 @@
       border-color: var(--time-blue);
     }
 
-    /* CLIENT FORM FIELDS */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -353,9 +344,7 @@
       margin-top: 10px;
       transition: background 0.3s;
     }
-    .btn-submit-booking:hover {
-      background: #333;
-    }
+    .btn-submit-booking:hover { background: #333; }
 
     footer {
       text-align: center;
@@ -372,7 +361,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <a href="#home" class="logo-container">
       <div class="logo-icon"><i class="fa-regular fa-eye"></i></div>
@@ -390,7 +378,6 @@
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
   <section id="home" class="hero">
     <div class="hero-slides">
       <img src="slide1.jpg" alt="" class="hero-slide active">
@@ -410,8 +397,6 @@
   </section>
 
   <div class="container">
-
-    <!-- PRICELIST SECTION -->
     <section id="pricing" class="section-card">
       <div class="price-header-title">2026 Pricelist & Offers</div>
       <div class="price-sub-info">
@@ -419,7 +404,6 @@
         <span class="badge-gift-header">ΔΩΡΟ Brow Lamination 20€</span>
       </div>
 
-      <!-- OFFERS PILLS -->
       <div class="offers-pill-container">
         <button class="offer-tab-btn active" onclick="selectOffer('regular', this)">Κανονικός</button>
         <button class="offer-tab-btn" onclick="selectOffer('student', this)">Student -10€</button>
@@ -427,260 +411,216 @@
         <button class="offer-tab-btn" onclick="selectOffer('friend', this)">Bring a Friend -10€</button>
       </div>
 
-      <!-- PRICE TABLE -->
       <div class="price-table-header">
         <span>SERVICE</span>
         <span>PRICE</span>
       </div>
-      <div id="priceListContainer">
-        <!-- Δυναμική φόρτωση με JavaScript -->
-      </div>
+      <div id="priceListContainer"></div>
     </section>
 
-    <!-- BOOKING SECTION -->
     <section id="booking" class="section-card">
       <div class="booking-title">Book Appointment</div>
       <div class="booking-subtitle">ΕΠΙΛΕΞΤΕ ΥΠΗΡΕΣΙΑ, ΗΜΕΡΑ & ΩΡΑ (08:00 - 20:00)</div>
 
       <form id="bookingForm">
-        <!-- Step 1 -->
         <label class="form-step-label">1. Επιλέξτε Υπηρεσία</label>
-        <select id="serviceSelect" class="booking-select" required onchange="updatePriceDisplay()">
+        <select id="serviceSelect" class="booking-select" required>
           <option value="">-- Επιλέξτε υπηρεσία --</option>
-          <option value="Brow Wax(ΤΣΙΜΠΙΔΑΚΙ)" data-price="5">Brow Wax (ΤΣΙΜΠΙΔΑΚΙ) (5€)</option>
-          <option value="Brow Wax(ΚΕΡΙ)" data-price="10">Brow Wax (ΚΕΡΙ) (10€)</option>
-          <option value="Half Set" data-price="35">Half Set (35€)</option>
-          <option value="One by One" data-price="45">One by One (45€)</option>
-          <option value="Volume 2D-3D" data-price="50">Volume 2D-3D (50€)</option>
-          <option value="Volume 4D+" data-price="55">Volume 4D+ (55€)</option>
-          <option value="Special Effetcts" data-price="60">Special Effects (60€)</option>
-          <option value="Lash Lift + Tint" data-price="35">Lash Lift + Tint (35€)</option>
-          <option value="Lash Lift" data-price="30">Lash Lift (30€)</option>
-          <option value="Brow Lift" data-price="25">Brow Lift (25€)</option>
-          <option value="Brow Lift + Tint" data-price="30">Brow lift + Tint (30€)</option>
-          <option value="Brow Lift + Lash Lift + Tint" data-price="55">Brow lift + Lash Lift + Tint (55€)</option>
-          <option value="Half Set + Brow lift" data-price="55">Half Set + Brow lift (55€)</option>
-          <option value="Volume + Brow lift" data-price="70">Volume + Brow lift (70€)</option>
-          <option value="Special Effects + Brow lift" data-price="75">Special Effects+ Brow lift (75€)</option>
-          <option value="One by one + Brow lift" data-price="60">One by one  + Brow lift (60€)</option>
-        
+          <option value="Brow Wax (ΤΣΙΜΠΙΔΑΚΙ)">Brow Wax (ΤΣΙΜΠΙΔΑΚΙ) (5€)</option>
+          <option value="Brow Wax (ΚΕΡΙ)">Brow Wax (ΚΕΡΙ) (10€)</option>
+          <option value="Half Set">Half Set (35€)</option>
+          <option value="One by One">One by One (45€)</option>
+          <option value="Volume 2D-3D">Volume 2D-3D (50€)</option>
+          <option value="Volume 4D+">Volume 4D+ (55€)</option>
+          <option value="Special Effects">Special Effects (60€)</option>
+          <option value="Lash Lift + Tint">Lash Lift + Tint (35€)</option>
+          <option value="Lash Lift">Lash Lift (30€)</option>
+          <option value="Brow Lift">Brow Lift (25€)</option>
+          <option value="Brow Lift + Tint">Brow Lift + Tint (30€)</option>
+          <option value="Brow Lift + Lash Lift + Tint">Brow Lift + Lash Lift + Tint (55€)</option>
+          <option value="Half Set + Brow Lift">Half Set + Brow Lift (55€)</option>
+          <option value="Volume + Brow Lift">Volume + Brow Lift (70€)</option>
+          <option value="Special Effects + Brow Lift">Special Effects + Brow Lift (75€)</option>
+          <option value="One by One + Brow Lift">One by One + Brow Lift (60€)</option>
         </select>
 
-        <!-- Step 2 -->
         <label class="form-step-label">2. Επιλέξτε Ημερομηνία</label>
         <input type="date" id="dateInput" class="booking-input" required>
 
-        <!-- Step 3 -->
         <label class="form-step-label">3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)</label>
-        <div class="time-grid" id="timeGrid">
-          <!-- Δυναμική φόρτωση ωρών -->
-        </div>
+        <div class="time-grid" id="timeGrid"></div>
         <input type="hidden" id="selectedTime" required>
 
-        <!-- Step 4: Στοιχεία Πελάτη -->
         <label class="form-step-label" style="margin-top:15px;">4. Στοιχεία Επικοινωνίας</label>
         <div class="form-grid">
           <input type="text" id="clientName" class="booking-input" placeholder="Ονοματεπώνυμο *" required style="margin-bottom:0;">
           <input type="tel" id="clientPhone" class="booking-input" placeholder="Κινητό (+30) *" required style="margin-bottom:0;">
         </div>
 
-        <button type="submit" class="btn-submit-booking">ΚΡΑΤΗΣΗ ΡΑΝΤΕΒΟΥ</button>
+        <button type="button" id="chooseSendBtn" class="btn-submit-booking">ΕΠΙΛΟΓΗ ΑΠΟΣΤΟΛΗΣ</button>
+
+        <div id="manualSendActions" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+          <button type="button" id="btnViber" class="btn-submit-booking" style="margin-top:0;background:#7360F2;">Αποστολή σε Viber</button>
+          <button type="button" id="btnWhatsApp" class="btn-submit-booking" style="margin-top:0;background:#25D366;">Αποστολή σε WhatsApp</button>
+        </div>
+
         <p id="bookingMsg" style="margin-top:12px; text-align:center; font-size:14px;"></p>
       </form>
     </section>
-
   </div>
 
   <footer>© VELISSE Lash & Brow Studio</footer>
 
- <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyWCRqVgePGoDon2ZMs-a-p6TFp7MJ7n2q265L-qfGPZ_wp5qwLvJwZ0rm2qfso2vPr/exec';
+  <script>
+    const STUDIO_PHONE_E164_NO_PLUS = '306909392922';
+    const servicesData = [
+      { name: "Half Set", price: 35, gift: true },
+      { name: "One by One", price: 45, gift: true },
+      { name: "Volume 2D-3D", price: 50, gift: true },
+      { name: "Volume 4D-6D", price: 55, gift: true },
+      { name: "Special Effects", price: 55, gift: true },
+      { name: "Lash Lift + Tint", price: 35, gift: false },
+      { name: "Lash Lift", price: 35, gift: false },
+      { name: "Brow Lift + Tint", price: 30, gift: false },
+      { name: "Brow Lift", price: 30, gift: false },
+      { name: "Lash Lift + Brow Lift", price: 55, gift: false }
+    ];
 
-// PRICE DATA
-const servicesData = [
-  { name: "Half Set", price: 35, gift: true },
-  { name: "One by One", price: 45, gift: true },
-  { name: "Volume 2D-3D", price: 50, gift: true },
-  { name: "Volume 4D-6D", price: 55, gift: true },
-  { name: "Special Effects", price: 55, gift: true },
-  { name: "Lash Lift + Tint", price: 35, gift: false },
-  { name: "Lash Lift", price: 35, gift: false },
-  { name: "Brow Lift + Tint", price: 30, gift: false },
-  { name: "Brow Lift", price: 30, gift: false },
-  { name: "Lash Lift + Brow Lift", price: 55, gift: false }
-];
+    let currentDiscount = 0;
 
-let currentDiscount = 0;
+    function renderPrices() {
+      const container = document.getElementById('priceListContainer');
+      container.innerHTML = '';
+      servicesData.forEach(item => {
+        const finalPrice = Math.max(0, item.price - currentDiscount);
+        const row = document.createElement('div');
+        row.className = 'price-row';
+        row.innerHTML = `
+          <div class="price-service-name">
+            ${item.name}
+            ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 35€</span>' : ''}
+          </div>
+          <div class="price-value">${finalPrice}€</div>
+        `;
+        container.appendChild(row);
+      });
+    }
 
-function renderPrices() {
-  const container = document.getElementById('priceListContainer');
-  if (!container) return;
-  container.innerHTML = '';
-  servicesData.forEach(item => {
-    const finalPrice = Math.max(0, item.price - currentDiscount);
-    const row = document.createElement('div');
-    row.className = 'price-row';
-    row.innerHTML = `
-      <div class="price-service-name">
-        ${item.name}
-        ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 35€</span>' : ''}
-      </div>
-      <div class="price-value">${finalPrice}€</div>
-    `;
-    container.appendChild(row);
-  });
-}
+    function selectOffer(type, btn) {
+      document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if(type === 'student') currentDiscount = 10;
+      else if(type === 'first') currentDiscount = 5;
+      else if(type === 'friend') currentDiscount = 10;
+      else currentDiscount = 0;
+      renderPrices();
+    }
 
-function selectOffer(type, btn) {
-  document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  if (type === 'student') currentDiscount = 10;
-  else if (type === 'first') currentDiscount = 5;
-  else if (type === 'friend') currentDiscount = 10;
-  else currentDiscount = 0;
-  renderPrices();
-}
+    function renderTimeSlots() {
+      const grid = document.getElementById('timeGrid');
+      grid.innerHTML = '';
+      const times = [
+        "08:00", "08:30", "09:00", "09:30",
+        "10:00", "10:30", "11:00", "11:30",
+        "12:00", "12:30", "13:00", "13:30",
+        "14:00", "14:30", "15:00", "15:30",
+        "16:00", "16:30", "17:00", "17:30",
+        "18:00", "18:30", "19:00", "19:30"
+      ];
 
-const TIMES = [
-  "08:00", "08:30", "09:00", "09:30",
-  "10:00", "10:30", "11:00", "11:30",
-  "12:00", "12:30", "13:00", "13:30",
-  "14:00", "14:30", "15:00", "15:30",
-  "16:00", "16:30", "17:00", "17:30",
-  "18:00", "18:30", "19:00", "19:30"
-];
+      times.forEach(t => {
+        const slot = document.createElement('div');
+        slot.className = 'time-slot available';
+        slot.textContent = t;
+        slot.onclick = function() {
+          document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+          slot.classList.add('selected');
+          document.getElementById('selectedTime').value = t;
+        };
+        grid.appendChild(slot);
+      });
+    }
 
-async function getBookedSlots(dateStr) {
-  if (!dateStr) return [];
-  try {
-    const url = `${GOOGLE_SCRIPT_URL}?action=slots&date=${encodeURIComponent(dateStr)}`;
-    const res = await fetch(url, { method: 'GET' });
-    const data = await res.json();
-    if (data && data.ok && Array.isArray(data.booked)) return data.booked;
-    return [];
-  } catch (e) {
-    console.error('Slots fetch error:', e);
-    return [];
-  }
-}
+    function toggleMenu() {
+      const nav = document.getElementById('dropdownMenu');
+      nav.classList.toggle('active');
+    }
 
-async function renderTimeSlots() {
-  const grid = document.getElementById('timeGrid');
-  const dateEl = document.getElementById('dateInput');
-  const selectedTimeEl = document.getElementById('selectedTime');
-  if (!grid || !dateEl || !selectedTimeEl) return;
-
-  grid.innerHTML = '';
-  const booked = await getBookedSlots(dateEl.value);
-
-  TIMES.forEach(t => {
-    const slot = document.createElement('div');
-    const isBooked = booked.includes(t);
-    slot.className = isBooked ? 'time-slot' : 'time-slot available';
-    slot.textContent = isBooked ? `${t} • booked` : t;
-
-    if (!isBooked) {
-      slot.onclick = function () {
-        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-        slot.classList.add('selected');
-        selectedTimeEl.value = t;
+    function gatherBooking() {
+      return {
+        service: document.getElementById('serviceSelect').value.trim(),
+        date: document.getElementById('dateInput').value.trim(),
+        time: document.getElementById('selectedTime').value.trim(),
+        name: document.getElementById('clientName').value.trim(),
+        phone: document.getElementById('clientPhone').value.trim()
       };
     }
-    grid.appendChild(slot);
-  });
-}
 
-function toggleMenu() {
-  const nav = document.getElementById('dropdownMenu');
-  if (nav) nav.classList.toggle('active');
-}
+    function validateBooking(b) {
+      return b.service && b.date && b.time && b.name && b.phone;
+    }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderPrices();
+    function bookingText(b) {
+      return `Γεια σας VELISSE! Θέλω ραντεβού:
+Ονοματεπώνυμο: ${b.name}
+Κινητό: ${b.phone}
+Υπηρεσία: ${b.service}
+Ημερομηνία: ${b.date}
+Ώρα: ${b.time}`;
+    }
 
-  const dateInput = document.getElementById('dateInput');
-  if (dateInput) {
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.value = today;
-    dateInput.addEventListener('change', async () => {
-      const selectedTime = document.getElementById('selectedTime');
-      if (selectedTime) selectedTime.value = '';
-      await renderTimeSlots();
+    function sendToWhatsApp() {
+      const msg = document.getElementById('bookingMsg');
+      const b = gatherBooking();
+      if (!validateBooking(b)) {
+        msg.innerHTML = '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
+        return;
+      }
+      const text = encodeURIComponent(bookingText(b));
+      window.open(`https://wa.me/${STUDIO_PHONE_E164_NO_PLUS}?text=${text}`, '_blank');
+      msg.innerHTML = '✅ Άνοιξε το WhatsApp. Πάτησε αποστολή.';
+    }
+
+    function sendToViber() {
+      const msg = document.getElementById('bookingMsg');
+      const b = gatherBooking();
+      if (!validateBooking(b)) {
+        msg.innerHTML = '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
+        return;
+      }
+      const text = encodeURIComponent(bookingText(b));
+      window.location.href = `viber://forward?text=${text}`;
+      msg.innerHTML = '✅ Αν δεν άνοιξε αυτόματα το Viber, κάνε copy το μήνυμα και στείλ’ το χειροκίνητα.';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPrices();
+      renderTimeSlots();
+
+      const dateInput = document.getElementById('dateInput');
+      dateInput.value = new Date().toISOString().split('T')[0];
+
+      const slides = document.querySelectorAll('.hero-slide');
+      if (slides.length > 1) {
+        let i = 0;
+        setInterval(() => {
+          slides[i].classList.remove('active');
+          i = (i + 1) % slides.length;
+          slides[i].classList.add('active');
+        }, 3500);
+      }
+
+      document.getElementById('chooseSendBtn').addEventListener('click', () => {
+        const msg = document.getElementById('bookingMsg');
+        const b = gatherBooking();
+        msg.innerHTML = validateBooking(b)
+          ? 'Επέλεξε αποστολή: Viber ή WhatsApp.'
+          : '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
+      });
+
+      document.getElementById('btnWhatsApp').addEventListener('click', sendToWhatsApp);
+      document.getElementById('btnViber').addEventListener('click', sendToViber);
     });
-  }
-
-  renderTimeSlots();
-
-  const slides = document.querySelectorAll('.hero-slide');
-  if (slides.length > 1) {
-    let current = 0;
-    setInterval(() => {
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, 3500);
-  }
-});
-
-document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const serviceEl = document.getElementById('serviceSelect');
-  const dateEl = document.getElementById('dateInput');
-  const timeEl = document.getElementById('selectedTime');
-  const nameEl = document.getElementById('clientName');
-  const phoneEl = document.getElementById('clientPhone');
-  const msgContainer = document.getElementById('bookingMsg');
-
-  const service = serviceEl ? serviceEl.value : '';
-  const date = dateEl ? dateEl.value : '';
-  const time = timeEl ? timeEl.value : '';
-  const name = nameEl ? nameEl.value.trim() : '';
-  const phone = phoneEl ? phoneEl.value.trim() : '';
-
-  if (!service || !date || !time || !name || !phone) {
-    if (msgContainer) msgContainer.innerHTML = '❌ Συμπλήρωσε όλα τα πεδία.';
-    return;
-  }
-
-  if (msgContainer) {
-    msgContainer.style.color = '#1A1A1A';
-    msgContainer.innerHTML = '⏳ Αποστολή κράτησης...';
-  }
-
-  try {
-    const bookingData = { name, phone, service, date, time };
-    const payload = JSON.stringify(bookingData);
-    const body = new URLSearchParams({ payload });
-
-    const res = await fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      body
-    });
-
-    const data = await res.json();
-
-    if (!res.ok || !data || data.ok !== true) {
-      throw new Error((data && data.error) ? data.error : 'Failed to fetch');
-    }
-
-    if (msgContainer) {
-      msgContainer.innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
-    }
-
-    document.getElementById('bookingForm').reset();
-    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-    if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
-    if (timeEl) timeEl.value = '';
-    await renderTimeSlots();
-
-  } catch (err) {
-    console.error('Booking error:', err);
-    if (msgContainer) {
-      msgContainer.innerHTML = `❌ ${err.message || 'Υπήρξε πρόβλημα κατά την αποστολή.'}`;
-    }
-  }
-});
-</script>
+  </script>
 </body>
 </html>
