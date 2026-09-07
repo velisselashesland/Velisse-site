@@ -585,48 +585,62 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw87-i8vGenYY
     });
 
     // FORM SUBMIT & GOOGLE SHEET/TELEGRAM INTEGRATION
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const service = document.getElementById('serviceSelect').value;
-      const date = document.getElementById('dateInput').value;
-      const time = document.getElementById('selectedTime').value;
-      const name = document.getElementById('clientName').value.trim();
-      const phone = document.getElementById('clientPhone').value.trim();
-      
-      if(!time) {
-        alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
-        return;
-      }
+document.getElementById('bookingForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const serviceEl = document.getElementById('serviceSelect');
+  const dateEl = document.getElementById('dateInput');
+  const timeEl = document.getElementById('selectedTime');
+  const nameEl = document.getElementById('clientName');
+  const phoneEl = document.getElementById('clientPhone');
 
-      const msgContainer = document.getElementById('bookingMsg');
-      msgContainer.style.color = '#1A1A1A';
-      msgContainer.innerHTML = '⏳ Αποστολή κρατήσης...';
+  const service = serviceEl ? serviceEl.value : '';
+  const date = dateEl ? dateEl.value : '';
+  const time = timeEl ? timeEl.value : '';
+  const name = nameEl ? nameEl.value.trim() : '';
+  const phone = phoneEl ? phoneEl.value.trim() : '';
 
-      const bookingData = {
-        name: name,
-        phone: phone,
-        service: service,
-        date: date,
-        time: time
-      };
+  if(!time) {
+    alert('Παρακαλώ επιλέξτε διαθέσιμη ώρα!');
+    return;
+  }
 
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(bookingData),
-        mode: 'no-cors'
-      })
-      .then(() => {
-        msgContainer.innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
-        document.getElementById('bookingForm').reset();
-        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-        document.getElementById('dateInput').value = new Date().toISOString().split('T')[0];
-      })
-      .catch(err => {
-        console.error('Error:', err);
-        msgContainer.innerHTML = '❌ Υπήρξε πρόβλημα κατά την αποστολή. Παρακαλώ δοκιμάστε ξανά.';
-      });
-    });
+  const msgContainer = document.getElementById('bookingMsg');
+  if(msgContainer) {
+    msgContainer.style.color = '#1A1A1A';
+    msgContainer.innerHTML = '⏳ Αποστολή κρατήσης...';
+  }
+
+  const bookingData = {
+    name: name,
+    phone: phone,
+    service: service,
+    date: date,
+    time: time
+  };
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    body: JSON.stringify(bookingData),
+    mode: 'no-cors'
+  })
+  .then(() => {
+    if(msgContainer) {
+      msgContainer.innerHTML = '✅ <strong>Η κράτησή σας καταχωρήθηκε επιτυχώς!</strong>';
+    }
+    document.getElementById('bookingForm').reset();
+    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+    if(dateEl) {
+      dateEl.value = new Date().toISOString().split('T')[0];
+    }
+  })
+  .catch(err => {
+    console.error('Error:', err);
+    if(msgContainer) {
+      msgContainer.innerHTML = '❌ Υπήρξε πρόβλημα κατά την αποστολή.';
+    }
+  });
+});
   </script>
 </body>
 </html>
