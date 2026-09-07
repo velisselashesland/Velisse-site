@@ -516,7 +516,6 @@ function renderPrices() {
   const container = document.getElementById('priceListContainer');
   if (!container) return;
   container.innerHTML = '';
-
   servicesData.forEach(item => {
     const finalPrice = Math.max(0, item.price - currentDiscount);
     const row = document.createElement('div');
@@ -535,16 +534,13 @@ function renderPrices() {
 function selectOffer(type, btn) {
   document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-
   if (type === 'student') currentDiscount = 10;
   else if (type === 'first') currentDiscount = 5;
   else if (type === 'friend') currentDiscount = 10;
   else currentDiscount = 0;
-
   renderPrices();
 }
 
-// TIMES
 const TIMES = [
   "08:00", "08:30", "09:00", "09:30",
   "10:00", "10:30", "11:00", "11:30",
@@ -580,7 +576,6 @@ async function renderTimeSlots() {
   TIMES.forEach(t => {
     const slot = document.createElement('div');
     const isBooked = booked.includes(t);
-
     slot.className = isBooked ? 'time-slot' : 'time-slot available';
     slot.textContent = isBooked ? `${t} • booked` : t;
 
@@ -591,7 +586,6 @@ async function renderTimeSlots() {
         selectedTimeEl.value = t;
       };
     }
-
     grid.appendChild(slot);
   });
 }
@@ -601,7 +595,6 @@ function toggleMenu() {
   if (nav) nav.classList.toggle('active');
 }
 
-// INIT
 document.addEventListener('DOMContentLoaded', () => {
   renderPrices();
 
@@ -618,7 +611,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderTimeSlots();
 
-  // HERO SLIDESHOW
   const slides = document.querySelectorAll('.hero-slide');
   if (slides.length > 1) {
     let current = 0;
@@ -630,7 +622,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// BOOKING SUBMIT
 document.getElementById('bookingForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -659,8 +650,6 @@ document.getElementById('bookingForm').addEventListener('submit', async function
 
   try {
     const bookingData = { name, phone, service, date, time };
-
-    // SIMPLE FORM POST (avoids CORS preflight issues)
     const payload = JSON.stringify(bookingData);
     const body = new URLSearchParams({ payload });
 
