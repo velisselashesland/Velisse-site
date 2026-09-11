@@ -1,750 +1,410 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VELISSE Lash & Brow Studio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg: #F5F2EC;
-      --card-bg: #FFFFFF;
-      --pill-bg: #F2EBE1;
-      --text: #1A1A1A;
-      --subtext: #8E867E;
-      --border: #E8E2D9;
-      --accent: #D4B483;
-      --badge-bg: #F7EFE3;
-      --badge-text: #A38051;
-      --time-border: #D0D8E0;
-      --time-blue: #2B72C4;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 24px;
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(0,0,0,0.03);
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-      background: #111;
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-    .logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      letter-spacing: 4px;
-      font-weight: 500;
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .lang-switcher {
-      border: 1px solid var(--text);
-      padding: 5px 14px;
-      border-radius: 20px;
-      background: transparent;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .menu-toggle {
-      background: none;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-      color: var(--text);
-    }
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      background: var(--bg);
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border);
-      z-index: 999;
-    }
-    .dropdown-menu.active { display: block; }
-    .dropdown-menu a {
-      display: block;
-      padding: 10px 0;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 15px;
-    }
-
-    .hero {
-      position: relative;
-      height: 60vh;
-      min-height: 380px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #111;
-    }
-    .hero-slides { position: absolute; inset: 0; }
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity .8s ease;
-    }
-    .hero-slide.active { opacity: 1; }
-    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      color: #fff;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 400;
-      letter-spacing: 1px;
-    }
-
-    .container {
-      max-width: 680px;
-      margin: 30px auto;
-      padding: 0 16px;
-    }
-    .section-card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 32px 24px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-    }
-
-    .price-header-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      letter-spacing: 5px;
-      text-align: center;
-      color: #8E867E;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .price-sub-info {
-      text-align: center;
-      font-size: 13px;
-      color: #4A4A4A;
-      margin-bottom: 20px;
-    }
-    .badge-gift-header {
-      display: inline-block;
-      background: #FFF8EE;
-      border: 1px dashed #E5C396;
-      color: #B58A4C;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 12px;
-      margin-left: 4px;
-    }
-
-    .offers-pill-container {
-      background: var(--pill-bg);
-      border-radius: 30px;
-      padding: 16px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .offer-tab-btn {
-      padding: 10px 14px;
-      border-radius: 20px;
-      border: none;
-      background: transparent;
-      font-size: 13px;
-      color: #555;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-    .offer-tab-btn.active {
-      background: #1A1A1A;
-      color: #FFFFFF;
-      font-weight: 500;
-    }
-
-    .price-table-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: #999;
-      text-transform: uppercase;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #F0F0F0;
-      margin-bottom: 8px;
-    }
-    .price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 0;
-      border-bottom: 1px solid #F7F7F7;
-    }
-    .price-service-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: #1A1A1A;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .item-gift-badge {
-      background: var(--badge-bg);
-      color: var(--badge-text);
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 10px;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 500;
-    }
-    .price-value {
-      font-size: 16px;
-      font-weight: 600;
-      color: #1A1A1A;
-    }
-
-    .booking-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      letter-spacing: 3px;
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .booking-subtitle {
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: #8E867E;
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .form-step-label {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 8px;
-      display: block;
-      font-weight: 500;
-    }
-
-    .booking-input, .booking-select {
-      width: 100%;
-      padding: 14px 16px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background: #FFF;
-      font-size: 14px;
-      color: #333;
-      outline: none;
-      margin-bottom: 20px;
-      font-family: inherit;
-    }
-    .booking-input:focus, .booking-select:focus {
-      border-color: #1A1A1A;
-    }
-
-    .time-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .time-slot {
-      padding: 10px 0;
-      border: 1px solid #EAEAEA;
-      border-radius: 8px;
-      background: #FAFAFA;
-      color: #BBB;
-      font-size: 13px;
-      text-align: center;
-      cursor: not-allowed;
-      transition: all 0.2s ease;
-    }
-    .time-slot.available {
-      background: #FFFFFF;
-      border-color: var(--time-border);
-      color: var(--time-blue);
-      cursor: pointer;
-    }
-    .time-slot.available:hover, .time-slot.selected {
-      background: var(--time-blue);
-      color: #FFF;
-      border-color: var(--time-blue);
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .btn-submit-booking {
-      width: 100%;
-      background: #1A1A1A;
-      color: #FFF;
-      padding: 16px;
-      border-radius: 30px;
-      border: none;
-      font-size: 14px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.3s;
-    }
-    .btn-submit-booking:hover { background: #333; }
-
-    footer {
-      text-align: center;
-      padding: 24px 0;
-      color: #999;
-      font-size: 0.8rem;
-    }
-
-    @media(max-width: 480px) {
-      .time-grid { grid-template-columns: repeat(4, 1fr); }
-      .form-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELISSE LASHES LAND — Lash Studio Athens</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond', serif}
+  body{font-family:'Inter', sans-serif; background:#F9F6F3; color:#1E1E1E}
+  ::selection{background:#E8DDD5}
+</style>
 </head>
-<body>
+<body class="antialiased">
 
-  <header>
-    <a href="#home" class="logo-container">
-      <div class="logo-icon"><i class="fa-regular fa-eye"></i></div>
-      <span class="logo-text">VELISSE</span>
-    </a>
-    <div class="header-right">
-      <button id="langToggle" class="lang-switcher"><i class="fa-solid fa-globe"></i> EN</button>
-      <button class="menu-toggle" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+<!-- HEADER -->
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-[#F9F6F3]/85 border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 h-[72px] flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-[#1E1E1E] text-white flex items-center justify-center serif text-[14px]">V</div>
+      <span class="serif text-[18px] tracking-[0.18em] font-light">VELISSE</span>
+      <span class="hidden md:block text-[10px] tracking-[0.22em] uppercase text-[#8C7A6B] ml-1">LASHES LAND</span>
     </div>
-    <nav id="dropdownMenu" class="dropdown-menu">
-      <a href="#home">Αρχική</a>
-      <a href="#pricing">Τιμές</a>
-      <a href="#booking">Κλείσε Ραντεβού</a>
-      <a href="#contact">Επικοινωνία</a>
+    <nav class="hidden lg:flex items-center gap-8 text-[11px] tracking-[0.18em] uppercase text-[#6B5F57]">
+      <a href="#services" class="hover:text-[#1E1E1E]">Υπηρεσίες</a>
+      <a href="#monthly" class="hover:text-[#1E1E1E]">Monthly Club</a>
+      <a href="#aftercare" class="hover:text-[#1E1E1E]">Φροντίδα Μετά</a>
+      <a href="#policy" class="hover:text-[#1E1E1E]">Πολιτική</a>
+      <a href="#booking" class="bg-[#1E1E1E] text-white px-5 py-2.5 rounded-full tracking-[0.15em]">Κράτηση</a>
     </nav>
-  </header>
-
-  <section id="home" class="hero">
-    <div class="hero-slides">
-      <img src="slide1.jpg" alt="" class="hero-slide active">
-      <img src="slide2.jpg" alt="" class="hero-slide">
-      <img src="slide3.jpg" alt="" class="hero-slide">
-      <img src="slide4.jpg" alt="" class="hero-slide">
-      <img src="slide5.jpg" alt="" class="hero-slide">
-      <img src="slide6.jpg" alt="" class="hero-slide">
-      <img src="slide7.jpg" alt="" class="hero-slide">
-      <img src="slide8.jpg" alt="" class="hero-slide">
-      <img src="slide9.jpg" alt="" class="hero-slide">
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Wake up to<br><span style="font-weight:700;font-style:italic;letter-spacing:2px">FLAWLESS LASHES</span></h1>
-    </div>
-  </section>
-
-  <div class="container">
-    <section id="pricing" class="section-card">
-      <div class="price-header-title">2026 Pricelist & Offers</div>
-      <div class="price-sub-info">
-        Όλες οι υπηρεσίες <strong>Eyelash Extensions</strong> περιλαμβάνουν 
-        <span class="badge-gift-header">ΔΩΡΟ Brow Lamination</span>
-      </div>
-
-      <div class="offers-pill-container">
-        <button class="offer-tab-btn active" onclick="selectOffer('regular', this)">Κανονικός</button>
-        <button class="offer-tab-btn" onclick="selectOffer('student', this)">Student -10€</button>
-        <button class="offer-tab-btn" onclick="selectOffer('first', this)">First Visit -5€</button>
-        <button class="offer-tab-btn" onclick="selectOffer('friend', this)">Bring a Friend -10€</button>
-      </div>
-
-      <div class="price-table-header">
-        <span>SERVICE</span>
-        <span>PRICE</span>
-      </div>
-      <div id="priceListContainer"></div>
-    </section>
-
-    <section id="booking" class="section-card">
-      <div class="booking-title">Book Appointment</div>
-      <div class="booking-subtitle">ΕΠΙΛΕΞΤΕ ΥΠΗΡΕΣΙΑ, ΗΜΕΡΑ & ΩΡΑ (08:00 - 20:00)</div>
-
-      <form id="bookingForm">
-        <label class="form-step-label">1. Επιλέξτε Υπηρεσία</label>
-        <select id="serviceSelect" class="booking-select" required>
-          <option value="">-- Επιλέξτε υπηρεσία --</option>
-          <option value="Brow Wax (ΤΣΙΜΠΙΔΑΚΙ)">Brow Wax (ΤΣΙΜΠΙΔΑΚΙ) (5€)</option>
-          <option value="Brow Wax (ΚΕΡΙ)">Brow Wax (ΚΕΡΙ) (10€)</option>
-          <option value="Half Set">Half Set (35€)</option>
-          <option value="One by One">One by One (45€)</option>
-          <option value="Volume 2D-3D">Volume 2D-3D (50€)</option>
-          <option value="Volume 4D+">Volume 4D+ (55€)</option>
-          <option value="Special Effects">Special Effects (60€)</option>
-          <option value="Lash Lift + Tint">Lash Lift + Tint (35€)</option>
-          <option value="Lash Lift">Lash Lift (30€)</option>
-          <option value="Brow Lift">Brow Lift (25€)</option>
-          <option value="Brow Lift + Tint">Brow Lift + Tint (30€)</option>
-          <option value="Brow Lift + Lash Lift + Tint">Brow Lift + Lash Lift + Tint (55€)</option>
-          <option value="Half Set + Brow Lift">Half Set + Brow Lift (55€)</option>
-          <option value="Volume + Brow Lift">Volume + Brow Lift (70€)</option>
-          <option value="Special Effects + Brow Lift">Special Effects + Brow Lift (75€)</option>
-          <option value="One by One + Brow Lift">One by One + Brow Lift (60€)</option>
-        </select>
-
-        <label class="form-step-label">2. Επιλέξτε Ημερομηνία</label>
-        <input type="date" id="dateInput" class="booking-input" required>
-
-        <label class="form-step-label">3. Επιλέξτε Διαθέσιμη Ώρα (08:00 έως 20:00)</label>
-        <div class="time-grid" id="timeGrid"></div>
-        <input type="hidden" id="selectedTime" required>
-
-        <label class="form-step-label" style="margin-top:15px;">4. Στοιχεία Επικοινωνίας</label>
-        <div class="form-grid">
-          <input type="text" id="clientName" class="booking-input" placeholder="Ονοματεπώνυμο *" required style="margin-bottom:0;">
-          <input type="tel" id="clientPhone" class="booking-input" placeholder="Κινητό (+30) *" required style="margin-bottom:0;">
-        </div>
-
-        <button type="button" id="chooseSendBtn" class="btn-submit-booking">ΕΠΙΛΟΓΗ ΑΠΟΣΤΟΛΗΣ</button>
-
-        <div id="manualSendActions" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
-          <button type="button" id="btnViber" class="btn-submit-booking" style="margin-top:0;background:#7360F2;">Αποστολή σε Viber</button>
-          <button type="button" id="btnWhatsApp" class="btn-submit-booking" style="margin-top:0;background:#25D366;">Αποστολή σε WhatsApp</button>
-        </div>
-
-        <p id="bookingMsg" style="margin-top:12px; text-align:center; font-size:14px;"></p>
-      </form>
-    </section>
+    <a href="#booking" class="lg:hidden bg-[#1E1E1E] text-white px-4 py-2 rounded-full text-[11px] uppercase tracking-widest">Κράτηση</a>
   </div>
+</header>
 
-  <footer>© VELISSE Lash & Brow Studio</footer>
-
-  <script>
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyxnuerCQ7JS4DAs_I-v53f8UjUjmId-lcqnQwUDqrjKkidUL9cR-PsBY9tYS0rmHpT/exec';
-const STUDIO_PHONE_E164_NO_PLUS = '306909392922'; 
-    
-// -------- PRICE DATA --------
-const servicesData = [
-  { name: "Half Set", price: 35, gift: true },
-  { name: "One by One", price: 45, gift: true },
-  { name: "Volume 2D-3D", price: 50, gift: true },
-  { name: "Volume 4D-6D", price: 55, gift: true },
-  { name: "Special Effects", price: 55, gift: true },
-  { name: "Lash Lift + Tint", price: 35, gift: false },
-  { name: "Lash Lift", price: 35, gift: false },
-  { name: "Brow Lift + Tint", price: 30, gift: false },
-  { name: "Brow Lift", price: 30, gift: false },
-  { name: "Lash Lift + Brow Lift", price: 55, gift: false }
-];
-
-let currentDiscount = 0;
-
-function renderPrices() {
-  const container = document.getElementById('priceListContainer');
-  if (!container) return;
-  container.innerHTML = '';
-
-  servicesData.forEach(item => {
-    const finalPrice = Math.max(0, item.price - currentDiscount);
-    const row = document.createElement('div');
-    row.className = 'price-row';
-    row.innerHTML = `
-      <div class="price-service-name">
-        ${item.name}
-        ${item.gift ? '<span class="item-gift-badge">ΔΩΡΟ 35€</span>' : ''}
+<!-- HERO -->
+<section id="home" class="border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-16 md:py-28 grid md:grid-cols-[1.2fr_0.8fr] gap-12 items-end">
+    <div>
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#E8DDD5] bg-white text-[11px] uppercase tracking-[0.2em] text-[#8C7A6B] mb-8">Athens Lash Studio • Minimal Luxury</div>
+      <h1 class="serif text-[48px] md:text-[84px] leading-[0.9] font-light mb-6">Το βλέμμα σου,<br>η υπογραφή σου.</h1>
+      <p class="text-[14px] md:text-[19px] leading-[1.6] text-[#6B5F57] max-w-[520px] mb-8">Η VELISSE LASHES LAND γεννήθηκε από την αγάπη για τη λεπτομέρεια και την φυσική ομορφιά. Εξατομικευμένα lash looks που αναδεικνύουν το βλέμμα σας, με σεβασμό στην υγεία των φυσικών σας βλεφαρίδων.</p>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="h-11 px-8 bg-[#1E1E1E] text-white rounded-full text-[12px] uppercase tracking-[0.18em]">Κλείσε Ραντεβού</button>
+        <button onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" class="h-11 px-8 border border-[#1E1E1E] rounded-full text-[12px] uppercase tracking-[0.18em]">Δες Υπηρεσίες</button>
       </div>
-      <div class="price-value">${finalPrice}€</div>
-    `;
-    container.appendChild(row);
-  });
+      </div>
+    </div>
+  
+      <div class="absolute -bottom-6 -left-6 hidden md:flex bg-[#1E1E1E] text-white rounded-[16px] p-5 gap-4 max-w-[300px]">
+        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">✦</div>
+        <div><div class="text-[12px] uppercase tracking-wide text-white/60">Tip</div><div class="text-[13px] leading-[1.5]">Κλείσε refill κάθε 2-3 εβδομάδες για συνεχή φρεσκάδα.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="bg-white border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28 grid md:grid-cols-[0.9fr_1.1fr] gap-12">
+    <h2 class="serif text-[40px] md:text-[58px] leading-[0.95] font-light">About Us</h2>
+    <p class="text-[15px] leading-[1.7] text-[#4A403A] max-w-[640px]">Η VELISSE LASHES LAND γεννήθηκε από την αγάπη για τη λεπτομέρεια και την φυσική ομορφιά. Στο studio μας στην Αθήνα, δημιουργούμε εξατομικευμένα lash looks που αναδεικνύουν το βλέμμα σας, με απόλυτο σεβασμό στην υγεία των φυσικών σας βλεφαρίδων. Με πιστοποιημένες τεχνικές, premium υλικά και συνεχή εκπαίδευση, στόχος μας είναι να νιώθετε αυτοπεποίθηση κάθε φορά που κοιτάζεστε στον καθρέφτη.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="flex flex-wrap justify-between items-end gap-6 mb-12">
+      <div>
+        <div class="text-[11px] tracking-[0.22em] uppercase text-[#8C7A6B] mb-3">Υπηρεσίες • 12 curated</div>
+        <h2 class="serif text-[40px] md:text-[56px] leading-[0.95] font-light">Υπηρεσίες</h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-[#E8DDD5] border border-[#E8DDD5] rounded-[20px] overflow-hidden">
+      <!-- Service cards -->
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">120'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Natural</span></div>
+        <h3 class="serif text-[22px] mb-2">One By One</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Μία προς μία, φυσικό αποτέλεσμα για καθημερινή κομψότητα.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">45€</span><button onclick="selectService('Κλασσικές Επεκτάσεις - 45€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">135'</span><span class="text-[11px] bg-[#1E1E1E] text-white rounded-full px-2 py-1">Popular</span></div>
+        <h3 class="serif text-[22px] mb-2">Hybrid</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Συνδυασμός κλασσικών και volume για ένταση με φυσικότητα.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">50€</span><button onclick="selectService('Hybrid - 50€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">150'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Volume</span></div>
+        <h3 class="serif text-[22px] mb-2">Volume 2D-10D</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Απαλό, Έντονο, πυκνό και ανάλαφρο volume για πιο γεμάτο βλέμμα.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">55€</span><button onclick="selectService('Volume 2D-3D - 55€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">165'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Full</span></div>
+        <h3 class="serif text-[22px] mb-2">Special Effect</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Wispy, Fox, Eyeliner, Wet, Mascara...</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">60€</span><button onclick="selectService('Volume 4D-6D - 60€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">60'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Lift</span></div>
+        <h3 class="serif text-[22px] mb-2">Lash Lift + Tint</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Ανόρθωση και χρώμα στις φυσικές σας βλεφαρίδες.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">35€</span><button onclick="selectService('Lash Lift + Tint - 35€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">60'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Brow</span></div>
+        <h3 class="serif text-[20px] mb-2">Brow Lamination + Tint + Wax</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Πλήρης αναδόμηση και σχήμα φρυδιών.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">30€</span><button onclick="selectService('Brow Lamination - 30€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">30'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Brow</span></div>
+        <h3 class="serif text-[22px] mb-2">Brow Shaping & Wax</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Καθαρισμός και αρχιτεκτονική φρυδιών.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">5€</span><button onclick="selectService('Brow Shaping - 5€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">20'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Brow</span></div>
+        <h3 class="serif text-[22px] mb-2">Brow Tint</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Ένταση χρώματος που διαρκεί.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">15€</span><button onclick="selectService('Brow Tint - 15€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-[#F3E5DE] p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">75'</span><span class="text-[11px] border border-[#1E1E1E] rounded-full px-2 py-1">Refill</span></div>
+        <h3 class="serif text-[22px] mb-2">Refill 2 εβδομάδων</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Συντήρηση για άψογο αποτέλεσμα.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">30€</span><button onclick="selectService('Refill 2 εβδομάδων - 30€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-[#F3E5DE] p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">90'</span><span class="text-[11px] border border-[#1E1E1E] rounded-full px-2 py-1">Refill</span></div>
+        <h3 class="serif text-[22px] mb-2">Refill 3 εβδομάδων</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Επαναφορά πυκνότητας.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">35€</span><button onclick="selectService('Refill 3 εβδομάδων - 35€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+
+      <div class="bg-white p-7 flex flex-col">
+        <div class="flex justify-between mb-4"><span class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B]">30'</span><span class="text-[11px] border border-[#E8DDD5] rounded-full px-2 py-1">Removal</span></div>
+        <h3 class="serif text-[22px] mb-2">Αφαίρεση Επεκτάσεων</h3>
+        <p class="text-[13px] text-[#6B5F57] leading-[1.6] mb-6">Ασφαλής αφαίρεση χωρίς φθορά.</p>
+        <div class="mt-auto flex justify-between items-center"><span class="text-[26px] font-light">10€</span><button onclick="selectService('Αφαίρεση - 10€')" class="text-[11px] uppercase tracking-widest border border-[#1E1E1E] rounded-full px-4 py-2">Κράτηση</button></div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-[12px] text-[#8C7A6B]">Extras: +5€ για strass / colour lashes / art design ανά μάτι.</div>
+  </div>
+</section>
+
+<!-- MONTHLY CLUB -->
+<section id="monthly" class="bg-[#FFFEFC] border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="max-w-[720px] mb-12">
+      <div class="text-[11px] tracking-[0.22em] uppercase text-[#8C7A6B] mb-4">Για όσες αγαπούν να είναι πάντα περιποιημένες</div>
+      <h2 class="serif text-[40px] md:text-[54px] leading-[0.95] font-light">Monthly Club</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7 flex flex-col">
+        <div class="text-[11px] uppercase tracking-[0.2em] text-[#8C7A6B] mb-3">Starter</div>
+        <h3 class="serif text-[26px] mb-1">Mini</h3>
+        <div class="text-[32px] font-light mb-6">55€ <span class="text-[14px] text-[#8C7A6B]">/μήνα</span></div>
+        <ul class="space-y-2 text-[13px] leading-[1.5] mb-8"><li>— Half Set</li><li>— Refill εντός 21 ημερών</li></ul>
+        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="mt-auto h-10 rounded-full border border-[#1E1E1E] text-[12px] uppercase">Επιλογή</button>
+      </div>
+      <div class="bg-[#1E1E1E] text-white rounded-[20px] p-7 flex flex-col relative">
+        <div class="absolute top-4 right-4 bg-white text-black text-[10px] uppercase tracking-widest px-2 py-1 rounded-full">Popular</div>
+        <h3 class="serif text-[26px] mb-1">Classic</h3>
+        <div class="text-[32px] font-light mb-6">65€ <span class="text-[14px] text-white/60">/μήνα</span></div>
+        <ul class="space-y-2 text-[13px] leading-[1.5] mb-8 text-white/80"><li>— Classic</li><li>— 1 refill εντός 21 ημερών</li><li><li></ul>
+        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="mt-auto h-10 rounded-full bg-white text-black text-[12px] uppercase">Επιλογή</button>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7 flex flex-col">
+        <div class="text-[11px] uppercase tracking-[0.2em] text-[#8C7A6B] mb-3">Full Glam</div>
+        <h3 class="serif text-[26px] mb-1">Volume</h3>
+        <div class="text-[32px] font-light mb-6">70€ <span class="text-[14px] text-[#8C7A6B]">/μήνα</span></div>
+        <ul class="space-y-2 text-[13px] leading-[1.5] mb-8"><li>— Refill εντός 21 ημερών</li></ul>
+        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="mt-auto h-10 rounded-full border border-[#1E1E1E] text-[12px] uppercase">Επιλογή</button>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7 flex flex-col">
+        <div class="text-[11px] uppercase tracking-[0.2em] text-[#8C7A6B] mb-3">Full Glam</div>
+        <h3 class="serif text-[26px] mb-1">Glam</h3>
+        <div class="text-[32px] font-light mb-6">80€ <span class="text-[14px] text-[#8C7A6B]">/μήνα</span></div>
+        <ul class="space-y-2 text-[13px] leading-[1.5] mb-8"><li>— Refill εντός 21 ημερών</li></ul>
+        <button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" class="mt-auto h-10 rounded-full border border-[#1E1E1E] text-[12px] uppercase">Επιλογή</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFERS -->
+<section id="offers" class="bg-[#F9F6F3] border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20">
+    <h2 class="serif text-[36px] md:text-[48px] font-light mb-10">Προσφορές</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7">
+        <div class="flex justify-between mb-6"><span class="text-[12px] uppercase tracking-[0.18em] text-[#8C7A6B]">New Client</span><span class="text-[28px] font-light">-10%</span></div>
+        <p class="text-[13.5px] leading-[1.6] text-[#4A403A]">Στην πρώτη σου επίσκεψη για οποιοδήποτε set.</p>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7">
+        <div class="flex justify-between mb-6"><span class="text-[12px] uppercase tracking-[0.18em] text-[#8C7A6B]">Birthday</span><span class="text-[28px] font-light">-20%</span></div>
+        <p class="text-[13.5px] leading-[1.6] text-[#4A403A]">Την εβδομάδα των γενεθλίων σου. Με ταυτότητα. Ισχύει μία φορά / χρόνο.</p>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7">
+        <div class="flex justify-between mb-6"><span class="text-[12px] uppercase tracking-[0.18em] text-[#8C7A6B]">Student</span><span class="text-[28px] font-light">-25%</span></div>
+        <p class="text-[13.5px] leading-[1.6] text-[#4A403A]"> Με έγκυρο φοιτιτικό πάσο .</p>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[20px] p-7">
+        <div class="flex justify-between mb-6"><span class="text-[12px] uppercase tracking-[0.18em] text-[#8C7A6B]">Bring a Friend</span><span class="text-[28px] font-light">-10€</span></div>
+        <p class="text-[13.5px] leading-[1.6] text-[#4A403A]">Φέρε φίλη και κερδίζετε και οι δύο -10€ στην επόμενη επίσκεψη.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AFTERCARE -->
+<section id="aftercare" class="bg-white border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="max-w-[720px] mb-10">
+      <h2 class="serif text-[40px] md:text-[58px] leading-[0.9] font-light mb-4">Aftercares</h2>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8 p-1 bg-[#F9F6F3] border border-[#E8DDD5] rounded-full w-fit">
+      <button onclick="switchAftercare('extensions')" id="btn-extensions" class="aftercare-btn px-4 py-2 rounded-full text-[12.5px] bg-[#1E1E1E] text-white">Lash Extensions</button>
+      <button onclick="switchAftercare('lashlift')" id="btn-lashlift" class="aftercare-btn px-4 py-2 rounded-full text-[12.5px] text-[#6B5F57]">Lash Lift</button>
+      <button onclick="switchAftercare('brows')" id="btn-brows" class="aftercare-btn px-4 py-2 rounded-full text-[12.5px] text-[#6B5F57]">Brow Lift</button>
+    </div>
+
+    <div id="aftercare-content" class="min-h-[280px] grid md:grid-cols-2 gap-6">
+      <div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6">
+        <h4 class="font-medium tracking-wide text-[13px] uppercase mb-4 text-[#8C7A6B]">Πρώτες 24 ώρες</h4>
+        <ul class="space-y-3 text-[14px] leading-[1.6] text-[#2B2B2B]">
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Αποφύγετε νερό για τις πρώτες 24 ώρες.</li>
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Αποφύγετε ατμό, σάουνα, γυμναστήριο και κολύμβηση για 24 ώρες.</li>
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Μην κοιμηθείτε μπρούμυτα και αποφύγετε την επαφή με μαξιλάρι.</li>
+        </ul>
+      </div>
+      <div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6">
+        <h4 class="font-medium tracking-wide text-[13px] uppercase mb-4 text-[#8C7A6B]">Καθημερινή Φροντίδα</h4>
+        <ul class="space-y-3 text-[14px] leading-[1.6] text-[#2B2B2B]">
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Μην τραβάτε ή κόβετε τις βλεφαρίδες . Όχι ψαλίδι(Lash Curl).</li>
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Αποφύγετε μάσκαρα, ειδικά αδιάβροχη.</li>
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Χρησιμοποιείτε μόνο oil-free προϊόντα και lash shampoo.</li>
+          <li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Καθαρισμός καθημερινά με απαλό αφρό και βούρτσισμα με ειδικό microbrush.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-3 gap-6 text-[12px] leading-[1.6] text-[#8C7A6B]">
+      <div class="border-t border-[#E8DDD5] pt-4">Αν έχετε απορία, στείλτε μας DM στο @velisselashesland.</div>
+      <div class="border-t border-[#E8DDD5] pt-4">Η σωστή φροντίδα διπλασιάζει τη διάρκεια των επεκτάσεων.</div>
+    </div>
+  </div>
+</section>
+
+<!-- POLICY -->
+<section id="policy" class="bg-[#F9F6F3] border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20">
+    <div class="grid md:grid-cols-[0.9fr_1.1fr] gap-12">
+      <h2 class="serif text-[36px] md:text-[48px] leading-[0.95] font-light">Πολιτική Studio</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">Κράτηση</div><p class="text-[13.5px] leading-[1.5]">Για την καλύτερη εξυπηρέτησή σας, ο προγραμματισμός των
+ραντεβού πραγματοποιείται διαδικτυακά μέσω των επίσημων
+λογαριασμών μας στα Social Media, μέσω των
+εφαρμογών Viber και WhatsApp, καθώς και τηλεφωνικά. Σας
+προτείνουμε να προβαίνετε σε έγκαιρη κράτηση, ώστε να
+διασφαλίσετε τη διαθεσιμότητα στην ημέρα και ώρα της προτίμησής
+σας</p></div>
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">Προκαταβολή</div><p class="text-[13.5px] leading-[1.5]">Επιστρέφεται μόνο με ακύρωση 24 ώρες πριν. Μετά χάνεται.</p></div>
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">Extras</div><p class="text-[13.5px] leading-[1.5]">Παρακαλούμε σημειώστε ότι για
+εξειδικευμένες τεχνικές (όπως lash strass, colour lashes ή lash art),
+υπάρχει επιπλέον χρέωση 5€ στην τελική τιμή.</p></div>
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">Show</div><p class="text-[13.5px] leading-[1.5]">Για τη δική σας καλύτερη εμπειρία, σας προτείνουμε να βρίσκεστε
+στον χώρο μας 10 λεπτά νωρίτερα. Έτσι, θα έχετε τον χρόνο να
+χαλαρώσετε και να απολαύσετε την υπηρεσία σας χωρίς βιασύνη.</p></div>
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">Καθυστερήσεις</div><p class="text-[13.5px] leading-[1.5]">Για καθυστερήσεις άνω των 10 λεπτών, διατηρούμε το δικαίωμα
+τροποποίησης ή μεταφοράς του ραντεβού σε νέα ημερομηνία, βάσει
+του προγράμματος της ημέρας ανάλογα με τη διαθεσιμότητα,
+προκειμένου να μην υπάρξει καθυστέρηση στους επόμενους πελάτες</p></div>
+        <div class="bg-white border border-[#E8DDD5] rounded-[16px] p-5"><div class="text-[11px] uppercase tracking-[0.18em] text-[#8C7A6B] mb-2">No Show</div><p class="text-[13.5px] leading-[1.5]">Για οποιαδήποτε αλλαγή ή ακύρωση απαιτείται ενημέρωση
+τουλάχιστον 24 ώρες νωρίτερα. Σε περίπτωση που σημειωθούν περισσότερες από 2 φορές no show, η δυνατότητα μελλοντικής κράτησης δεν θα είναι πλέον διαθέσιμη.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="bg-white border-b border-[#E8DDD5]">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-20 md:py-28">
+    <div class="grid md:grid-cols-[1fr_1fr] gap-12 md:gap-20 items-start">
+      <div>
+        <div class="text-[11px] tracking-[0.22em] uppercase text-[#8C7A6B] mb-4">Κράτηση</div>
+        <h2 class="serif text-[38px] md:text-[52px] leading-[0.95] font-light mb-6">Κλείστε το<br>ραντεβού σας</h2>
+        <div class="space-y-3 text-[13px]">
+          <div class="flex gap-3"><span class="text-[#8C7A6B]">📍</span> Αθήνα, Αθήνα</div>
+          <div class="flex gap-3"><span class="text-[#8C7A6B]">📸</span> <ahref="https://instagram.com/velisselashesland"></ahref></div>
+          <div class="flex gap-3"><span class="text-[#8C7A6B]">💬</span> WhatsApp / Viber DM</div>
+        </div>
+      </div>
+
+      <div class="bg-[#F9F6F3] border border-[#E8DDD5] rounded-[22px] p-6 md:p-8">
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Όνομα</label>
+            <input id="b-name" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px] focus:outline-none focus:border-[#1E1E1E]" placeholder="Όνομα">
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Τηλέφωνο</label>
+            <input id="b-phone" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px] focus:outline-none focus:border-[#1E1E1E]" placeholder="69...">
+          </div>
+        </div>
+        <div class="mb-4">
+          <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Υπηρεσία</label>
+          <select id="b-service" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px] focus:outline-none focus:border-[#1E1E1E]">
+            <option>One By One - 45€</option>
+            <option>Hybrid - 50€</option>
+            <option>Volume 2D-10D - 55€</option>
+            <option>Special Effect - 60€</option>
+            <option>lash & brow lift - 55€</option>
+            <option>Lash Lift + Tint - 35€</option>
+            <option>Brow Lamination + Tint - 30€</option>
+            <option>Brow Tint - 15€</option>
+            <option>Brow Shape & Wax - 5€</option>
+            <option>Refill 2 εβδομάδων - 30€</option>
+            <option>Refill 3 εβδομάδων - 35€</option>
+            <option>Αφαίρεση - 10€</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mb-4">
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Μέρα</label>
+            <select id="b-day" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><option>Δευτέρα</option><option>Τρίτη</option><option>Τετάρτη</option><option>Πέμπτη</option><option>Παρασκευή</option><option>Σάββατο</option></select>
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Ημερομηνία</label>
+            <input id="b-date" type="date" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]">
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Ώρα</label>
+            <select id="b-time" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option></select>
+          </div>
+        </div>
+        <div class="mb-6">
+          <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Μήνυμα (προαιρετικό)</label>
+          <textarea id="b-msg" rows="2" class="mt-1 w-full bg-white border border-[#E8DDD5] rounded-[12px] p-4 text-[14px] focus:outline-none focus:border-[#1E1E1E]" placeholder="Κάτι που θέλεις να ξέρουμε;"></textarea>
+        </div>
+        <button onclick="sendWhatsApp()" class="w-full h-11 bg-[#1E1E1E] text-white rounded-full text-[12px] uppercase tracking-[0.18em]">Στείλε σε WhatsApp</button>
+        <p class="text-[11px] text-[#8C7A6B] mt-3 text-center">Ανοίγει WhatsApp με έτοιμο μήνυμα.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-[#1E1E1E] text-white">
+  <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-16 grid md:grid-cols-4 gap-10 text-[13px]">
+    <div><div class="serif text-[22px] tracking-[0.18em] mb-4">VELISSE</div><p class="text-white/60 leading-[1.6]">Minimal luxury lash studio στην Αθήνα. Φυσική ομορφιά, λεπτομέρεια, αυτοπεποίθηση.</p></div>
+    <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Menu</div><div class="space-y-2 text-white/70"><a href="#services">Υπηρεσίες</a><br><a href="#monthly">Monthly Club</a><br><a href="#aftercare">Aftercare</a></div></div>
+    <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Επικοινωνία</div><div class="space-y-2 text-white/70">Instagram:<ahref="https://instagram.com/velisselashesland">  @velisselashesland<br>WhatsApp / Viber DM<br>Αθήνα,Αθήνα</div></div>
+    <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Ώρες</div><div class="space-y-2 text-white/70">Δευ-Παρ: 09:00-20:00<br>Σάβ: 10:00-18:00<br>Κυρ: Κλειστά</div></div>
+  </div>
+  <div class="border-t border-white/10">
+    <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-6 flex justify-between text-[11px] tracking-[0.15em] uppercase text-white/40"><span>© 2026 VELISSE LASHES LAND</span><span>Designed minimal beige</span></div>
+  </div>
+</footer>
+
+<script>
+function selectService(val){
+  document.getElementById('b-service').value = val;
+  document.getElementById('booking').scrollIntoView({behavior:'smooth'});
 }
 
-function selectOffer(type, btn) {
-  document.querySelectorAll('.offer-tab-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-
-  if (type === 'student') currentDiscount = 10;
-  else if (type === 'first') currentDiscount = 5;
-  else if (type === 'friend') currentDiscount = 10;
-  else currentDiscount = 0;
-
-  renderPrices();
-}
-
-// -------- BOOKING / AVAILABILITY --------
-const TIMES = [
-  "08:00","08:30","09:00","09:30",
-  "10:00","10:30","11:00","11:30",
-  "12:00","12:30","13:00","13:30",
-  "14:00","14:30","15:00","15:30",
-  "16:00","16:30","17:00","17:30",
-  "18:00","18:30","19:00","19:30"
-];
-
-function serviceDurationMinutes(serviceName) {
-  const s = (serviceName || '').toLowerCase();
-
-  // καθαρισμός φρυδιών / brow wax = 30'
-  if (s.includes('brow wax') || s.includes('τσιμπιδακι') || s.includes('κερι') || s.includes('καθαρισ')) return 30;
-
-  // lash/brow lift (μαζί ή ξεχωριστά) = 60'
-  if (s.includes('lash lift') || s.includes('brow lift')) return 60;
-
-  // lash extensions = 2.5 ώρες
-  if (
-    s.includes('half set') ||
-    s.includes('one by one') ||
-    s.includes('volume') ||
-    s.includes('special effects')
-  ) return 150;
-
-  return 60;
-}
-
-function toMinutes(hhmm) {
-  const [h,m] = hhmm.split(':').map(Number);
-  return h*60 + m;
-}
-function toHHMM(total) {
-  const h = Math.floor(total/60).toString().padStart(2,'0');
-  const m = (total%60).toString().padStart(2,'0');
-  return `${h}:${m}`;
-}
-function buildNeededSlots(start, durationMin) {
-  const arr = [];
-  const s = toMinutes(start);
-  const e = s + durationMin;
-  for (let t = s; t < e; t += 30) arr.push(toHHMM(t));
-  return arr;
-}
-function fitsWorkingHours(start, durationMin) {
-  const s = toMinutes(start);
-  const e = s + durationMin;
-  return s >= toMinutes("08:00") && e <= toMinutes("20:00");
-}
-
-async function getBlockedSlots(dateStr) {
-  if (!dateStr) return [];
-  try {
-    const url = `${GOOGLE_SCRIPT_URL}?action=slots&date=${encodeURIComponent(dateStr)}`;
-    const res = await fetch(url, { method: 'GET' });
-    const data = await res.json();
-    if (data && data.ok && Array.isArray(data.blocked)) return data.blocked;
-    return [];
-  } catch (err) {
-    console.error('slots error', err);
-    return [];
+function switchAftercare(id){
+  document.querySelectorAll('.aftercare-btn').forEach(b=>{b.className='aftercare-btn px-4 py-2 rounded-full text-[12.5px] text-[#6B5F57] hover:bg-white'});
+  document.getElementById('btn-'+id).className='aftercare-btn px-4 py-2 rounded-full text-[12.5px] bg-[#1E1E1E] text-white';
+  const content = document.getElementById('aftercare-content');
+  if(id==='extensions'){
+    content.innerHTML=`<div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="font-medium tracking-wide text-[13px] uppercase mb-4 text-[#8C7A6B]">Πρώτες 24 ώρες</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Αποφύγετε νερό για 6 ώρες.</li><li class="flex gap-3"><span class="text-[#C2A99A]">—</span> Ατμό, σάουνα, γυμναστήριο 24 ώρες.</li></ul></div><div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="font-medium tracking-wide text-[13px] uppercase mb-4 text-[#8C7A6B]">Καθημερινή Φροντίδα</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li>— Oil-free προϊόντα μόνο</li><li>— Καθημερινός καθαρισμός με lash shampoo</li><li>— Όχι μάσκαρα, όχι τράβηγμα</li></ul></div>`;
+  } else if(id==='lashlift'){
+    content.innerHTML=`<div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="text-[13px] uppercase tracking-wide text-[#8C7A6B] mb-4">Πρώτες 24 ώρες</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li>— Νερό: αποφύγετε 6 ώρες</li><li>— Ατμό, σάουνα 24 ώρες</li><li>— Μην κοιμηθείτε πάνω στις βλεφαρίδες</li></ul></div><div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="text-[13px] uppercase tracking-wide text-[#8C7A6B] mb-4">Φροντίδα</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li>— Ενυδάτωση με keratin serum</li><li>— Όχι αδιάβροχη μάσκαρα για 48 ώρες</li></ul></div>`;
+  } else {
+    content.innerHTML=`<div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="text-[13px] uppercase tracking-wide text-[#8C7A6B] mb-4">Πρώτες 24 ώρες</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li>— Μην βρέξετε φρύδια 24 ώρες</li><li>— Αποφύγετε μακιγιάζ στην περιοχή</li></ul></div><div class="bg-white border border-[#E8DDD5] rounded-[18px] p-6"><h4 class="text-[13px] uppercase tracking-wide text-[#8C7A6B] mb-4">Φροντίδα</h4><ul class="space-y-3 text-[14px] leading-[1.6]"><li>— Βούρτσισμα καθημερινά</li><li>— Λάδι αργκάν / καστορέλαιο το βράδυ</li></ul></div>`;
   }
 }
 
-async function renderTimeSlots() {
-  const grid = document.getElementById('timeGrid');
-  const dateEl = document.getElementById('dateInput');
-  const serviceEl = document.getElementById('serviceSelect');
-  const selectedTimeEl = document.getElementById('selectedTime');
-
-  if (!grid || !dateEl || !serviceEl || !selectedTimeEl) return;
-
-  const service = serviceEl.value;
-  const durationMin = serviceDurationMinutes(service);
-  const blocked = await getBlockedSlots(dateEl.value);
-
-  grid.innerHTML = '';
-
-  TIMES.forEach(t => {
-    const slot = document.createElement('div');
-    const needed = buildNeededSlots(t, durationMin);
-    const overlaps = needed.some(n => blocked.includes(n));
-    const available = !!service && fitsWorkingHours(t, durationMin) && !overlaps;
-
-    slot.className = available ? 'time-slot available' : 'time-slot';
-    slot.textContent = available ? t : `${t}`;
-
-    if (available) {
-      slot.onclick = function () {
-        document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-        slot.classList.add('selected');
-        selectedTimeEl.value = t;
-      };
-    }
-
-    grid.appendChild(slot);
-  });
+function sendWhatsApp(){
+  const name=document.getElementById('b-name').value||'[Όνομα]';
+  const phone=document.getElementById('b-phone').value||'[Τηλέφωνο]';
+  const service=document.getElementById('b-service').value;
+  const day=document.getElementById('b-day').value;
+  const date=document.getElementById('b-date').value||'[Ημερομηνία]';
+  const time=document.getElementById('b-time').value;
+  const extra=document.getElementById('b-msg').value;
+  const msg=`Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE.\n\n👤 Όνομα: ${name}\n📞 Τηλέφωνο: ${phone}\n✨ Υπηρεσία: ${service}\n📅 Ημερομηνία/Ώρα: ${day} ${date} ${time}\n${extra?'\n📝 '+extra:''}`;
+  const url='https://wa.me/?text='+encodeURIComponent(msg);
+  window.open(url,'_blank');
 }
-
-function toggleMenu() {
-  const nav = document.getElementById('dropdownMenu');
-  if (nav) nav.classList.toggle('active');
-}
-
-function gatherBooking() {
-  return {
-    service: (document.getElementById('serviceSelect')?.value || '').trim(),
-    date: (document.getElementById('dateInput')?.value || '').trim(),
-    time: (document.getElementById('selectedTime')?.value || '').trim(),
-    name: (document.getElementById('clientName')?.value || '').trim(),
-    phone: (document.getElementById('clientPhone')?.value || '').trim()
-  };
-}
-function validBooking(b) {
-  return b.service && b.date && b.time && b.name && b.phone;
-}
-function bookingText(b, endTime, durationMin) {
-  return `Γεια σας VELISSE! Θέλω ραντεβού:
-Ονοματεπώνυμο: ${b.name}
-Κινητό: ${b.phone}
-Υπηρεσία: ${b.service}
-Ημερομηνία: ${b.date}
-Ώρα: ${b.time}${endTime ? ' - ' + endTime : ''}
-Διάρκεια: ${durationMin || serviceDurationMinutes(b.service)} λεπτά`;
-}
-
-async function submitBookingAndOpen(channel) {
-  const msg = document.getElementById('bookingMsg');
-  const b = gatherBooking();
-
-  if (!validBooking(b)) {
-    msg.innerHTML = '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
-    return;
-  }
-
-  msg.innerHTML = '⏳ Καταχώρηση κράτησης...';
-
-  try {
-    const payload = JSON.stringify(b);
-    const body = new URLSearchParams({ payload });
-
-    const res = await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body });
-    const data = await res.json();
-
-    if (!res.ok || !data || data.ok !== true) {
-      throw new Error((data && data.error) ? data.error : 'Αποτυχία καταχώρησης');
-    }
-
-    const text = encodeURIComponent(bookingText(b, data.endTime, data.durationMin));
-
-    if (channel === 'wa') {
-      window.open(`https://wa.me/${STUDIO_PHONE_E164_NO_PLUS}?text=${text}`, '_blank');
-    } else {
-      window.location.href = `viber://forward?text=${text}`;
-    }
-
-    msg.innerHTML = '✅ Η ώρα κλειδώθηκε και σημειώθηκε ως μη διαθέσιμη.';
-    document.getElementById('selectedTime').value = '';
-    await renderTimeSlots();
-
-  } catch (err) {
-    console.error(err);
-    msg.innerHTML = `❌ ${err.message || 'Κάτι πήγε στραβά.'}`;
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  renderPrices();
-
-  const dateInput = document.getElementById('dateInput');
-  if (dateInput) {
-    dateInput.value = new Date().toISOString().split('T')[0];
-    dateInput.addEventListener('change', async () => {
-      document.getElementById('selectedTime').value = '';
-      await renderTimeSlots();
-    });
-  }
-
-  const serviceSelect = document.getElementById('serviceSelect');
-  if (serviceSelect) {
-    serviceSelect.addEventListener('change', async () => {
-      document.getElementById('selectedTime').value = '';
-      await renderTimeSlots();
-    });
-  }
-
-  await renderTimeSlots();
-
-  // hero slideshow autoplay
-  const slides = document.querySelectorAll('.hero-slide');
-  if (slides.length > 1) {
-    let i = 0;
-    setInterval(() => {
-      slides[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
-    }, 3500);
-  }
-
-  // disable normal form submit
-  const form = document.getElementById('bookingForm');
-  if (form) form.addEventListener('submit', e => e.preventDefault());
-
-  const chooseSendBtn = document.getElementById('chooseSendBtn');
-  if (chooseSendBtn) {
-    chooseSendBtn.addEventListener('click', () => {
-      const msg = document.getElementById('bookingMsg');
-      const b = gatherBooking();
-      msg.innerHTML = validBooking(b)
-        ? 'Επίλεξε αποστολή: Viber ή WhatsApp.'
-        : '❌ Συμπλήρωσε όλα τα πεδία και επίλεξε ώρα.';
-    });
-  }
-
-  const btnWhatsApp = document.getElementById('btnWhatsApp');
-  const btnViber = document.getElementById('btnViber');
-
-  if (btnWhatsApp) btnWhatsApp.addEventListener('click', () => submitBookingAndOpen('wa'));
-  if (btnViber) btnViber.addEventListener('click', () => submitBookingAndOpen('viber'));
-});
 </script>
+</body>
+</html>
 </body>
 </html>
