@@ -392,6 +392,8 @@ function switchAftercare(id){
 }
 
 function sendWhatsApp(){
+  const OWNER_PHONE = "306909392922"; 
+
   const name=document.getElementById('b-name').value||'[Όνομα]';
   const phone=document.getElementById('b-phone').value||'[Τηλέφωνο]';
   const service=document.getElementById('b-service').value;
@@ -400,8 +402,12 @@ function sendWhatsApp(){
   const time=document.getElementById('b-time').value;
   const extra=document.getElementById('b-msg').value;
   const msg=`Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE.\n\n👤 Όνομα: ${name}\n📞 Τηλέφωνο: ${phone}\n✨ Υπηρεσία: ${service}\n📅 Ημερομηνία/Ώρα: ${day} ${date} ${time}\n${extra?'\n📝 '+extra:''}`;
-  const url='https://wa.me/?text='+encodeURIComponent(msg);
+   <button onclick="sendVia('whatsapp')" class="h- rounded-full bg-[#25D366] text-white font-medium">WhatsApp</button>
+      <button onclick="sendVia('viber')" class="h- rounded-full bg-[#7360F2] text-white font-medium">Viber</button>
+
+  const url='https://wa.me/' + OWNER_PHONE + '?text='+encodeURIComponent(msg);
   window.open(url,'_blank');
+}
 }
 </script>
 </body>
