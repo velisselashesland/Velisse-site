@@ -302,7 +302,9 @@
         <h2 class="serif text-[38px] md:text-[52px] leading-[0.95] font-light mb-6">Κλείστε το<br>ραντεβού σας</h2>
         <div class="space-y-3 text-[13px]">
           <div class="flex gap-3"><span class="text-[#8C7A6B]">📍</span> Αθήνα, Αθήνα</div>
-          <div class="flex gap-3"><span class="text-[#8C7A6B]">📸</span> <ahref="https://instagram.com/velisselashesland"></ahref></div>
+          <div class="flex gap-3"><span class="text-[#8C7A6B]">📸</span><a href="https://instagram.com/velisselashesland" target="_blank" class="flex items-center gap-2 text-[13px] text-[#8C7A6B] hover:text-black transition">
+  <span>📸</span>
+  <span class="underline underline-offset-4">Instagram - @velisselashesland</span></a></ahref></div>
           <div class="flex gap-3"><span class="text-[#8C7A6B]">💬</span> WhatsApp / Viber DM</div>
         </div>
       </div>
@@ -346,15 +348,15 @@
           </div>
           <div>
             <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Ώρα</label>
-            <select id="b-time" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option></select>
+            <select id="b-time" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option><option>14:00</option><option>14:30</option><option>15:00</option><option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option><option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option></select>
           </div>
         </div>
         <div class="mb-6">
           <label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Μήνυμα (προαιρετικό)</label>
           <textarea id="b-msg" rows="2" class="mt-1 w-full bg-white border border-[#E8DDD5] rounded-[12px] p-4 text-[14px] focus:outline-none focus:border-[#1E1E1E]" placeholder="Κάτι που θέλεις να ξέρουμε;"></textarea>
         </div>
-        <button onclick="sendWhatsApp()" class="w-full h-11 bg-[#1E1E1E] text-white rounded-full text-[12px] uppercase tracking-[0.18em]">Στείλε σε WhatsApp</button>
-        <p class="text-[11px] text-[#8C7A6B] mt-3 text-center">Ανοίγει WhatsApp με έτοιμο μήνυμα.</p>
+        <button onclick="sendVia('whatsapp')" class="h- rounded-full bg-[#25D366] text-white font-medium">WhatsApp</button>
+      <button onclick="sendVia('viber')" class="h- rounded-full bg-[#7360F2] text-white font-medium">Viber</button>
       </div>
     </div>
   </div>
@@ -364,7 +366,8 @@
   <div class="max-w-[1320px] mx-auto px-5 md:px-8 py-16 grid md:grid-cols-4 gap-10 text-[13px]">
     <div><div class="serif text-[22px] tracking-[0.18em] mb-4">VELISSE</div><p class="text-white/60 leading-[1.6]">Minimal luxury lash studio στην Αθήνα. Φυσική ομορφιά, λεπτομέρεια, αυτοπεποίθηση.</p></div>
     <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Menu</div><div class="space-y-2 text-white/70"><a href="#services">Υπηρεσίες</a><br><a href="#monthly">Monthly Club</a><br><a href="#aftercare">Aftercare</a></div></div>
-    <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Επικοινωνία</div><div class="space-y-2 text-white/70">Instagram:<ahref="https://instagram.com/velisselashesland">  @velisselashesland<br>WhatsApp / Viber DM<br>Αθήνα,Αθήνα</div></div>
+    <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Επικοινωνία</div><div class="space-y-2 text-white/70"<a href="https://instagram.com/velisselashesland" target="_blank" class="flex items-center gap-2 text-[13px] text-[#8C7A6B] hover:text-black transition">
+  <span class="underline underline-offset-4">Instagram - @velisselashesland</span></a><br>WhatsApp / Viber DM<br>Αθήνα,Αθήνα</div></div>
     <div><div class="text-[11px] uppercase tracking-[0.2em] text-white/40 mb-4">Ώρες</div><div class="space-y-2 text-white/70">Δευ-Παρ: 09:00-20:00<br>Σάβ: 10:00-18:00<br>Κυρ: Κλειστά</div></div>
   </div>
   <div class="border-t border-white/10">
@@ -391,22 +394,158 @@ function switchAftercare(id){
   }
 }
 
-function sendWhatsApp(){
-  const OWNER_PHONE = "306909392922"; 
+<script>
+const OWNER_PHONE = "306909392922";
+const OWNER_PHONE_DISPLAY = "+30 690 993 92922";
+const BUSINESS_HOURS = {
+  1: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"],
+  2: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"],
+  3: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"],
+  4: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"],
+  5: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00","18:30","19:00"],
+  6: ["09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00"],
+  0: []
+};
+const BLOCKED_DATES = ["2026-05-11"];
+</script>
 
+<div class="max-w-[1320px] mx-auto grid md:grid-cols-[1fr_1fr] gap-12">
+  <div class="bg-[#F9F6F3] border border-[#E8DDD5] rounded-[22px] p-6 md:p-8">
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Όνομα</label><input id="b-name" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px]" placeholder="Όνομα"></div>
+      <div><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Email</label><input id="b-email" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px]" placeholder="Email"></div>
+      <div><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Τηλέφωνο</label><input id="b-phone" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px]" placeholder="69..."></div>
+    </div>
+    <div class="mb-4"><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Υπηρεσία</label><select id="b-service" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-4 text-[14px]"><option>Κλασσικές Επεκτάσεις - 70€ (120')</option><option>Hybrid - 80€ (135')</option><option>Volume 2D-3D - 85€ (150')</option><option>Volume 4D-6D - 95€ (165')</option><option>Mega Volume - 105€ (180')</option><option>Lash Lift + Tint - 55€</option></select></div>
+    
+    <div class="grid grid-cols-2 gap-4 mb-4">
+      <div><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Ημερομηνία *</label><input id="b-date" type="date" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><div id="date-info" class="text-[11px] text-[#8C7A6B] mt-1"></div></div>
+      <div><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Ώρα * <span id="hours-count" class="text-[10px]"></span></label><select id="b-time" class="mt-1 w-full h-11 bg-white border border-[#E8DDD5] rounded-[12px] px-3 text-[14px]"><option value="">Διάλεξε πρώτα ημερομηνία</option></select></div>
+    </div>
+
+    <div class="mb-6"><label class="text-[11px] uppercase tracking-[0.15em] text-[#8C7A6B]">Μήνυμα (προαιρετικό)</label><textarea id="b-msg" rows="2" class="mt-1 w-full bg-white border border-[#E8DDD5] rounded-[12px] p-4 text-[14px]" placeholder="πχ Θέλω Foxy effect"></textarea></div>
+    <button onclick="openAppChooser()" class="w-full h-12 bg-[#1E1E1E] text-white rounded-full text-[12px] uppercase tracking-[0.18em]">Κλείσε Ραντεβού</button>
+    <p class="text-[11px] text-[#8C7A6B] mt-3 text-center">Θα δεις διαθέσιμες ώρες και θα ανοίξει απευθείας το chat μας.</p>
+  </div>
+</div>
+
+<!-- MODAL ΕΠΙΛΟΓΗΣ ΕΦΑΡΜΟΓΗΣ -->
+<div id="app-chooser" class="fixed inset-0 z-[999] hidden">
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeAppChooser()"></div>
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-[420px] bg-white border border-[#E8DDD5] rounded-[24px] p-7 shadow-xl">
+    <div class="flex justify-between items-start mb-6"><div><div class="text-[11px] tracking-[0.2em] uppercase text-[#8C7A6B]">Έτοιμο μήνυμα</div><h3 class="serif text-[26px] leading-[1.1] mt-1">Στείλε το ραντεβού σου</h3></div><button onclick="closeAppChooser()" class="w-8 h-8 rounded-full border border-[#E8DDD5]">✕</button></div>
+    <div class="bg-[#F9F6F3] border border-[#E8DDD5] rounded-[16px] p-4 mb-6 text-[13px] leading-[1.6] whitespace-pre-wrap" id="preview-msg"></div>
+    <div class="grid grid-cols-2 gap-3">
+      <button onclick="sendVia('whatsapp')" class="h-[56px] rounded-full bg-[#25D366] text-white text-[13px] font-medium flex items-center justify-center gap-2"><span>WhatsApp</span></button>
+      <button onclick="sendVia('viber')" class="h-[56px] rounded-full bg-[#7360F2] text-white text-[13px] font-medium flex items-center justify-center gap-2"><span>Viber</span></button>
+    </div>
+    <p class="text-[11px] text-[#8C7A6B] mt-4 text-center">Θα ανοίξει απευθείας το chat με το <span class="text-[#1E1E1E] font-medium" id="owner-display"></span> με έτοιμο κείμενο. Εσύ πατάς μόνο αποστολή.</p>
+  </div>
+</div>
+
+<script>
+let lastGeneratedMsg = "";
+
+function initDatePicker(){
+  const dateInput = document.getElementById('b-date');
+  const today = new Date(); today.setDate(today.getDate()+1);
+  const minDate = today.toISOString().split('T')[0];
+  dateInput.min = minDate;
+  const max = new Date(); max.setMonth(max.getMonth()+2);
+  dateInput.max = max.toISOString().split('T')[0];
+  dateInput.addEventListener('change', updateAvailableHours);
+  document.getElementById('owner-display').textContent = OWNER_PHONE_DISPLAY;
+}
+initDatePicker();
+
+function updateAvailableHours(){
+  const dateStr = document.getElementById('b-date').value;
+  const timeSelect = document.getElementById('b-time');
+  const info = document.getElementById('date-info');
+  const count = document.getElementById('hours-count');
+  timeSelect.innerHTML = "";
+
+  if(!dateStr){ timeSelect.innerHTML='<option>Διάλεξε ημερομηνία</option>'; return; }
+  
+  if(BLOCKED_DATES.includes(dateStr)){
+    info.textContent = "❌ Κλειστά αυτή την ημέρα";
+    timeSelect.innerHTML='<option>Μη διαθέσιμο</option>';
+    count.textContent=""; return;
+  }
+
+  const d = new Date(dateStr);
+  const day = d.getDay();
+  const hours = BUSINESS_HOURS[day] || [];
+
+  if(hours.length===0){
+    info.textContent = "❌ Κυριακή - Κλειστά";
+    timeSelect.innerHTML='<option>Κλειστά</option>';
+    count.textContent=""; return;
+  }
+
+  const days = ["Κυριακή","Δευτέρα","Τρίτη","Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο"];
+  info.textContent = `✅ ${days[day]} - Διαθέσιμο`;
+  count.textContent = `(${hours.length} ώρες)`;
+
+  hours.forEach(h=>{
+    const opt = document.createElement('option');
+    opt.value = h; opt.textContent = h;
+    timeSelect.appendChild(opt);
+  });
+}
+
+function buildMessage(){
   const name=document.getElementById('b-name').value||'[Όνομα]';
   const phone=document.getElementById('b-phone').value||'[Τηλέφωνο]';
+  const phone=document.getElementById('b-email').value||'[Email]';
   const service=document.getElementById('b-service').value;
-  const day=document.getElementById('b-day').value;
   const date=document.getElementById('b-date').value||'[Ημερομηνία]';
-  const time=document.getElementById('b-time').value;
+  const time=document.getElementById('b-time').value||'[Ώρα]';
   const extra=document.getElementById('b-msg').value;
-  const msg=`Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE.\n\n👤 Όνομα: ${name}\n📞 Τηλέφωνο: ${phone}\n✨ Υπηρεσία: ${service}\n📅 Ημερομηνία/Ώρα: ${day} ${date} ${time}\n${extra?'\n📝 '+extra:''}`;
-   <button onclick="sendVia('whatsapp')" class="h- rounded-full bg-[#25D366] text-white font-medium">WhatsApp</button>
-      <button onclick="sendVia('viber')" class="h- rounded-full bg-[#7360F2] text-white font-medium">Viber</button>
 
-  const url='https://wa.me/' + OWNER_PHONE + '?text='+encodeURIComponent(msg);
-  window.open(url,'_blank');
+  // Μορφοποίηση ημερομηνίας
+  let dateFormatted = date;
+  try{ const dd=new Date(date); dateFormatted = dd.toLocaleDateString('el-GR',{weekday:'long', day:'2-digit', month:'2-digit'}); }catch(e){}
+
+  return `Γεια σας! Θα ήθελα να κλείσω ραντεβού στο VELISSE ✨\n\n👤 Όνομα: ${name}\n📞 Τηλέφωνο: ${phone}\n✨ Υπηρεσία: ${service}\n📅 Ημερομηνία: ${dateFormatted} (${date})\n⏰ Ώρα: ${time}${extra?`\n\n📝 Σημείωση: ${extra}`:''}`;
+}
+
+function openAppChooser(){
+  const date = document.getElementById('b-date').value;
+  const time = document.getElementById('b-time').value;
+  if(!date || !time){ alert('Διάλεξε πρώτα ημερομηνία και ώρα από τις διαθέσιμες!'); document.getElementById('b-date').focus(); return; }
+
+  lastGeneratedMsg = buildMessage();
+  document.getElementById('preview-msg').textContent = lastGeneratedMsg;
+  document.getElementById('app-chooser').classList.remove('hidden');
+}
+
+function closeAppChooser(){ document.getElementById('app-chooser').classList.add('hidden'); }
+
+function sendVia(app){
+  const encoded = encodeURIComponent(lastGeneratedMsg);
+  const cleanNumber = OWNER_PHONE.replace('+','').replace(/\s/g,'');
+
+  if(app==='whatsapp'){
+    // Ανοίγει ΑΠΕΥΘΕΙΑΣ το chat σου με έτοιμο μήνυμα
+    const url = `https://wa.me/${cleanNumber}?text=${encoded}`;
+    window.open(url, '_blank');
+  } else {
+    // VIBER: Ανοίγει απευθείας το chat σου
+    // 1. Αντιγράφουμε το μήνυμα στο clipboard για σιγουριά
+    navigator.clipboard.writeText(lastGeneratedMsg).then(()=>{});
+    // 2. Ανοίγει το chat σου στο Viber
+    const viberChatUrl = `viber://chat?number=%2B${cleanNumber}`;
+    window.open(viberChatUrl, '_blank');
+    // Fallback για όσους δεν έχουν Viber desktop: ανοίγει και forward με κείμενο
+    setTimeout(()=>{
+      const viberForward = `viber://forward?text=${encoded}`;
+      window.location.href = viberForward;
+    }, 800);
+  }
+  closeAppChooser();
+}
+</script>
 }
 }
 </script>
